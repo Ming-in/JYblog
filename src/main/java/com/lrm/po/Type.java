@@ -10,7 +10,7 @@ import java.util.List;
  * Created by limi on 2017/10/14.
  */
 @Entity
-@Table(name = "t_type")
+@Table(name = "type")
 public class Type {
 
     @Id

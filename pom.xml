@@ -6,9 +6,9 @@
 	<groupId>com.lrm</groupId>
 	<artifactId>blog</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
-	<name>blog</name>
+	<name>jyblog</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
