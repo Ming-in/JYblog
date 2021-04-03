@@ -2,11 +2,10 @@ spring:
   application:
     name: jyblog
   thymeleaf:
+    cache: false
     mode: HTML
   profiles:
     active: dev
-  messages:
-    basename: i18n/messages
 
 comment.avatar: /images/avatar.png
 
