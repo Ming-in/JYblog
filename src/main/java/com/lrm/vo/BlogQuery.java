@@ -1,7 +1,7 @@
 package com.lrm.vo;
 
 /**
- * Created by limi on 2017/10/20.
+ * @author 邹明
  */
 public class BlogQuery {
 

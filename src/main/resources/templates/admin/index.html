@@ -16,7 +16,7 @@
 
 
   <!--中间内容-->
-  <div  class="m-container-small m-padded-tb-big">
+  <div  class="m-container-small m-padded-tb-big" style="min-height:80vh">
     <div class="ui container">
       <div class="ui success large  message">
         <h3>Hi,</h3>
@@ -29,9 +29,7 @@
   <br>
 
   <!--底部footer-->
-  <footer th:include="admin/_fragments :: footer" class="ui inverted vertical segment"
-          style="position: absolute;bottom: 0;width: 100%;">
-  </footer>
+  <footer th:replace="admin/_fragments :: footer"> </footer>
   <!--/*/<th:block th:replace="_fragments :: script">/*/-->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>

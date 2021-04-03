@@ -13,9 +13,8 @@ import org.commonmark.renderer.html.AttributeProviderFactory;
 import org.commonmark.renderer.html.HtmlRenderer;
 
 import java.util.*;
-
 /**
- * Created by limi on 2017/10/22.
+ * @author 邹明
  */
 public class MarkdownUtils {
 
@@ -50,6 +49,7 @@ public class MarkdownUtils {
                 .extensions(headingAnchorExtensions)
                 .extensions(tableExtension)
                 .attributeProviderFactory(new AttributeProviderFactory() {
+                    @Override
                     public AttributeProvider create(AttributeProviderContext context) {
                         return new CustomAttributeProvider();
                     }

@@ -7,9 +7,8 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Map;
-
 /**
- * Created by limi on 2017/10/20.
+ * @author 邹明
  */
 public interface BlogService {
 

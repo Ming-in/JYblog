@@ -37,7 +37,7 @@
 </nav>
 
 <!--中间内容-->
-<div id="waypoint" class="m-container-small m-padded-tb-big animated fadeIn">
+<div id="waypoint" class="m-container-small m-padded-tb-big animated fadeIn" style="min-height:80vh">
   <div class="ui container">
     <div class="ui top attached segment">
       <div class="ui horizontal link list">
@@ -54,18 +54,18 @@
         </div>
       </div>
     </div>
-    <div class="ui attached segment">
+    <div class="ui attached segment" th:if="${blog.firstPicture}!=null">
       <!--图片区域-->
-      <img src="https://unsplash.it/800/450?image=1005" th:src="@{${blog.firstPicture}}" alt=""
+      <img th:src="@{${blog.firstPicture}}" alt=""
            class="ui fluid rounded image">
     </div>
     <div class="ui  attached padded segment">
       <!--内容-->
-      <div class="ui right aligned basic segment">
+      <div class="ui right aligned basic segment" th:if="${blog.flag}!=null">
         <div class="ui orange basic label" th:text="${blog.flag}">原创</div>
       </div>
 
-      <h2 class="ui center aligned header" th:text="${blog.title}">关于刻意练习的清单</h2>
+      <h2 class="ui center aligned header" th:text="${blog.title}">标题</h2>
       <br>
       <!--中间主要内容部分-->
       <div id="content"
@@ -95,7 +95,7 @@
             <h3 class="ui dividing header">评论</h3>
             <div class="comment" th:each="comment : ${comments}">
               <a class="avatar">
-                <img src="https://unsplash.it/100/100?image=1005" th:src="@{${comment.avatar}}">
+                <img th:src="@{${comment.avatar}==null?'/images/avatar.png':${comment.avatar}}">
               </a>
               <div class="content">
                 <a class="author">
@@ -119,7 +119,7 @@
               <div class="comments" th:if="${#arrays.length(comment.replyComments)}>0">
                 <div class="comment" th:each="reply : ${comment.replyComments}">
                   <a class="avatar">
-                    <img src="https://unsplash.it/100/100?image=1005" th:src="@{${reply.avatar}}">
+                    <img th:src="@{${comment.avatar}==null?'/images/avatar':${comment.avatar.png}}">
                   </a>
                   <div class="content">
                     <a class="author">
@@ -183,7 +183,6 @@
   <div class="ui vertical icon buttons ">
     <button type="button" class="ui toc teal button">目录</button>
     <a href="#comment-container" class="ui teal button">留言</a>
-    <button class="ui wechat icon button"><i class="weixin icon"></i></button>
     <div id="toTop-button" class="ui icon button"><i class="chevron up icon"></i></div>
   </div>
 </div>
@@ -195,14 +194,13 @@
 </div>
 
 <div id="qrcode" class="ui wechat-qr flowing popup transition hidden " style="width: 130px !important;">
-  <!--<img src="./static/images/wechat.jpg" alt="" class="ui rounded image" style="width: 120px !important;">-->
 </div>
 
 
 <br>
 <br>
 <!--底部footer-->
-<footer th:include="_fragments :: footer" class="ui inverted vertical segment" style="margin-top: 200px">
+<footer th:include="_fragments :: footer" class="ui inverted vertical segment">
   底部
 </footer>
 

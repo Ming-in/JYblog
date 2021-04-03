@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by limi on 2017/10/22.
+ * @author 邹明
  */
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -79,7 +79,9 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
-    //存放迭代找出的所有子代的集合
+    /**
+     * 存放迭代找出的所有子代的集合
+     */
     private List<Comment> tempReplys = new ArrayList<>();
     /**
      * 递归迭代，剥洋葱
@@ -87,7 +89,8 @@ public class CommentServiceImpl implements CommentService {
      * @return
      */
     private void recursively(Comment comment) {
-        tempReplys.add(comment);//顶节点添加到临时存放集合
+        //顶节点添加到临时存放集合
+        tempReplys.add(comment);
         if (comment.getReplyComments().size()>0) {
             List<Comment> replys = comment.getReplyComments();
             for (Comment reply : replys) {

@@ -21,7 +21,7 @@ import javax.persistence.criteria.*;
 import java.util.*;
 
 /**
- * Created by limi on 2017/10/20.
+ * @author 邹明
  */
 @Service
 public class BlogServiceImpl implements BlogService {

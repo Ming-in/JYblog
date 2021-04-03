@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 /**
- * Created by limi on 2017/10/14.
+ * @author 邹明
  */
 @Entity
 @Table(name = "blog")
@@ -15,6 +16,7 @@ public class Blog {
     @Id
     @GeneratedValue
     private Long id;
+
 
     private String title;
 
@@ -214,7 +216,10 @@ public class Blog {
         this.tagIds = tagsToIds(this.getTags());
     }
 
-    //1,2,3
+    /**
+     * @param tags 1,2,3
+     * @return
+     */
     private String tagsToIds(List<Tag> tags) {
         if (!tags.isEmpty()) {
             StringBuffer ids = new StringBuffer();

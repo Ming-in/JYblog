@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 /**
- * Created by limi on 2017/10/13.
+ * @author 邹明
  */
 @Aspect
 @Component
