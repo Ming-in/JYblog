@@ -16,34 +16,42 @@
 <div class="login" style="height:91vh">
   <div class="main">
     <div class="container a-container" id="a-container">
-      <form class="form" id="a-form" method="" action="">
+      <form class="form" id="a-form" method="post" th:action="@{/login}">
         <h2 class="form_title title">登&nbsp;&nbsp;&nbsp;&nbsp;录</h2>
         <span class="form__span">请输入你的账户</span>
-        <input class="form__input" type="text" placeholder="用户名">
-        <input class="form__input" type="password" placeholder="密码">
+        <input id="username" class="form__input field" type="text" name="username" placeholder="用户名">
+        <input id="password" class="form__input field" type="password" name="password" placeholder="密码">
         <!--<a class="form__link">忘记密码?</a>-->
-        <button class="form__button button submit">登录</button>
+        <button class="form__button button">登录</button>
       </form>
     </div>
     <div class="container b-container" id="b-container">
-      <form class="form" id="b-form" method="" action="">
+      <form class="form" id="b-form" method="post" th:action="@{/register}">
         <h2 class="form_title title">注&nbsp;&nbsp;&nbsp;&nbsp;册</h2>
         <span class="form__span">请注册一个账户</span>
-        <input class="form__input" type="text" placeholder="用户名">
-        <input class="form__input" type="text" placeholder="电子邮箱">
-        <input class="form__input" type="password" placeholder="密码">
-        <button class="form__button button submit">注册</button>
+        <input id="r-username" class="form__input" type="text" name="username" placeholder="用户名">
+        <input id="r-nickname" class="form__input" type="text" name="nickname" placeholder="昵称">
+        <input id="r-email" class="form__input" type="text" name="email" placeholder="电子邮箱">
+        <input id="r-password" class="form__input" type="password" placeholder="密码">
+        <input id="re-password" class="form__input" type="password" name="password" placeholder="密码">
+        <button class="form__button button">注册</button>
       </form>
     </div>
     <div class="switch" id="switch-cnt">
       <div class="switch__circle"></div>
       <div class="switch__circle switch__circle--t"></div>
       <div class="switch__container" id="switch-c1">
+        <div class="ui big red message" th:unless="${#strings.isEmpty(message)}" th:text="${message}">
+          信息有误
+        </div>
         <h2 class="switch__title title">欢迎 回来 !</h2>
         <p class="switch__description description">请登录您的账户以保存您的信息</p>
         <button class="switch__button button switch-btn">注册</button>
       </div>
       <div class="switch__container is-hidden" id="switch-c2">
+        <div class="ui big red message" th:unless="${#strings.isEmpty(message)}" th:text="${message}">
+          信息有误
+        </div>
         <h2 class="switch__title title">你好 Friend !</h2>
         <p class="switch__description description">请输入您的个人信息并与我们一起开始博客旅程</p>
         <button class="switch__button button switch-btn">登录</button>
@@ -51,8 +59,12 @@
     </div>
   </div>
 </div>
+
+</form>
+
 <!--底部footer-->
-<footer th:include="admin/_fragments :: footer" style="position: absolute;bottom: 0;left: 0;right: 0;color:white"></footer>
+<footer th:include="admin/_fragments :: footer"
+        style="position: absolute;bottom: 0;left: 0;right: 0;color:white"></footer>
 
 <th:block th:replace="_fragments :: script"/>
 <script type="text/javascript">
@@ -93,6 +105,63 @@
     }
 
     window.addEventListener("load", mainF);
+
+    //表单校验
+    $(function () {
+        $("#username").blur(function () {
+            $("#names").empty();
+            var name = $(this).val();
+            if (name === "" || name == null) {
+                $("#username").after("<span id='names' style='color: red'>用户名不能为空</span>");
+            }
+        });
+        $("#password").blur(function () {
+            $("#pwds").empty();
+            var pwd = $(this).val();
+            if (pwd === "" || pwd == null) {
+                $("#password").after("<span id='pwds' style='color: red'>密码不能为空</span>");
+            }
+        });
+        $("#r-username").blur(function () {
+            $("#r-names").empty();
+            var name = $(this).val();
+            if (name === "" || name == null) {
+                $("#r-username").after("<span id='r-names' style='color: red'>用户名不能为空</span>");
+            }
+        });
+        $("#r-nickname").blur(function () {
+            $("#r-nick").empty();
+            var name = $(this).val();
+            if (name === "" || name == null) {
+                $("#r-nickname").after("<span id='r-nick' style='color: red'>用户名不能为空</span>");
+            }
+        });
+        $("#r-password").blur(function () {
+            $("#r-pwds").empty();
+            var pwd = $(this).val();
+            if (pwd === "" || pwd == null) {
+                $("#r-password").after("<span id='r-pwds' style='color: red'>密码不能为空</span>");
+            }
+        });
+        $("#re-password").blur(function () {
+            $("#repwds").empty();
+            var repwd = $(this).val();
+            var pwd = $("#r-password").val();
+            if (repwd === "" || repwd == null) {
+                $("#re-password").after("<span id='repwds' style='color: red'>请确认密码</span>");
+            }
+            if (repwd !== pwd) {
+                $("#re-password").after("<span id='repwds' style='color: red'>两次密码不匹配,请重新输入!</span>");
+            }
+        });
+        $("#r-email").blur(function () {
+            $("#r-emails").empty();
+            var mail = $(this).val();
+            if (mail === "" || mail == null) {
+                $("#r-email").after("<span id='r-emails' style='color: red'>邮箱不能为空</span>");
+            }
+        });
+    });
 </script>
 
 </body>

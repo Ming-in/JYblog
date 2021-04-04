@@ -1,5 +1,8 @@
 package com.lrm.po;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,14 +21,17 @@ public class User {
     /**
      * 昵称
      */
+    @Column(nullable = false)
     private String nickname;
     /**
      * 用户名
      */
+    @Column(nullable = false,unique = true)
     private String username;
     /**
      * 密码
      */
+    @Column(nullable = false)
     private String password;
     /**
      * 邮箱
@@ -38,16 +44,19 @@ public class User {
     /**
      * 用户类型：0：管理员。1：普通用户。 2:暂无...
      */
-    private Integer type;
+    @Column(columnDefinition="tinyint default 0",nullable = false)
+    private Integer type = 1;
     /**
      * 创建时间
      */
     @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Date createTime;
     /**
      * 上一次登录时间
      */
     @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
     private Date updateTime;
 
     @OneToMany(mappedBy = "user")

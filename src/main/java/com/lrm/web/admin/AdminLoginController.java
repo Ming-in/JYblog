@@ -37,11 +37,17 @@ public class AdminLoginController {
                         RedirectAttributes attributes) {
         User user = userService.checkUser(username, password);
         if (user != null) {
-            user.setPassword(null);
-            session.setAttribute("user",user);
-            return "admin/index";
+            //管理员type=0
+            if (user.getType() == 0){
+                user.setPassword(null);
+                session.setAttribute("user", user);
+                return "admin/index";
+            }else {
+                attributes.addFlashAttribute("message", "用户权限不够");
+                return "redirect:/admin";
+            }
         } else {
-            attributes.addFlashAttribute("message", "用户名和密码错误");
+            attributes.addFlashAttribute("message", "用户名或密码错误");
             return "redirect:/admin";
         }
     }

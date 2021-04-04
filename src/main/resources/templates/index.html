@@ -154,6 +154,24 @@
 
 <br>
 <br>
+
+<form class="ui large form" method="post" action="#" th:action="@{/login}">
+  <div class="ui  segment">
+    <div class="field">
+      <div class="ui left icon input">
+        <i class="user icon"></i>
+        <input type="text" name="username" placeholder="用户名">
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui left icon input">
+        <i class="lock icon"></i>
+        <input type="password" name="password" placeholder="密码">
+      </div>
+    </div>
+    <button class="ui fluid large teal submit button">登 录</button>
+  </div>
+
 <!--底部footer-->
 <footer th:replace="_fragments :: footer">底部</footer>
 
