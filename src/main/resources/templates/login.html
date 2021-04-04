@@ -1,49 +1,99 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="_fragments :: head(~{::title})">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>登录/注册</title>
-  <link rel="stylesheet" th:href="/css/login.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+  <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
-    <div class="main">
-      <div class="container a-container" id="a-container">
-        <form class="form" id="a-form" method="" action="">
-          <h2 class="form_title title">会员注册</h2>
-          <span class="form__span">or use email for registration</span>
-          <input class="form__input" type="text" placeholder="Name">
-          <input class="form__input" type="text" placeholder="Email">
-          <input class="form__input" type="password" placeholder="Password">
-          <button class="form__button button submit">注册</button>
-        </form>
+
+<!--导航-->
+<nav th:replace="_fragments :: menu(1)">导航栏</nav>
+
+<div class="login" style="height:91vh">
+  <div class="main">
+    <div class="container a-container" id="a-container">
+      <form class="form" id="a-form" method="" action="">
+        <h2 class="form_title title">登&nbsp;&nbsp;&nbsp;&nbsp;录</h2>
+        <span class="form__span">请输入你的账户</span>
+        <input class="form__input" type="text" placeholder="用户名">
+        <input class="form__input" type="password" placeholder="密码">
+        <!--<a class="form__link">忘记密码?</a>-->
+        <button class="form__button button submit">登录</button>
+      </form>
+    </div>
+    <div class="container b-container" id="b-container">
+      <form class="form" id="b-form" method="" action="">
+        <h2 class="form_title title">注&nbsp;&nbsp;&nbsp;&nbsp;册</h2>
+        <span class="form__span">请注册一个账户</span>
+        <input class="form__input" type="text" placeholder="用户名">
+        <input class="form__input" type="text" placeholder="电子邮箱">
+        <input class="form__input" type="password" placeholder="密码">
+        <button class="form__button button submit">注册</button>
+      </form>
+    </div>
+    <div class="switch" id="switch-cnt">
+      <div class="switch__circle"></div>
+      <div class="switch__circle switch__circle--t"></div>
+      <div class="switch__container" id="switch-c1">
+        <h2 class="switch__title title">欢迎 回来 !</h2>
+        <p class="switch__description description">请登录您的账户以保存您的信息</p>
+        <button class="switch__button button switch-btn">注册</button>
       </div>
-      <div class="container b-container" id="b-container">
-        <form class="form" id="b-form" method="" action="">
-          <h2 class="form_title title">会员登录</h2>
-          <span class="form__span">or use your email account</span>
-          <input class="form__input" type="text" placeholder="Email">
-          <input class="form__input" type="password" placeholder="Password"><a class="form__link">忘记密码?</a>
-          <button class="form__button button submit">登录</button>
-        </form>
-      </div>
-      <div class="switch" id="switch-cnt">
-        <div class="switch__circle"></div>
-        <div class="switch__circle switch__circle--t"></div>
-        <div class="switch__container" id="switch-c1">
-          <h2 class="switch__title title">Welcome Back !</h2>
-          <p class="switch__description description">To keep connected with us please login with your personal info</p>
-          <button class="switch__button button switch-btn">登录</button>
-        </div>
-        <div class="switch__container is-hidden" id="switch-c2">
-          <h2 class="switch__title title">Hello Friend !</h2>
-          <p class="switch__description description">Enter your personal details and start journey with us</p>
-          <button class="switch__button button switch-btn">注册</button>
-        </div>
+      <div class="switch__container is-hidden" id="switch-c2">
+        <h2 class="switch__title title">你好 Friend !</h2>
+        <p class="switch__description description">请输入您的个人信息并与我们一起开始博客旅程</p>
+        <button class="switch__button button switch-btn">登录</button>
       </div>
     </div>
+  </div>
+</div>
+<!--底部footer-->
+<footer th:include="admin/_fragments :: footer" style="position: absolute;bottom: 0;left: 0;right: 0;color:white"></footer>
 
-  <script  th:src="@{/js/login.js}"></script>
+<th:block th:replace="_fragments :: script"/>
+<script type="text/javascript">
+    let switchCtn = document.querySelector("#switch-cnt");
+    let switchC1 = document.querySelector("#switch-c1");
+    let switchC2 = document.querySelector("#switch-c2");
+    let switchCircle = document.querySelectorAll(".switch__circle");
+    let switchBtn = document.querySelectorAll(".switch-btn");
+    let aContainer = document.querySelector("#a-container");
+    let bContainer = document.querySelector("#b-container");
+    let allButtons = document.querySelectorAll(".submit");
+
+    let getButtons = (e) => e.preventDefault()
+
+    let changeForm = (e) => {
+
+        switchCtn.classList.add("is-gx");
+        setTimeout(function () {
+            switchCtn.classList.remove("is-gx");
+        }, 1500)
+
+        switchCtn.classList.toggle("is-txr");
+        switchCircle[0].classList.toggle("is-txr");
+        switchCircle[1].classList.toggle("is-txr");
+
+        switchC1.classList.toggle("is-hidden");
+        switchC2.classList.toggle("is-hidden");
+        aContainer.classList.toggle("is-txl");
+        bContainer.classList.toggle("is-txl");
+        bContainer.classList.toggle("is-z200");
+    }
+
+    let mainF = (e) => {
+        for (var i = 0; i < allButtons.length; i++)
+            allButtons[i].addEventListener("click", getButtons);
+        for (var i = 0; i < switchBtn.length; i++)
+            switchBtn[i].addEventListener("click", changeForm)
+    }
+
+    window.addEventListener("load", mainF);
+</script>
 
 </body>
 </html>

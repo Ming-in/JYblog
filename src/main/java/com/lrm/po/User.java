@@ -15,14 +15,38 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
+    /**
+     * 昵称
+     */
     private String nickname;
+    /**
+     * 用户名
+     */
     private String username;
+    /**
+     * 密码
+     */
     private String password;
+    /**
+     * 邮箱
+     */
     private String email;
+    /**
+     * 用户头像地址
+     */
     private String avatar;
+    /**
+     * 用户类型：0：管理员。1：普通用户。 2:暂无...
+     */
     private Integer type;
+    /**
+     * 创建时间
+     */
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
+    /**
+     * 上一次登录时间
+     */
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
 
