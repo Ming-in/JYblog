@@ -23,10 +23,10 @@
 /**/
 .login .main {
   position: relative;
-  width: 1000px;
-  min-width: 1000px;
-  min-height: 600px;
-  height: 600px;
+  width: 800px;
+  /*min-width: 1000px;*/
+  /*min-height: 600px;*/
+  height: 480px;
   padding: 25px;
   background-color: #ecf0f3;
   /*box-shadow: 10px 10px 10px #d1d9e6, -10px -10px 10px #f9f9f9;*/
@@ -40,11 +40,22 @@
   align-items: center;
   position: absolute;
   top: 0;
-  width: 600px;
+  width: 400px;
   height: 100%;
   padding: 25px;
   background-color: #ecf0f3;
   transition: 1.25s;
+}
+
+/**/
+.login .a-container {
+  z-index: 100;
+  left: calc(100% - 400px );
+}
+
+.login .b-container {
+  left: calc(100% - 400px );
+  z-index: 0;
 }
 
 .login .form {
@@ -68,7 +79,7 @@
   cursor: pointer;
 }
 .login .form__input {
-  width: 350px;
+  width: 300px;
   height: 40px;
   margin: 4px 0;
   padding-left: 25px;
@@ -124,17 +135,6 @@
   box-shadow: 8px 8px 16px #d1d9e6, -8px -8px 16px #f9f9f9;
   border: none;
   outline: none;
-}
-
-/**/
-.login .a-container {
-  z-index: 100;
-  left: calc(100% - 600px );
-}
-
-.login .b-container {
-  left: calc(100% - 600px );
-  z-index: 0;
 }
 
 .login .switch {

@@ -4,23 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title th:replace="${title}">博客详情</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
-  <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
-  <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
-  <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
-  <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
-  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+  <!--排版-->
+  <link rel="stylesheet" th:href="@{/css/typo.css}"
+        href="../static/css/typo.css">
+  <!--动画库-->
+  <link rel="stylesheet" th:href="@{/css/animate.css}"
+        href="../static/css/animate.css">
+  <!--代码高亮-->
+  <link rel="stylesheet" th:href="@{/lib/prism/prism.css}"
+        href="../static/lib/prism/prism.css">
+  <!--自动生成目录-->
+  <link rel="stylesheet" th:href="@{/lib/tocbot/tocbot.css}"
+        href="../static/lib/tocbot/tocbot.css">
+  <!--markdown-->
+  <link rel="stylesheet" th:href="@{/lib/editormd/css/editormd.min.css}"
+        href="../static/lib/editormd/editormd.min.js">
+  <link rel="stylesheet" th:href="@{/lib/semantic-UI/semantic.min.css}"
+        href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" th:href="@{/css/me.css}" href="../static/css/me.css">
 </head>
+
 <body>
 
 
 <!--导航-->
-<nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+<nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small m-theme-bg">
   <div class="ui container">
     <div class="ui inverted secondary stackable menu">
-      <h2 class="ui teal header item">JY-Blog</h2>
-      <a href="#" th:href="@{/}" class="m-item item m-mobile-hide " th:classappend="${n==1} ? 'active'"><i
-          class="mini home icon"> </i><span>&nbsp;首页</span></a>
+      <h2 class="ui teal header item" style="color: palegoldenrod!important;">JY-Blog</h2>
+      <a href="#" th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i
+          class="mini home icon"></i> <span>&nbsp;首页</span></a>
       <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i
           class="mini idea icon"> </i> &nbsp;分类</a>
       <a href="#" th:href="@{/tags/-1}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i
@@ -38,9 +51,9 @@
         </form>
       </div>
       <div class="right m-item m-mobile-hide item">
-        <div class="ui dropdown item"  th:if="${session.user}">
+        <div class="ui dropdown item" th:if="${session.user}">
           <div class="text">
-            <img class="ui avatar image"th:src="@{${session.user.avatar}?${session.user.avatar}:'/images/avatar.png'}">
+            <img class="ui avatar image" th:src="@{${session.user.avatar}?${session.user.avatar}:'/images/avatar.png'}">
             <span th:text="${session.user.nickname}">Ming</span>
           </div>
           <i class="dropdown icon"></i>
@@ -49,7 +62,7 @@
             <a href="#" th:href="@{/logout}" class="item">注销</a>
           </div>
         </div>
-        <a class="right m-item m-mobile-hide item" th:href="@{/login}"  th:if="${session.user}==null">登录/注册</a>
+        <a class="right m-item m-mobile-hide item" th:href="@{/login}" th:if="${session.user}==null">登录/注册</a>
       </div>
     </div>
   </div>
@@ -69,18 +82,18 @@
 </footer>
 
 <th:block th:fragment="script">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+  <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+  <script src="../static/lib/semantic-UI/semantic.min.js" th:src="@{/lib/semantic-UI/semantic.min.js}"></script>
+  <script src="../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
   <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
-  <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
-  <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
-  <script src="../static/lib/waypoints/jquery.waypoints.min.js"
-          th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+  <script th:src="@{/lib/prism/prism.js}"></script>
+  <script th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+  <script th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
   <script>
       $('#newblog-container').load("/footer/newblog");
 
       $('.ui.dropdown').dropdown({
-          on : 'hover'
+          on: 'hover'
       });
   </script>
 </th:block>

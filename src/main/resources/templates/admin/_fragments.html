@@ -4,17 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title th:replace="${title}">博客详情</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
-  <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css" th:href="@{/lib/editormd/css/editormd.min.css}">
-  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+  <link rel="stylesheet" th:href="@{/lib/semantic-UI/semantic.min.css}"
+        href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" th:href="@{/lib/editormd/css/editormd.min.css}">
+  <link rel="stylesheet" th:href="@{/css/me.css}" href="../../static/css/me.css">
 </head>
 <body>
 
 <!--导航-->
-<nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+<nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small m-theme-bg" >
   <div class="ui container">
     <div class="ui inverted secondary stackable menu">
-      <h2 class="ui teal header item">管理后台</h2>
+      <h2 class="ui teal header item" style="color: palegoldenrod!important;">管理后台</h2>
       <a href="#" th:href="@{/admin/blogs}" class=" m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="mini home icon"></i>博客</a>
       <a href="#" th:href="@{/admin/types}" class=" m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="mini idea icon"></i>分类</a>
       <a href="#" th:href="@{/admin/tags}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="mini tags icon"></i>标签</a>
@@ -49,11 +50,9 @@
 </footer>
 
 <th:block th:fragment="script">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-  <script src="../../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
-
-
+  <script src="../../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+  <script src="../../static/lib/semantic-UI/semantic.min.js" th:src="@{/lib/semantic-UI/semantic.min.js}"></script>
+  <script th:src="@{/lib/editormd/editormd.min.js}"></script>
 </th:block>
 
 </body>

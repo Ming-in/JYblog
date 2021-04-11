@@ -18,40 +18,75 @@ public class Blog {
     private Long id;
 
 
+    /**
+     * 标题
+     */
     private String title;
 
+    /**
+     * 内容
+     */
     @Basic(fetch = FetchType.LAZY)
     @Lob
     private String content;
+    /**
+     * 首页展示图
+     */
     private String firstPicture;
+    /**
+     * 原创/转载
+     */
     private String flag;
+    /**
+     * 浏览人数
+     */
     private Integer views;
     private boolean appreciation;
     private boolean shareStatement;
     private boolean commentabled;
-    private boolean published;
     private boolean recommend;
+    /**
+     * 是否推荐
+     */
+    private boolean published;
+    /**
+     * 创建时间
+     */
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
+    /**
+     * 更新时间
+     */
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
-
+    /**
+     * 分类
+     */
     @ManyToOne
     private Type type;
-
+    /**
+     * 标签
+     */
     @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<Tag> tags = new ArrayList<>();
-
-
+    /**
+     * 所属用户
+     */
     @ManyToOne
     private User user;
-
+    /**
+     * 评论
+     */
     @OneToMany(mappedBy = "blog")
     private List<Comment> comments = new ArrayList<>();
-
+    /**
+     * 标签Id
+     */
     @Transient
     private String tagIds;
-
+    /**
+     * 描述
+     */
     private String description;
 
     public Blog() {

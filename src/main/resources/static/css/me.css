@@ -1,8 +1,18 @@
 
 body {
     background: url("../images/bg.png");
+    /*background-size: 200px;*/
 }
-
+.m-theme-color{
+    color: palegoldenrod!important;
+}
+.m-theme-bg{
+    background-color:#545c64!important;
+}
+.m-them-shadow{
+    box-shadow: -5px 5px 10px 0 rgba(0,0,0,.1)!important;
+    padding: 0!important;
+}
 .m-padded-mini {
     padding: 0.2em !important;
 }

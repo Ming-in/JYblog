@@ -1,6 +1,8 @@
 package com.lrm;
 
-import java.sql.Date;
+
+import com.lrm.po.User;
+import org.junit.Test;
 
 /**
  * @author Ming
@@ -8,7 +10,16 @@ import java.sql.Date;
  */
 public class MyTest {
 
-    @org.junit.Test
+    @Test
     public void test(){
+        final User user = new User();
+        user.setUsername("Ming");
+        System.out.println(user);
+        modify(user);
+        System.out.println(user);
+    }
+
+    private void modify(final User user){
+        user.setPassword("123");
     }
 }
