@@ -15,7 +15,8 @@
   align-items: center;
   font-family: 'Montserrat', sans-serif;
   font-size: 12px;
-  background: #ecf0f3 url("../images/background.jpg") no-repeat;
+  background: #ecf0f3 url("../images/login-background.jpg") no-repeat;
+  /*background: #ecf0f3 url("../images/background.jpg") no-repeat;*/
   background-size: 100% 100%;
   color: #a0a5a8;
 }

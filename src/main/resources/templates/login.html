@@ -11,9 +11,10 @@
 <body>
 
 <!--导航-->
-<nav th:replace="_fragments :: menu(1)">导航栏</nav>
+<!--<nav th:replace="_fragments :: menu(1)">导航栏</nav>-->
 
-<div class="login" style="height:91vh">
+<!--<div class="login" style="height:91vh">-->
+<div class="login">
   <div class="main">
     <div class="container a-container" id="a-container">
       <form class="form" id="a-form" method="post" th:action="@{/login}">
@@ -63,8 +64,7 @@
 </form>
 
 <!--底部footer-->
-<footer th:include="admin/_fragments :: footer"
-        style="position: absolute;bottom: 0;left: 0;right: 0;color:white"></footer>
+<footer th:include="admin/_fragments :: footer"style="position: absolute;bottom: 0;left: 0;right: 0;color:#000"></footer>
 
 <th:block th:replace="_fragments :: script"/>
 <script type="text/javascript">

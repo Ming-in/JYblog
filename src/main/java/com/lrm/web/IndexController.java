@@ -1,10 +1,9 @@
 package com.lrm.web;
 
-import com.lrm.NotFoundException;
+import com.lrm.po.Blog;
 import com.lrm.service.BlogService;
 import com.lrm.service.TagService;
 import com.lrm.service.TypeService;
-import com.lrm.vo.BlogQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -62,4 +61,16 @@ public class IndexController {
         return "_fragments :: newblogList";
     }
 
+    @GetMapping("/writeblog")
+    public String input(Model model) {
+        setTypeAndTag(model);
+        model.addAttribute("blog", new Blog());
+        return "write-blog";
+    }
+
+
+    private void setTypeAndTag(Model model) {
+        model.addAttribute("types", typeService.listType());
+        model.addAttribute("tags", tagService.listTag());
+    }
 }

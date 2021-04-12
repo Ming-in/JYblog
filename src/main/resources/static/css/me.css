@@ -43,6 +43,9 @@ body {
     padding-top: 2em !important;
     padding-bottom: 2em !important;
 }
+.m-padded-tb-large pre{
+    overflow-x:auto;
+}
 .m-padded-tb-big {
     padding-top: 3em !important;
     padding-bottom: 3em !important;

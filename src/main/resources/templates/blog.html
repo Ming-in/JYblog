@@ -17,7 +17,7 @@
 <nav th:replace="_fragments :: menu(1)"></nav>
 
 <!--中间内容-->
-<div id="waypoint" class="m-container-small m-padded-tb-big animated fadeIn" style="min-height:80vh">
+<div class="m-container-small m-padded-tb-big animated fadeIn" style="min-height:80vh">
   <div class="ui container">
     <div class="ui top attached segment">
       <div class="ui horizontal link list">
@@ -50,7 +50,6 @@
       <!--中间主要内容部分-->
       <div id="content"
            class="typo  typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large"
-           style="width: 100%"
            th:utext="${blog.content}">
         内容
       </div>
@@ -86,10 +85,10 @@
                 </a>
                 <div class="metadata">
                   <span class="date"
-                        th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+                        th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}">2021-04-03 18:47</span>
                 </div>
                 <div class="text" th:text="${comment.content}">
-                  How artistic!
+                  评论
                 </div>
                 <div class="actions">
                   <a class="reply" data-commentid="1" data-commentnickname="Matt"
@@ -104,18 +103,18 @@
                   </a>
                   <div class="content">
                     <a class="author">
-                      <span th:text="${reply.nickname}">小红</span>
+                      <span th:text="${reply.nickname}">昵称</span>
                       <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${reply.adminComment}">
                         博主
                       </div>
-                      &nbsp;<span th:text="|@ ${reply.parentComment.nickname}|" class="m-teal">@ 小白</span>
+                      &nbsp;<span th:text="|@ ${reply.parentComment.nickname}|" class="m-teal">昵称</span>
                     </a>
                     <div class="metadata">
                       <span class="date"
-                            th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+                            th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm')}">2021-04-03 18:47</span>
                     </div>
                     <div class="text" th:text="${reply.content}">
-                      How artistic!
+                      评论
                     </div>
                     <div class="actions">
                       <a class="reply" data-commentid="1" data-commentnickname="Matt"
@@ -160,24 +159,6 @@
   </div>
 </div>
 
-<div id="toolbar" class="m-padded m-fixed m-right-bottom" style="display: none">
-  <div class="ui vertical icon buttons ">
-    <button type="button" class="ui toc teal button">目录</button>
-    <a href="#comment-container" class="ui teal button">留言</a>
-    <div id="toTop-button" class="ui icon button"><i class="chevron up icon"></i></div>
-  </div>
-</div>
-
-<div class="ui toc-container flowing popup transition hidden" style="width: 250px!important;">
-  <ol class="js-toc">
-
-  </ol>
-</div>
-
-<div id="qrcode" class="ui wechat-qr flowing popup transition hidden " style="width: 130px !important;">
-</div>
-
-
 <br>
 <br>
 <!--底部footer-->
@@ -189,11 +170,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
-
 <script src="../static/lib/prism/prism.js"></script>
-<script src="../static/lib/tocbot/tocbot.min.js"></script>
-<script src="../static/lib/qrcode/qrcode.min.js"></script>
-<script src="../static/lib/waypoints/jquery.waypoints.min.js"></script>
 <!--/*/</th:block>/*/-->
 
 
@@ -208,55 +185,6 @@
         on: 'click',
         position: 'bottom center'
     });
-
-    tocbot.init({
-        // Where to render the table of contents.
-        tocSelector: '.js-toc',
-        // Where to grab the headings to build the table of contents.
-        contentSelector: '.js-toc-content',
-        // Which headings to grab inside of the contentSelector element.
-        headingSelector: 'h1, h2, h3',
-    });
-
-    $('.toc.button').popup({
-        popup: $('.toc-container.popup'),
-        on: 'click',
-        position: 'left center'
-    });
-
-    $('.wechat').popup({
-        popup: $('.wechat-qr'),
-        position: 'left center'
-    });
-
-    var serurl = /*[[#{blog.serurl}]]*/"127.0.0.1:8080";
-    var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
-    var qrcode = new QRCode("qrcode", {
-        text: serurl + url,
-        width: 110,
-        height: 110,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-    });
-
-    $('#toTop-button').click(function () {
-        $(window).scrollTo(0, 500);
-    });
-
-
-    var waypoint = new Waypoint({
-        element: document.getElementById('waypoint'),
-        handler: function (direction) {
-            if (direction == 'down') {
-                $('#toolbar').show(100);
-            } else {
-                $('#toolbar').hide(500);
-            }
-            console.log('Scrolled to waypoint!  ' + direction);
-        }
-    })
-
 
     //评论表单验证
     $('.ui.form').form({
