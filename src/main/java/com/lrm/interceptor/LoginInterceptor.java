@@ -1,5 +1,6 @@
 package com.lrm.interceptor;
 
+import com.lrm.po.User;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object handler) throws Exception {
-        if (request.getSession().getAttribute("user") == null) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null || user.getType() == 1) {
             response.sendRedirect("/admin");
             return false;
         }

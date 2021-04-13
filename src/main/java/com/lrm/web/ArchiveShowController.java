@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
+ * 归档页面
+ *
  * @author 邹明
  */
 @Controller

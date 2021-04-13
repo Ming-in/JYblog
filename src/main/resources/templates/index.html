@@ -64,7 +64,7 @@
               <div class="five wide column" th:if="${blog.firstPicture}!=null">
                 <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
                   <img th:src="@{${blog.firstPicture}}" alt=""
-                       class="ui rounded image">
+                       class="ui rounded image" style="max-height: 150px">
                 </a>
               </div>
 

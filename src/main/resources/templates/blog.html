@@ -22,7 +22,7 @@
     <div class="ui top attached segment">
       <div class="ui horizontal link list">
         <div class="item">
-          <img th:src="@{${blog.user.avatar}==null?'/favicon.ico':${blog.user.avatar}}" alt=""
+          <img th:src="@{${blog.user.avatar}==null?'/images/avatar.png':${blog.user.avatar}}" alt=""
                class="ui avatar image">
           <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">Ming</a></div>
         </div>
@@ -37,7 +37,7 @@
     <div class="ui attached segment" th:if="${blog.firstPicture}!=null and ${blog.firstPicture}!=''">
       <!--图片区域-->
       <img th:src="@{${blog.firstPicture}}" alt=""
-           class="ui fluid rounded image">
+           class="ui fluid rounded image" style="max-height: 50vh;max-width: 100%">
     </div>
     <div class="ui  attached padded segment" th:if="${blog.flag}!=null and ${blog.flag}!=''">
       <!--内容-->

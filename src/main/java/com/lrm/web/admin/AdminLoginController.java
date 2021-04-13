@@ -43,11 +43,11 @@ public class AdminLoginController {
                 session.setAttribute("user", user);
                 return "admin/index";
             }else {
-                attributes.addFlashAttribute("message", "用户权限不够");
+                attributes.addFlashAttribute("message", "请使用管理员账户登录！");
                 return "redirect:/admin";
             }
         } else {
-            attributes.addFlashAttribute("message", "用户名或密码错误");
+            attributes.addFlashAttribute("message", "管理员用户名或密码错误");
             return "redirect:/admin";
         }
     }

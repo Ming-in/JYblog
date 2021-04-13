@@ -30,7 +30,7 @@ public class BlogController {
 
     private static final String INPUT = "admin/blogs-input";
     private static final String LIST = "admin/blogs";
-    private static final String REDIRECT_LIST = "redirect:/admin/blogs";
+//    private static final String REDIRECT_LIST = "redirect:/admin/blogs";
 
 
     @Autowired
@@ -60,7 +60,7 @@ public class BlogController {
     public String input(Model model) {
         setTypeAndTag(model);
         model.addAttribute("blog", new Blog());
-        return INPUT;
+        return "admin/blogs-input";
     }
 
     private void setTypeAndTag(Model model) {
@@ -74,10 +74,9 @@ public class BlogController {
         setTypeAndTag(model);
         Blog blog = blogService.getBlog(id);
         blog.init();
-        model.addAttribute("blog",blog);
-        return INPUT;
+        model.addAttribute("blog", blog);
+        return "admin/blogs-input";
     }
-
 
 
     @PostMapping("/blogs")
@@ -85,32 +84,30 @@ public class BlogController {
         blog.setUser((User) session.getAttribute("user"));
         blog.setType(typeService.getType(blog.getType().getId()));
         blog.setTags(tagService.listTag(blog.getTagIds()));
-        if ("".equals(blog.getFlag()) ||blog.getFlag() == null){
+        if ("".equals(blog.getFlag()) || blog.getFlag() == null) {
             blog.setFlag("原创");
         }
         Blog b;
         if (blog.getId() == null) {
-            b =  blogService.saveBlog(blog);
+            b = blogService.saveBlog(blog);
         } else {
             b = blogService.updateBlog(blog.getId(), blog);
         }
-
-        if (b == null ) {
+        if (b == null) {
             attributes.addFlashAttribute("message", "操作失败");
         } else {
             attributes.addFlashAttribute("message", "操作成功");
         }
-        return REDIRECT_LIST;
+        return "redirect:/admin/blogs";
     }
 
 
     @GetMapping("/blogs/{id}/delete")
-    public String delete(@PathVariable Long id,RedirectAttributes attributes) {
+    public String delete(@PathVariable Long id, RedirectAttributes attributes) {
         blogService.deleteBlog(id);
         attributes.addFlashAttribute("message", "删除成功");
-        return REDIRECT_LIST;
+        return"redirect:/admin/blogs";
     }
-
 
 
 }
