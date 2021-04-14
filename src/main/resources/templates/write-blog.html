@@ -24,7 +24,7 @@
 -->
 
 <!--中间内容-->
-<div class="m-container m-padded-tb-big">
+<div class="m-container m-padded-tb-big" style="min-height: 80vh">
   <div class="ui container">
     <form id="blog-form" action="#" th:object="${blog}" th:action="@{/admin/blogs}" method="post" class="ui form">
       <input type="hidden" name="published" th:value="*{published}">
@@ -46,6 +46,10 @@
       </div>
 
       <div class="required field">
+        <textarea rows="3" name="description" th:text="*{description}" placeholder="博客描述,100字以内..." maxlength="100"></textarea>
+      </div>
+
+      <div class="required field">
         <div id="md-content" style="z-index: 1 !important;">
           <textarea placeholder="博客内容" name="content" style="display: none" th:text="*{content}"></textarea>
         </div>
@@ -61,7 +65,7 @@
               <div class="default text">分类</div>
               <div class="menu">
                 <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}"
-                     th:text="${type.name}">错误日志
+                     th:text="${type.name}">分类名
                 </div>
               </div>
             </div>
@@ -89,10 +93,6 @@
           <label class="ui teal basic label">首图</label>
           <input type="text" name="firstPicture" th:value="*{firstPicture}" placeholder="首图引用地址">
         </div>
-      </div>
-
-      <div class="required field">
-        <textarea name="description" th:text="*{description}" placeholder="博客描述..." maxlength="200"></textarea>
       </div>
 
       <div class="inline fields">

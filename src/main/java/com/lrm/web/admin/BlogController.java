@@ -28,11 +28,6 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/admin")
 public class BlogController {
 
-    private static final String INPUT = "admin/blogs-input";
-    private static final String LIST = "admin/blogs";
-//    private static final String REDIRECT_LIST = "redirect:/admin/blogs";
-
-
     @Autowired
     private BlogService blogService;
     @Autowired
@@ -41,15 +36,15 @@ public class BlogController {
     private TagService tagService;
 
     @GetMapping("/blogs")
-    public String blogs(@PageableDefault(size = 8, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String blogs(@PageableDefault(size = 10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                         BlogQuery blog, Model model) {
         model.addAttribute("types", typeService.listType());
         model.addAttribute("page", blogService.listBlog(pageable, blog));
-        return LIST;
+        return "admin/blogs";
     }
 
     @PostMapping("/blogs/search")
-    public String search(@PageableDefault(size = 8, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String search(@PageableDefault(size = 10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          BlogQuery blog, Model model) {
         model.addAttribute("page", blogService.listBlog(pageable, blog));
         return "admin/blogs :: blogList";
@@ -106,7 +101,7 @@ public class BlogController {
     public String delete(@PathVariable Long id, RedirectAttributes attributes) {
         blogService.deleteBlog(id);
         attributes.addFlashAttribute("message", "删除成功");
-        return"redirect:/admin/blogs";
+        return "redirect:/admin/blogs";
     }
 
 

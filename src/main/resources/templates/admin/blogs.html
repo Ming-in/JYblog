@@ -21,7 +21,7 @@
   </div>
 
   <!--中间内容-->
-  <div  class="m-container-small m-padded-tb-big">
+  <div  class="m-container-small m-padded-tb-big" style="min-height: 80vh">
     <div class="ui container">
       <div  class="ui secondary segment form">
         <input type="hidden" name="page" >
@@ -36,10 +36,7 @@
                 <i class="dropdown icon"></i>
                 <div class="default text">分类</div>
                 <div class="menu">
-                  <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}" th:text="${type.name}">错误日志</div>
-                  <!--/*-->
-                  <div class="item" data-value="2">开发者手册</div>
-                  <!--*/-->
+                  <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}" th:text="${type.name}"></div>
                 </div>
               </div>
               <button id="clear-btn" class="ui compact button">clear</button>
@@ -72,12 +69,12 @@
           </thead>
           <tbody>
           <tr th:each="blog,iterStat : ${page.content}">
-            <td th:text="${iterStat.count}">1</td>
-            <td th:text="${blog.title}">刻意练习清单</td>
-            <td th:text="${blog.type.name}">认知升级</td>
-            <td th:text="${blog.recommend} ? '是':'否'">是</td>
-            <td th:text="${blog.published} ? '发布':'草稿'">草稿</td>
-            <td th:text="${blog.updateTime}">2017-10-02 09:45</td>
+            <td th:text="${iterStat.count}"></td>
+            <td th:text="${blog.title}"></td>
+            <td th:text="${blog.type.name}"></td>
+            <td th:text="${blog.recommend} ? '是':'否'"></td>
+            <td th:text="${blog.published} ? '发布':'草稿'"></td>
+            <td th:text="${blog.updateTime}">2021</td>
             <td>
               <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini teal basic button">编辑</a>
               <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui mini red basic button">删除</a>
@@ -100,7 +97,7 @@
         <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
           <i class="close icon"></i>
           <div class="header">提示：</div>
-          <p th:text="${message}">恭喜，操作成功！</p>
+          <p th:text="${message}">操作成功！</p>
         </div>
 
       </div>
