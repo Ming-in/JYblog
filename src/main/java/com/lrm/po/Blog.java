@@ -41,12 +41,20 @@ public class Blog {
      * 浏览人数
      */
     private Integer views;
+    //赞赏
     private boolean appreciation;
+    //版权声明
     private boolean shareStatement;
+    /**
+     * 可评论
+     */
     private boolean commentabled;
-    private boolean recommend;
     /**
      * 是否推荐
+     */
+    private boolean recommend;
+    /**
+     * 是否发布
      */
     private boolean published;
     /**

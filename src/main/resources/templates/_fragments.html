@@ -29,21 +29,21 @@
 
 
 <!--导航-->
-<nav th:fragment="menu(n)" class="ui attached segment m-padded-tb-mini m-shadow-small m-theme-bg" style="border: none">
+<nav th:fragment="menu(n)" class="ui attached segment m-padded-tb-mini m-shadow-small m-theme-bg" style="border: none;">
   <div class="ui container">
     <div class="ui inverted secondary menu m-theme-bg">
       <h2 class="ui teal header item" style="color: palegoldenrod!important;">JY-Blog</h2>
       <a th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i
-          class="mini home icon" style="margin: 0 1.5em .75em 0 !important;"></i>首页</a>
+          class="home icon"></i>首页</a>
       <a th:href="@{/types/-1}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i
-          class="mini clone icon" style="margin: 0 1.5em .75em 0 !important;"></i>分类</a>
+          class="clone icon"></i>分类</a>
       <a th:href="@{/tags/-1}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i
-          class="mini tags icon" style="margin: 0 2em .75em 0 !important;"></i>标签</a>
-      <a th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i
-          class="mini calendar alternate outline icon" style="margin: 0 1.5em .75em 0 !important;"></i>时间线</a>
+          class="tags icon"></i>标签</a>
+      <a th:href="@{/news}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i
+          class="newspaper outline icon"></i>新闻</a>
       <a th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"
          th:if="${session.user}"><i
-          class="mini street view icon" style="margin: 0 1.5em .75em 0 !important;"></i>个人空间</a>
+          class="street view icon"></i>个人空间</a>
       <div class="right m-item item m-mobile-hide">
         <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
           <div class="ui icon inverted transparent input m-margin-tb-tiny">

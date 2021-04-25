@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="_fragments :: head(~{::title})">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新闻</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../static/css/me.css">
+</head>
+<body>
+
+<!--导航-->
+<nav th:fragment="menu(n)" class="ui attached segment m-padded-tb-mini m-shadow-small m-theme-bg" style="border: none;min-height: 67.3px!important;">
+  <div class="ui container">
+    <div class="ui inverted secondary menu m-theme-bg" style="width:100%">
+      <h2 class="ui teal header item" style="color: palegoldenrod!important;font-size: 24px">JY-Blog</h2>
+      <a th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'" style="font-size: 15px !important; margin-top: 12px!important;margin-bottom: 12px!important;"><i
+          class="home icon"></i>首页</a>
+      <a th:href="@{/types/-1}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'" style="font-size: 15px !important; margin-top: 12px!important;margin-bottom: 12px!important;"><i
+          class="clone icon"></i>分类</a>
+      <a th:href="@{/tags/-1}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'" style="font-size: 15px !important; margin-top: 12px!important;margin-bottom: 12px!important;"><i
+          class="tags icon"></i>标签</a>
+      <a th:href="@{/news}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'" style="font-size: 15px !important; margin-top: 12px!important;margin-bottom: 12px!important;"><i
+          class="newspaper outline icon"></i>新闻</a>
+      <a th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'" style="font-size: 15px !important; margin-top: 12px!important;margin-bottom: 12px!important;"
+         th:if="${session.user}"><i
+          class="street view icon"></i>个人空间</a>
+      <div class="right m-item item m-mobile-hide">
+        <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+          <div class="ui icon inverted transparent input m-margin-tb-tiny"
+               style="font-size: 15px !important;">
+            <input type="text" name="query" placeholder="Search...." th:value="${query}" >
+            <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+          </div>
+        </form>
+      </div>
+      <div class="right m-item m-mobile-hide item">
+        <div class="ui dropdown item" th:if="${session.user}">
+          <a th:href="@{/about}" class="text" style="font-size: 13px !important;line-height: 13px!important;">
+            <img class="ui avatar image" th:src="@{${session.user.avatar}?${session.user.avatar}:'/images/avatar.png'}">
+            <span th:text="${session.user.nickname}">Ming</span>
+          </a>
+        </div>
+        <a class="right m-item m-mobile-hide item" th:href="@{/login}" th:if="${session.user}==null"
+           style="font-size: 15px !important;"><i
+            class="desktop icon"></i>登录/注册</a>
+      </div>
+    </div>
+  </div>
+  <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+    <i class="sidebar icon"></i>
+  </a>
+</nav>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!--中间内容-->
+<div class="m-container-small m-padded-tb-big" style="min-height:80vh;padding-top: 10px!important;">
+  <div class="ui container">
+    <div class="ui top attached teal segment">
+      <!--轮播图-->
+      <div class="ui padded vertical segment m-padded-tb-large" style="padding: 0 0 1em 0!important;">
+        <div id="carousel-example-generic" class="carousel slide center-block">
+          <div class="carousel-inner">
+            <div class="item" th:each="news,num : ${page.content}" th:classappend="${num.index}==0 ? 'active' : '' ">
+              <img class="center-block" th:src="@{${news.firstPicture}}" alt="" style="object-fit:cover">
+              <div class="carousel-caption">
+                <h2 th:text="${news.title}"></h2>
+                <p th:text="${news.description}"></p>
+              </div>
+            </div>
+          </div>
+          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          </a>
+          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="ui padded vertical segment m-padded-tb-large" th:each="news : ${page.content}">
+        <div class="ui middle aligned mobile reversed stackable grid">
+          <div class="eleven wide column">
+            <h3 class="ui header"><a href="#" th:href="@{/news/{id}(id=${news.id})}" target="_blank" class="m-black"
+                                     th:text="${news.title}">标题</a></h3>
+            <p class="m-text" th:text="|${news.description}...|">描述</p>
+            <div class="ui grid">
+              <div class="eleven wide column">
+                <div class="ui mini horizontal link list">
+                  <div class="item">
+                    <i class="calendar icon"></i><span th:text="${#dates.format(news.createTime,'yyyy-MM-dd')}">2020-10-01</span>
+                  </div>
+                  <div class="item">
+                    <i class="eye icon"></i> <span th:text="${news.views}">666</span>
+                  </div>
+                </div>
+              </div>
+              <div class="right aligned five wide column">
+                <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin" th:text="新闻">类型名</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="five wide column">
+            <a href="#" th:href="@{/news/{id}(id=${news.id})}" target="_blank">
+              <img th:src="@{${news.firstPicture}}" alt="" class="ui rounded image">
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!--footer-->
+    <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
+      <div class="ui middle aligned two column grid">
+        <div class="column">
+          <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
+        </div>
+        <div class="right aligned column">
+          <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<br>
+<br>
+<!--底部footer-->
+<footer th:replace="_fragments :: footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+</script>
+</body>
+</html>

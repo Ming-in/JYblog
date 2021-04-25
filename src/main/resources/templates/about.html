@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="_fragments :: head(~{::title})">
+<head th:replace="_fragments :: head(~{::title})">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>关于我</title>
@@ -9,18 +9,19 @@
 </head>
 <body>
 
-  <!--导航-->
-  <nav th:replace="_fragments :: menu(5)">导航条</nav>
+<!--导航-->
+<nav th:replace="_fragments :: menu(5)">导航条</nav>
 
-  <!--中间内容-->
-  <div  class="m-container m-padded-tb-big animated fadeIn" style="min-height:80vh">
-    <div class="ui container">
+<!--中间内容-->
+<div class="m-container m-padded-tb-big animated fadeIn" style="min-height:80vh">
+  <div class="ui container">
 
-      <div class="ui stackable grid">
-        <div class="eleven wide column">
-          博主太懒没有创建自己的空间。
-        </div>
-        <div class="five wide column">
+    <div class="ui stackable grid">
+      <div class="eleven wide column" style="height: 1000vh">
+        博主太懒没有创建自己的空间。
+      </div>
+      <div class="five wide column">
+        <div style="position:sticky;top: 0">
           <div class="ui top attached segment">
             <div class="ui header">关于我</div>
           </div>
@@ -43,32 +44,33 @@
             <div class="ui teal basic left pointing label m-margin-tb-tiny">MYSQL</div>
             <div class="ui teal basic left pointing label m-margin-tb-tiny">...</div>
           </div>
-          </div>
+        </div>
       </div>
-
     </div>
+
   </div>
+</div>
 
-  <br>
-  <br>
-  <!--底部footer-->
-  <footer th:replace="_fragments :: footer">底部</footer>
-  <!--/*/<th:block th:replace="_fragments :: script">/*/-->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-  <!--/*/</th:block>/*/-->
+<br>
+<br>
+<!--底部footer-->
+<footer th:replace="_fragments :: footer">底部</footer>
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
 
-  <script>
+<script>
     $('.menu.toggle').click(function () {
-      $('.m-item').toggleClass('m-mobile-hide');
+        $('.m-item').toggleClass('m-mobile-hide');
     });
 
     $('.wechat').popup({
-      popup : $('.wechat-qr'),
-      position: 'bottom center'
+        popup: $('.wechat-qr'),
+        position: 'bottom center'
     });
     $('.qq').popup();
 
-  </script>
+</script>
 </body>
 </html>
