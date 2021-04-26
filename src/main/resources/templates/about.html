@@ -3,8 +3,11 @@
 <head th:replace="_fragments :: head(~{::title})">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>关于我</title>
+  <title>个人空间</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../static/css/typo.css">
+  <link rel="stylesheet" href="../static/css/animate.css">
+  <link rel="stylesheet" href="../static/lib/prism/prism.css">
   <link rel="stylesheet" href="../static/css/me.css">
 </head>
 <body>
@@ -13,39 +16,59 @@
 <nav th:replace="_fragments :: menu(5)">导航条</nav>
 
 <!--中间内容-->
-<div class="m-container m-padded-tb-big animated fadeIn" style="min-height:80vh">
+<div class="m-padded-tb-big animated fadeIn" style="min-height:80vh">
   <div class="ui container">
 
     <div class="ui stackable grid">
-      <div class="eleven wide column" style="height: 1000vh">
-        博主太懒没有创建自己的空间。
-      </div>
-      <div class="five wide column">
-        <div style="position:sticky;top: 0">
+
+      <!--选择列表-->
+      <div class="three wide column">
+        <div style="position:sticky;top: 0" class=" m-them-shadow">
           <div class="ui top attached segment">
-            <div class="ui header">关于我</div>
+            <div class="ui header centered">选项</div>
+          </div>
+          <div class="ui attached segment" th:if="${zone.id}==${session.user.id}">
+            <a class="m-black m-text-thin" href="" target="_blank">
+              <p style="padding-left: 3em">发布博客</p>
+            </a>
           </div>
           <div class="ui attached segment">
-            <p class="m-text">Ming，一个独立开发者，折腾在 0 和 1 世界的大学生；一个终身学习者，誓将学习无限循环. 希望结识可以共同成长的小伙伴.</p>
-            <p class="m-text">热爱编程，喜欢折腾，正在探索高效学习编程技术的方法...</p>
+            <a class="m-black m-text-thin" href="" target="_blank">
+              <p style="padding-left: 3em">个人介绍</p>
+            </a>
+          </div>
+          <div class="ui attached segment" th:if="${zone.id}==${session.user.id}">
+            <a class="m-black m-text-thin" href="" target="_blank">
+              <p style="padding-left: 3em">头像上传</p>
+            </a>
+          </div>
+          <div class="ui attached segment" th:if="${zone.id}==${session.user.id}">
+            <a class="m-black m-text-thin" href="" target="_blank">
+              <p style="padding-left: 3em">更改密码</p>
+            </a>
           </div>
           <div class="ui attached segment">
-            <div class="ui orange basic left pointing label">编程</div>
-            <div class="ui orange basic left pointing label">写作</div>
-            <div class="ui orange basic left pointing label">思考</div>
-            <div class="ui orange basic left pointing label">运动</div>
-          </div>
-          <div class="ui attached segment">
-            <div class="ui teal basic left pointing label m-margin-tb-tiny">Java</div>
-            <div class="ui teal basic left pointing label m-margin-tb-tiny">SpringBoot</div>
-            <div class="ui teal basic left pointing label m-margin-tb-tiny">JavaScript</div>
-            <div class="ui teal basic left pointing label m-margin-tb-tiny">Element UI</div>
-            <div class="ui teal basic left pointing label m-margin-tb-tiny">Vue</div>
-            <div class="ui teal basic left pointing label m-margin-tb-tiny">MYSQL</div>
-            <div class="ui teal basic left pointing label m-margin-tb-tiny">...</div>
+            <a class="m-black m-text-thin" href="" target="_blank">
+              <p style="padding-left: 1em" th:text="${zone.nickname}+'编写的博客'">用户的博客</p>
+            </a>
           </div>
         </div>
       </div>
+
+      <!--中间主要内容部分-->
+      <div class="thirteen wide column">
+        <div class="ui  attached padded segment m-them-shadow" style="min-height: 80vh">
+          <div class="typo  typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large"
+               th:if="${zone.introduction}==null or ${zone.introduction}== ''">
+            <p style="text-align: center">博主太懒没有写下个人介绍。</p>
+          </div>
+          <div class="typo  typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large"
+               th:utext="${zone.introduction}">
+            内容
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -55,21 +78,17 @@
 <br>
 <!--底部footer-->
 <footer th:replace="_fragments :: footer">底部</footer>
-<!--/*/<th:block th:replace="_fragments :: script">/*/-->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-<!--/*/</th:block>/*/-->
 
+<th:block th:replace="_fragments :: script">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+  <script src="../static/lib/prism/prism.js"></script>
+</th:block>
 <script>
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
     });
-
-    $('.wechat').popup({
-        popup: $('.wechat-qr'),
-        position: 'bottom center'
-    });
-    $('.qq').popup();
 
 </script>
 </body>

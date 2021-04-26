@@ -22,7 +22,7 @@
           class="tags icon"></i>标签</a>
       <a th:href="@{/news}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'" style="font-size: 15px !important; margin-top: 12px!important;margin-bottom: 12px!important;"><i
           class="newspaper outline icon"></i>新闻</a>
-      <a th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'" style="font-size: 15px !important; margin-top: 12px!important;margin-bottom: 12px!important;"
+      <a th:href="@{/about/{id}(id=${session.user.id})}" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'" style="font-size: 15px !important; margin-top: 12px!important;margin-bottom: 12px!important;"
          th:if="${session.user}"><i
           class="street view icon"></i>个人空间</a>
       <div class="right m-item item m-mobile-hide">
@@ -36,7 +36,7 @@
       </div>
       <div class="right m-item m-mobile-hide item">
         <div class="ui dropdown item" th:if="${session.user}">
-          <a th:href="@{/about}" class="text" style="font-size: 13px !important;line-height: 13px!important;">
+          <a th:href="@{/about/{id}(id=${session.user.id})}" class="text" style="font-size: 13px !important;line-height: 13px!important;">
             <img class="ui avatar image" th:src="@{${session.user.avatar}?${session.user.avatar}:'/images/avatar.png'}">
             <span th:text="${session.user.nickname}">Ming</span>
           </a>

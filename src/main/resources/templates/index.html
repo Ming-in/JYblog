@@ -14,6 +14,13 @@
 
 <!--中间内容-->
 <div class="m-container m-padded-tb-big animated fadeIn" style="min-height:80vh">
+
+  <!--消息提示-->
+  <div class="ui floating massive positive  message" th:if="${message}">
+    <i class="close icon"></i>
+    <span th:text="${message}">要走的路！</span>
+  </div>
+
   <div class="ui container">
 
     <div class="ui stackable grid">
@@ -73,7 +80,7 @@
             <i class="bookmark icon"></i>最新推荐
           </div>
           <div class="ui segment" th:each="blog : ${recommendBlogs}">
-            <a th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" >
+            <a th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
               <span class="m-black m-text-thin" th:text="${blog.title}">博客标题</span>
             </a>
           </div>
@@ -109,7 +116,8 @@
                       <div class="item">
                         <img th:src="@{${blog.user.avatar}==null?'/images/avatar.png':${blog.user.avatar}}" alt=""
                              class="ui avatar image">
-                        <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">Ming</a></div>
+                        <div class="content"><a th:href="@{/about/{id}(id=${blog.user.id})}" class="header"
+                                                th:text="${blog.user.nickname}">Ming</a></div>
                       </div>
                       <div class="item">
                         <i class="calendar alternate outline icon"></i><span
@@ -172,6 +180,18 @@
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
     });
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade')
+            ;
+        });
+    //两秒后自动关闭消息
+    setTimeout(() => {
+        $('.message .close').click()
+    }, 3000);
+
 </script>
 </body>
 </html>

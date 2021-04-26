@@ -38,17 +38,16 @@
       <img th:src="@{${blog.firstPicture}}" alt=""
            class="ui fluid rounded image" style="max-height: 50vh;max-width: 100%">
     </div>
-    <div class="ui  attached padded segment" th:if="${blog.flag}!=null and ${blog.flag}!=''">
+    <div class="ui  attached padded segment">
       <!--内容-->
-      <div class="ui right aligned basic segment">
+      <div class="ui right aligned basic segment" th:if="${blog.flag}!=null and ${blog.flag}!=''">
         <div class="ui orange basic label" th:text="${blog.flag}">原创</div>
       </div>
 
       <h2 class="ui center aligned header" th:text="${blog.title}">标题</h2>
       <br>
       <!--中间主要内容部分-->
-      <div id="content"
-           class="typo  typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large"
+      <div id="content" class="typo  typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large"
            th:utext="${blog.content}">
         内容
       </div>
@@ -165,24 +164,18 @@
   底部
 </footer>
 
-<!--/*/<th:block th:replace="_fragments :: script">/*/-->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
-<script src="../static/lib/prism/prism.js"></script>
-<!--/*/</th:block>/*/-->
+<th:block th:replace="_fragments :: script">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+  <script src="../static/lib/prism/prism.js"></script>
+</th:block>
 
 
 <script th:inline="javascript">
 
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
-    });
-
-    $('#payButton').popup({
-        popup: $('.payQR.popup'),
-        on: 'click',
-        position: 'bottom center'
     });
 
     //评论表单验证
