@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveUser(String username, String nickname, String password, String email) {
+    public User saveUser(String username, String password, String nickname, String email) {
         User user = new User();
         user.setUsername(username);
         user.setNickname(nickname);
