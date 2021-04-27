@@ -24,6 +24,7 @@
   #menu a i {
     margin: 0 1.5em .75em 0 !important;
   }
+
 </style>
 <body>
 
@@ -55,7 +56,7 @@
       <div class="right m-item m-mobile-hide item">
         <div class="ui dropdown item" th:if="${session.user}">
           <div class="text">
-            <img class="ui avatar image" th:src="@{${session.user.avatar}?${session.user.avatar}:'/images/avatar.png'}">
+            <img class="ui avatar image" th:src="@{${session.user.avatar} ? ${session.user.avatar}:'/images/avatar.png'}">
             <span th:text="${session.user.nickname}">Ming</span>
           </div>
           <i class="dropdown icon"></i>
@@ -90,7 +91,7 @@
   <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
   <script src="../static/lib/semantic-UI/semantic.min.js" th:src="@{/lib/semantic-UI/semantic.min.js}"></script>
   <script src="../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
   <script th:src="@{/lib/prism/prism.js}"></script>
   <script>
       $('#newblog-container').load("/footer/newblog");
