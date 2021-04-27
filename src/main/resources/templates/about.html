@@ -38,8 +38,8 @@
             </a>
           </div>
           <div class="ui attached segment" th:if="${zone.id}==${session.user.id}">
-            <a class="m-black m-text-thin" href="" target="_blank">
-              <p style="padding-left: 3em">头像上传</p>
+            <a class="m-black m-text-thin" th:href="@{/lib/upload/index.html}">
+              <p style="padding-left: 3em">上传头像</p>
             </a>
           </div>
           <div class="ui attached segment" th:if="${zone.id}==${session.user.id}">
@@ -58,6 +58,18 @@
       <!--中间主要内容部分-->
       <div class="thirteen wide column">
         <div class="ui  attached padded segment m-them-shadow" style="min-height: 85vh">
+
+          <div class="ui stackable grid">
+            <div class="four wide column">
+              <img class="ui small circular image centered" src="" style="border: solid 0.1em #ccc"
+                   th:src="@{${session.user.avatar}?${session.user.avatar}:'/images/avatar.png'}" alt=""/>
+            </div>
+            <div class="column">
+              <div>零零零零</div>
+            </div>
+          </div>
+          <div class="ui divider"></div>
+
           <div class="typo  typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large"
                th:if="${zone.introduction}==null or ${zone.introduction}== ''">
             <p style="text-align: center">博主太懒没有写下个人介绍。</p>

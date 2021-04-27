@@ -8,12 +8,10 @@ import com.ming.util.MimeTypeUtils;
 import com.ming.util.UploadUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -43,13 +41,13 @@ public class AboutShowController {
     }
 
 
-    @PostMapping(value = "/avatar")
-    public String avatarUpload(@RequestPart(value = "file") MultipartFile file,
+    @PostMapping(value = "/file/avatar")
+    public String avatarUpload(@RequestPart(value = "avatar_file") MultipartFile avatar_file,
                                HttpSession session,
                                Model model) {
         User user = (User) session.getAttribute("user");
         //获取文件后缀
-        final String fileSuffix = FileUtils.getExtension(file);
+        final String fileSuffix = FileUtils.getExtension(avatar_file);
         String path = "";
         //判断是否为有效图片
         if (isAllowedExtension(fileSuffix, MimeTypeUtils.IMAGE_EXTENSION)) {
@@ -62,12 +60,26 @@ public class AboutShowController {
         //生成加密字符
         String str = UploadUtils.aesEncrypt(user.getUsername());
         path = path + str + File.separator;
-        String fileName = FileUtils.upload(file, path);
+        String fileName = FileUtils.upload(avatar_file, path);
         model.addAttribute("message", "头像上传成功");
         model.addAttribute("filename", fileName);
         return "about";
     }
 
+    @PostMapping(value = "/avatar")
+    public void avatarUpload(@RequestParam String file,
+                             HttpSession session,
+                             Model model) {
+        System.out.println(file);
+        User user = (User) session.getAttribute("user");
+        user = userService.findById(user.getId());
+        user.setAvatar(file);
+        userService.save(user);
+        user.setPassword(null);
+        session.setAttribute("user", user);
+        model.addAttribute("message", "头像上传成功");
+//        model.addAttribute("filename", fileName);
+    }
 
     /**
      * 判断是否是允许的文件类型
