@@ -4,9 +4,7 @@ import com.ming.po.User;
 import com.ming.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -72,5 +70,31 @@ public class LoginController {
                 return "redirect:/";
             }
         }
+    }
+
+    @ResponseBody
+    @PostMapping("/repwd")
+    public void repairPassword(@RequestParam(value = "oldPwd") String oldPwd,
+                               @RequestParam(value = "pwd") String pwd,
+                               HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        user = userService.findById(user.getId());
+        user.setPassword(pwd);
+        userService.save(user);
+    }
+
+    @ResponseBody
+    @PostMapping("/reinfo")
+    public String repairInfo(@RequestParam(value = "username") String username,
+                               @RequestParam(value = "nickname") String nickname,
+                               @RequestParam(value = "email") String email,
+                               HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        user = userService.findById(user.getId());
+        user.setUsername(username);
+        user.setNickname(nickname);
+        user.setEmail(email);
+        userService.save(user);
+        return "redirect:/about"+user.getId();
     }
 }

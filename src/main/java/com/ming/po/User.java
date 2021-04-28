@@ -169,11 +169,11 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", avatar='" + avatar + '\'' +
-                ", introduction='" + introduction + '\'' +
+//                ", introduction='" + introduction + '\'' +
                 ", type=" + type +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
-                ", blogs=" + blogs +
+//                ", blogs=" + blogs +
                 '}';
     }
 }
