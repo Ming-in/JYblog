@@ -38,8 +38,10 @@ public class User {
      */
     private String email;
     /**
-     * 用户头像地址
+     * 用户头像地址/base64图
      */
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
     private String avatar;
     /**
      * 用户主页介绍
