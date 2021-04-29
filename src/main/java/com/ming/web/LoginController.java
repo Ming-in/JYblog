@@ -2,6 +2,7 @@ package com.ming.web;
 
 import com.ming.po.User;
 import com.ming.service.UserService;
+import com.ming.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +48,7 @@ public class LoginController {
     }
 
     /**
+     * 密码：202cb962ac59075b964b07152d234b70
      * 注册用户
      */
     @PostMapping("/register")
@@ -72,7 +74,7 @@ public class LoginController {
         }
     }
 
-    //一下ajax调用
+    //以下ajax调用
 
     @ResponseBody
     @PostMapping("/repwd")
@@ -81,7 +83,7 @@ public class LoginController {
                                HttpSession session) {
         User user = (User) session.getAttribute("user");
         user = userService.findById(user.getId());
-        user.setPassword(pwd);
+        user.setPassword(MD5Utils.code(pwd));
         userService.save(user);
         return "修改成功";
     }

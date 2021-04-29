@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="_fragments :: head(~{::title})">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,7 +39,7 @@
               </div>
             </div>
           </div>
-          <div class="ui teal segment m-them-shadow">
+          <div class="ui teal segment m-them-shadow" style="padding: 0!important;">
             <div class="ui fluid vertical menu">
               <a href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank" class="item"
                  th:each="type : ${types}">
@@ -52,7 +52,7 @@
 
         <!--
                 &lt;!&ndash;标签&ndash;&gt;
-                <div class="ui segments m-margin-top-large m-them-shadow">
+                <div class="ui segments m-margin-top-large m-them-shadow" style="padding: 0!important;">
                   <div class="ui secondary segment">
                     <div class="ui two column grid">
                       <div class="column">
@@ -75,7 +75,7 @@
 
         <!--最新推荐-->
         <div class="ui segments m-margin-top-large m-them-shadow"
-             style="position: sticky;top: 300px;z-index: 801!important;">
+             style="position: sticky;top: 400px;z-index: 801!important;">
           <div class="ui secondary segment ">
             <i class="bookmark icon"></i>最新推荐
           </div>
@@ -88,9 +88,9 @@
       </div>
 
       <!--右边博客列表-->
-      <div class="eleven wide column m-them-shadow">
+      <div class="eleven wide column" style="padding: 0!important;">
         <!--header-->
-        <div class="ui top attached segment">
+        <div class="ui top attached segment m-them-shadow">
           <div class="ui middle aligned two column grid">
             <div class="column">
               <h3 class="ui teal header" style="color: #555!important;">博客列表</h3>
@@ -102,7 +102,7 @@
         </div>
 
         <!--content-->
-        <div class="ui attached  segment">
+        <div class="ui attached  segment  m-them-shadow">
 
           <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
             <div class="ui middle aligned mobile reversed stackable grid">
@@ -117,7 +117,7 @@
                         <img th:src="@{${blog.user.avatar}==null?'/images/avatar.png':${blog.user.avatar}}" alt=""
                              class="ui avatar image">
                         <div class="content"><a th:href="@{/about/{id}(id=${blog.user.id})}" class="header"
-                                                th:text="${blog.user.nickname}">Ming</a></div>
+                                                th:text="${blog.user.nickname}" target="_blank">Ming</a></div>
                       </div>
                       <div class="item">
                         <i class="calendar alternate outline icon"></i><span
@@ -146,7 +146,7 @@
         </div>
 
         <!--footer-->
-        <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
+        <div class="ui bottom attached segment m-them-shadow" th:if="${page.totalPages}>1">
           <div class="ui middle aligned two column grid">
             <div class="column">
               <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}"

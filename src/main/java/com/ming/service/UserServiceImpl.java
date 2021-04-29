@@ -43,7 +43,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-        user.setPassword(MD5Utils.code(user.getPassword()));
         return userRepository.save(user);
     }
 }

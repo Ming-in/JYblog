@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="_fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,31 +27,26 @@
                     <div class="ui top attached segment">
                         <div class="ui header centered">选项</div>
                     </div>
-                    <div class="ui button  attached segment" onclick="document.getElementById('write-blog').click()"
-                         th:if="${zone.id}==${session.user.id}">
-                        <a id="write-blog" class="m-black m-text-thin" th:href="@{/writeblog}">
-                            <i class="edit outline icon"></i>
-                            编写博客
-                        </a>
-                    </div>
-                    <div class="ui button  attached segment"
-                         onclick="document.getElementById('write-introduction').click()">
-                        <a id="write-introduction" class="m-black m-text-thin" href="">
-                            <i class="edit outline icon"></i>
-                            个人介绍
-                        </a>
-                    </div>
-                    <div class="ui button attached segment" onclick="showInfo()" th:if="${zone.id}==${session.user.id}">
-                        <div class="m-black m-text-thin">
-                            <i class="id card outline icon"></i>
-                            修改个人信息
-                        </div>
-                    </div>
                     <div class="ui button  attached segment" onclick="document.getElementById('upload-avatar').click()"
                          th:if="${zone.id}==${session.user.id}">
                         <a id="upload-avatar" class="m-black m-text-thin" th:href="@{/lib/upload/index.html}">
                             <i class="user circle outline icon"></i>
                             上传头像
+                        </a>
+                    </div>
+                    <div class="ui button attached segment" onclick="showInfo()"
+                         th:if="${zone.id}==${session.user.id}">
+                        <div class="m-black m-text-thin">
+                            <i class="id card outline icon"></i>
+                            修改个人信息
+                        </div>
+                    </div>
+                    <div class="ui button  attached segment"
+                         th:if="${zone.id}==${session.user.id}"
+                         onclick="document.getElementById('write-introduction').click()">
+                        <a id="write-introduction" class="m-black m-text-thin" href="">
+                            <i class="edit outline icon"></i>
+                            修改个人介绍
                         </a>
                     </div>
                     <div class="ui button attached segment" onclick="showPassword()"
@@ -60,6 +55,13 @@
                             <i class="expeditedssl icon"></i>
                             更改密码
                         </div>
+                    </div>
+                    <div class="ui button  attached segment" onclick="document.getElementById('write-blog').click()"
+                         th:if="${zone.id}==${session.user.id}">
+                        <a id="write-blog" class="m-black m-text-thin" th:href="@{/writeblog}">
+                            <i class="edit outline icon"></i>
+                            编写博客
+                        </a>
                     </div>
                     <div class="ui button attached segment" onclick="document.getElementById('query-blog').click()">
                         <a id="query-blog" class="m-black m-text-thin" href="" target="_blank">
@@ -74,47 +76,47 @@
             <div class="thirteen wide column">
                 <div class="ui  attached padded segment m-them-shadow" style="min-height: 85vh">
 
-                    <div id="allForm" class="ui stackable grid centered" style="display: none">
+                    <div class="ui stackable grid centered">
                         <div class="four wide column">
                             <br>
                             <img class="ui small circular image centered" src=""
                                  style="margin:4em 0;border: solid 0.1em #ccc;"
-                                 th:src="@{${session.user.avatar}?${session.user.avatar}:'/images/avatar.png'}" alt=""/>
+                                 th:src="@{${zone.avatar}?${zone.avatar}:'/images/avatar.png'}" alt=""/>
                         </div>
                         <div class="ten wide column">
-                            <form id="info" class="ui form" onsubmit="return false" style="color: #aaa;display: none">
+                            <form id="info" class="ui form" onsubmit="return false" style="color: #aaa;">
                                 <br>
                                 <div class="inline field">
                                     <label style="width:5em;">用户名：</label>
                                     <input type="text" name="username" placeholder="请输入用户名"
-                                           style="width: 80%"
-                                           th:value="${session.user.username}">
+                                           style="width: 80%" disabled
+                                           th:value="${zone.username}">
                                 </div>
                                 <div class="inline field">
                                     <label style="width:5em;">昵称：</label>
                                     <input type="text" name="nickname" placeholder="请输入昵称"
-                                           style="width: 80%"
-                                           th:value="${session.user.nickname}">
+                                           style="width: 80%" disabled
+                                           th:value="${zone.nickname}">
                                 </div>
                                 <div class="inline field">
                                     <label style="width:5em;">Email：</label>
                                     <input type="text" name="email" placeholder="请输入邮箱"
-                                           style="width: 80%"
-                                           th:value="${session.user.email}">
+                                           style="width: 80%" disabled
+                                           th:value="${zone.email}">
                                 </div>
                                 <div class="inline field">
                                     <label style="width:5em;">用户角色：</label>
                                     <input type="text" placeholder="请输入角色"
                                            style="width: 80%"
-                                           th:value="${session.user.type}==1?'普通用户':'管理员'" disabled>
+                                           th:value="${zone.type}==1?'普通用户':'管理员'" disabled>
                                 </div>
                                 <div class="inline field">
                                     <label style="width:5em;">创建日期：</label>
                                     <input type="text" placeholder="创建日期"
                                            style="width: 80%"
-                                           th:value="${#dates.format(session.user.createTime,'yyyy-MM-dd')}" disabled>
+                                           th:value="${#dates.format(zone.createTime,'yyyy-MM-dd')}" disabled>
                                 </div>
-                                <div class="ui buttons" style="margin-left:40%">
+                                <div id="submit" class="ui buttons" style="margin-left:40%;display: none">
                                     <button class="ui primary button" onclick="ajaxInfo()">保存</button>
                                     <div class="or"></div>
                                     <button class="ui button" onclick="showInfo()">取消</button>
@@ -138,7 +140,7 @@
                                     <input type="password" name="pwd" placeholder="再次输入新的密码"
                                            style="width: 80%">
                                 </div>
-                                <div class="ui buttons" style="margin-left:40%">
+                                <div id="submit2" class="ui buttons" style="margin-left:40%;display: none">
                                     <button class="ui primary button" onclick="ajaxPwd()">保存</button>
                                     <div class="or"></div>
                                     <button class="ui button" onclick="showPassword()">取消</button>
@@ -146,7 +148,7 @@
                             </form>
                         </div>
                     </div>
-                    <div id="divider" style="display: none" class="ui divider"></div>
+                    <div class="ui divider"></div>
                     <!--个人介绍博客-->
                     <div id="introduction"
                          class="typo typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large"
@@ -175,18 +177,20 @@
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
     });
+
     function showInfo() {
+        document.getElementsByName('username')[0].disabled = '';
+        document.getElementsByName('nickname')[0].disabled = '';
+        document.getElementsByName('email')[0].disabled = '';
         document.getElementById('info').style = 'color:#aaa';
         document.getElementById('password').style = 'color:#aaa;display:none';
-        document.getElementById('allForm').style = '';
-        document.getElementById('divider').style = '';
+        document.getElementById('submit').style = 'margin-left:40%';
     }
 
     function showPassword() {
         document.getElementById('info').style = 'color:#aaa;display:none';
         document.getElementById('password').style = 'color:#aaa';
-        document.getElementById('allForm').style = '';
-        document.getElementById('divider').style = '';
+        document.getElementById('submit2').style = 'margin-left:40%';
     }
 
     function ajaxPwd() {
