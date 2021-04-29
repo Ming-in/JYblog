@@ -72,15 +72,18 @@ public class LoginController {
         }
     }
 
+    //一下ajax调用
+
     @ResponseBody
     @PostMapping("/repwd")
-    public void repairPassword(@RequestParam(value = "oldPwd") String oldPwd,
+    public String repairPassword(@RequestParam(value = "oldPwd") String oldPwd,
                                @RequestParam(value = "pwd") String pwd,
                                HttpSession session) {
         User user = (User) session.getAttribute("user");
         user = userService.findById(user.getId());
         user.setPassword(pwd);
         userService.save(user);
+        return "修改成功";
     }
 
     @ResponseBody
@@ -95,6 +98,9 @@ public class LoginController {
         user.setNickname(nickname);
         user.setEmail(email);
         userService.save(user);
-        return "redirect:/about"+user.getId();
+        user.setPassword(null);
+        session.setAttribute("user",user);
+        return "修改成功";
+//        return "redirect:/about"+user.getId();
     }
 }

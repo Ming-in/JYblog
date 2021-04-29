@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="_fragments :: head(~{::title})">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>个人空间</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
-  <link rel="stylesheet" href="../static/css/typo.css">
-  <link rel="stylesheet" href="../static/css/animate.css">
-  <link rel="stylesheet" href="../static/lib/prism/prism.css">
-  <link rel="stylesheet" href="../static/css/me.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人空间</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/typo.css">
+    <link rel="stylesheet" href="../static/css/animate.css">
+    <link rel="stylesheet" href="../static/lib/prism/prism.css">
+    <link rel="stylesheet" href="../static/css/me.css">
 </head>
 <body>
 
@@ -17,144 +17,151 @@
 
 <!--中间内容-->
 <div class="m-padded-tb-big animated fadeIn" style="min-height:85vh">
-  <div class="ui container">
+    <div class="ui container">
 
-    <div class="ui stackable grid">
+        <div class="ui stackable grid">
 
-      <!--选择列表-->
-      <div class="three wide column">
-        <div style="position:sticky;top: 0" class=" m-them-shadow">
-          <div class="ui top attached segment">
-            <div class="ui header centered">选项</div>
-          </div>
-          <div class="ui button  attached segment" onclick="document.getElementById('write-blog').click()" th:if="${zone.id}==${session.user.id}">
-            <a id="write-blog" class="m-black m-text-thin" th:href="@{/writeblog}">
-              <i class="edit outline icon"></i>
-              编写博客
-            </a>
-          </div>
-          <div class="ui button  attached segment" onclick="document.getElementById('write-introduction').click()" >
-            <a id="write-introduction" class="m-black m-text-thin" href="">
-              <i class="edit outline icon"></i>
-              个人介绍
-            </a>
-          </div>
-          <div class="ui button attached segment" onclick="showInfo()" th:if="${zone.id}==${session.user.id}">
-            <div class="m-black m-text-thin">
-              <i class="id card outline icon"></i>
-              修改个人信息
+            <!--选择列表-->
+            <div class="three wide column">
+                <div style="position:sticky;top: 0" class=" m-them-shadow">
+                    <div class="ui top attached segment">
+                        <div class="ui header centered">选项</div>
+                    </div>
+                    <div class="ui button  attached segment" onclick="document.getElementById('write-blog').click()"
+                         th:if="${zone.id}==${session.user.id}">
+                        <a id="write-blog" class="m-black m-text-thin" th:href="@{/writeblog}">
+                            <i class="edit outline icon"></i>
+                            编写博客
+                        </a>
+                    </div>
+                    <div class="ui button  attached segment"
+                         onclick="document.getElementById('write-introduction').click()">
+                        <a id="write-introduction" class="m-black m-text-thin" href="">
+                            <i class="edit outline icon"></i>
+                            个人介绍
+                        </a>
+                    </div>
+                    <div class="ui button attached segment" onclick="showInfo()" th:if="${zone.id}==${session.user.id}">
+                        <div class="m-black m-text-thin">
+                            <i class="id card outline icon"></i>
+                            修改个人信息
+                        </div>
+                    </div>
+                    <div class="ui button  attached segment" onclick="document.getElementById('upload-avatar').click()"
+                         th:if="${zone.id}==${session.user.id}">
+                        <a id="upload-avatar" class="m-black m-text-thin" th:href="@{/lib/upload/index.html}">
+                            <i class="user circle outline icon"></i>
+                            上传头像
+                        </a>
+                    </div>
+                    <div class="ui button attached segment" onclick="showPassword()"
+                         th:if="${zone.id}==${session.user.id}">
+                        <div class="m-black m-text-thin">
+                            <i class="expeditedssl icon"></i>
+                            更改密码
+                        </div>
+                    </div>
+                    <div class="ui button attached segment" onclick="document.getElementById('query-blog').click()">
+                        <a id="query-blog" class="m-black m-text-thin" href="" target="_blank">
+                            <i class="file alternate outline icon"></i>
+                            他的博客
+                        </a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="ui button  attached segment" onclick="document.getElementById('upload-avatar').click()"  th:if="${zone.id}==${session.user.id}">
-            <a id="upload-avatar" class="m-black m-text-thin" th:href="@{/lib/upload/index.html}">
-              <i class="user circle outline icon"></i>
-              上传头像
-            </a>
-          </div>
-          <div class="ui button attached segment" onclick="showPassword()" th:if="${zone.id}==${session.user.id}">
-            <div class="m-black m-text-thin">
-              <i class="expeditedssl icon"></i>
-              更改密码
+
+            <!--中间主要内容部分-->
+            <div class="thirteen wide column">
+                <div class="ui  attached padded segment m-them-shadow" style="min-height: 85vh">
+
+                    <div id="allForm" class="ui stackable grid centered" style="display: none">
+                        <div class="four wide column">
+                            <br>
+                            <img class="ui small circular image centered" src=""
+                                 style="margin:4em 0;border: solid 0.1em #ccc;"
+                                 th:src="@{${session.user.avatar}?${session.user.avatar}:'/images/avatar.png'}" alt=""/>
+                        </div>
+                        <div class="ten wide column">
+                            <form id="info" class="ui form" onsubmit="return false" style="color: #aaa;display: none">
+                                <br>
+                                <div class="inline field">
+                                    <label style="width:5em;">用户名：</label>
+                                    <input type="text" name="username" placeholder="请输入用户名"
+                                           style="width: 80%"
+                                           th:value="${session.user.username}">
+                                </div>
+                                <div class="inline field">
+                                    <label style="width:5em;">昵称：</label>
+                                    <input type="text" name="nickname" placeholder="请输入昵称"
+                                           style="width: 80%"
+                                           th:value="${session.user.nickname}">
+                                </div>
+                                <div class="inline field">
+                                    <label style="width:5em;">Email：</label>
+                                    <input type="text" name="email" placeholder="请输入邮箱"
+                                           style="width: 80%"
+                                           th:value="${session.user.email}">
+                                </div>
+                                <div class="inline field">
+                                    <label style="width:5em;">用户角色：</label>
+                                    <input type="text" placeholder="请输入角色"
+                                           style="width: 80%"
+                                           th:value="${session.user.type}==1?'普通用户':'管理员'" disabled>
+                                </div>
+                                <div class="inline field">
+                                    <label style="width:5em;">创建日期：</label>
+                                    <input type="text" placeholder="创建日期"
+                                           style="width: 80%"
+                                           th:value="${#dates.format(session.user.createTime,'yyyy-MM-dd')}" disabled>
+                                </div>
+                                <div class="ui buttons" style="margin-left:40%">
+                                    <button class="ui primary button" onclick="ajaxInfo()">保存</button>
+                                    <div class="or"></div>
+                                    <button class="ui button" onclick="showInfo()">取消</button>
+                                </div>
+                            </form>
+                            <form id="password" onsubmit="return false" class="ui form"
+                                  style="color: #aaa;display: none">
+                                <br><br><br><br>
+                                <div class="inline field">
+                                    <label style="width:5em;">旧密码：</label>
+                                    <input type="password" name="oldPwd" placeholder="请输入旧密码"
+                                           style="width: 80%">
+                                </div>
+                                <div class="inline field">
+                                    <label style="width:5em;">新密码：</label>
+                                    <input type="password" placeholder="请输入新的密码"
+                                           style="width: 80%">
+                                </div>
+                                <div class="inline field">
+                                    <label style="width:5em;">新密码：</label>
+                                    <input type="password" name="pwd" placeholder="再次输入新的密码"
+                                           style="width: 80%">
+                                </div>
+                                <div class="ui buttons" style="margin-left:40%">
+                                    <button class="ui primary button" onclick="ajaxPwd()">保存</button>
+                                    <div class="or"></div>
+                                    <button class="ui button" onclick="showPassword()">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="divider" style="display: none" class="ui divider"></div>
+                    <!--个人介绍博客-->
+                    <div id="introduction"
+                         class="typo typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large"
+                         th:if="${zone.introduction}==null or ${zone.introduction}== ''">
+                        <p style="text-align: center">博主太懒没有写下个人介绍。</p>
+                    </div>
+                    <div class="typo  typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large"
+                         th:utext="${zone.introduction}">
+                        内容
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="ui button attached segment" onclick="document.getElementById('query-blog').click()">
-            <a id="query-blog" class="m-black m-text-thin" href="" target="_blank">
-              <i class="file alternate outline icon"></i>
-              他的博客
-            </a>
-          </div>
         </div>
-      </div>
 
-      <!--中间主要内容部分-->
-      <div class="thirteen wide column">
-        <div class="ui  attached padded segment m-them-shadow" style="min-height: 85vh">
-
-          <div id="allForm" class="ui stackable grid centered" style="display: none">
-            <div class="four wide column">
-              <br>
-              <img class="ui small circular image centered" src="" style="margin:4em 0;border: solid 0.1em #ccc;"
-                   th:src="@{${session.user.avatar}?${session.user.avatar}:'/images/avatar.png'}" alt=""/>
-            </div>
-            <div class="ten wide column">
-              <form id="info" class="ui form" onsubmit="return false" style="color: #aaa;display: none">
-                <br>
-                <div class="inline field">
-                  <label style="width:5em;">用户名：</label>
-                  <input type="text" name="username" placeholder="请输入用户名"
-                         style="width: 80%"
-                         th:value="${session.user.username}">
-                </div>
-                <div class="inline field">
-                  <label style="width:5em;">昵称：</label>
-                  <input type="text" name="nickname" placeholder="请输入昵称"
-                         style="width: 80%"
-                         th:value="${session.user.nickname}">
-                </div>
-                <div class="inline field">
-                  <label style="width:5em;">Email：</label>
-                  <input type="text" name="email" placeholder="请输入邮箱"
-                         style="width: 80%"
-                         th:value="${session.user.email}">
-                </div>
-                <div class="inline field">
-                  <label style="width:5em;">用户角色：</label>
-                  <input type="text" placeholder="请输入角色"
-                         style="width: 80%"
-                         th:value="${session.user.type}==1?'普通用户':'管理员'" disabled>
-                </div>
-                <div class="inline field">
-                  <label style="width:5em;">创建日期：</label>
-                  <input type="text" placeholder="创建日期"
-                         style="width: 80%"
-                         th:value="${#dates.format(session.user.createTime,'yyyy-MM-dd')}" disabled>
-                </div>
-                <div class="ui buttons" style="margin-left:40%">
-                  <button class="ui primary button" onclick="ajaxInfo()">保存</button>
-                  <div class="or"></div>
-                  <button class="ui button" onclick="showInfo()">取消</button>
-                </div>
-              </form>
-              <form id="password" onsubmit="return false" class="ui form" style="color: #aaa;display: none">
-                <br><br><br><br>
-                <div class="inline field">
-                  <label style="width:5em;">旧密码：</label>
-                  <input type="password" name="oldPwd" placeholder="请输入旧密码"
-                         style="width: 80%">
-                </div>
-                <div class="inline field">
-                  <label style="width:5em;">新密码：</label>
-                  <input type="password" placeholder="请输入新的密码"
-                         style="width: 80%">
-                </div>
-                <div class="inline field">
-                  <label style="width:5em;">新密码：</label>
-                  <input type="password" name="pwd" placeholder="再次输入新的密码"
-                         style="width: 80%">
-                </div>
-                <div class="ui buttons" style="margin-left:40%">
-                  <button class="ui primary button" onclick="ajaxPwd()">保存</button>
-                  <div class="or"></div>
-                  <button class="ui button" onclick="showPassword()">取消</button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div id="divider" style="display: none" class="ui divider"></div>
-          <!--个人介绍博客-->
-          <div id="introduction" class="typo typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large"
-               th:if="${zone.introduction}==null or ${zone.introduction}== ''">
-            <p style="text-align: center">博主太懒没有写下个人介绍。</p>
-          </div>
-          <div class="typo  typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large"
-               th:utext="${zone.introduction}">
-            内容
-          </div>
-        </div>
-      </div>
     </div>
-
-  </div>
 </div>
 
 <br>
@@ -168,13 +175,14 @@
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
     });
-    function showInfo(){
+    function showInfo() {
         document.getElementById('info').style = 'color:#aaa';
         document.getElementById('password').style = 'color:#aaa;display:none';
         document.getElementById('allForm').style = '';
         document.getElementById('divider').style = '';
     }
-    function showPassword(){
+
+    function showPassword() {
         document.getElementById('info').style = 'color:#aaa;display:none';
         document.getElementById('password').style = 'color:#aaa';
         document.getElementById('allForm').style = '';
@@ -185,14 +193,24 @@
         $.ajax({
             url: "/repwd",
             data: $('#password').serialize(),
-            type: "POST"
+            type: "POST",
+            success: function (re) {
+                alert(re);
+                window.location.reload();
+            }
         });
     }
+
     function ajaxInfo() {
         $.ajax({
             url: "/reinfo",
             data: $('#info').serialize(),
-            type: "POST"
+            type: "POST",
+            success: function (re) {
+                alert(re);
+                window.location.reload();
+                showInfo();
+            }
         });
     }
 </script>
