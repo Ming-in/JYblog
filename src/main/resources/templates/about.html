@@ -27,33 +27,39 @@
           <div class="ui top attached segment">
             <div class="ui header centered">选项</div>
           </div>
-          <div class="ui button  attached segment" th:if="${zone.id}==${session.user.id}">
-            <a class="m-black m-text-thin" href="" target="_blank">
-              发布博客
+          <div class="ui button  attached segment" onclick="document.getElementById('write-blog').click()" th:if="${zone.id}==${session.user.id}">
+            <a id="write-blog" class="m-black m-text-thin" th:href="@{/writeblog}">
+              <i class="edit outline icon"></i>
+              编写博客
             </a>
           </div>
-          <div class="ui button  attached segment">
-            <a class="m-black m-text-thin" href="" target="_blank">
+          <div class="ui button  attached segment" onclick="document.getElementById('write-introduction').click()" >
+            <a id="write-introduction" class="m-black m-text-thin" href="">
+              <i class="edit outline icon"></i>
               个人介绍
             </a>
           </div>
           <div class="ui button attached segment" onclick="showInfo()" th:if="${zone.id}==${session.user.id}">
             <div class="m-black m-text-thin">
+              <i class="id card outline icon"></i>
               修改个人信息
             </div>
           </div>
-          <div class="ui button  attached segment" th:if="${zone.id}==${session.user.id}">
-            <a class="m-black m-text-thin" th:href="@{/lib/upload/index.html}">
+          <div class="ui button  attached segment" onclick="document.getElementById('upload-avatar').click()"  th:if="${zone.id}==${session.user.id}">
+            <a id="upload-avatar" class="m-black m-text-thin" th:href="@{/lib/upload/index.html}">
+              <i class="user circle outline icon"></i>
               上传头像
             </a>
           </div>
           <div class="ui button attached segment" onclick="showPassword()" th:if="${zone.id}==${session.user.id}">
             <div class="m-black m-text-thin">
+              <i class="expeditedssl icon"></i>
               更改密码
             </div>
           </div>
-          <div class="ui button attached segment">
-            <a class="m-black m-text-thin" href="" target="_blank">
+          <div class="ui button attached segment" onclick="document.getElementById('query-blog').click()">
+            <a id="query-blog" class="m-black m-text-thin" href="" target="_blank">
+              <i class="file alternate outline icon"></i>
               他的博客
             </a>
           </div>
