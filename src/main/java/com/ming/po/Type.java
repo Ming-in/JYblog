@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author 邹明
@@ -42,11 +43,11 @@ public class Type {
     }
 
     public List<Blog> getBlogs() {
-        return blogs;
+        return blogs.stream().filter(Blog::isPublished).collect(Collectors.toList());
     }
 
     public void setBlogs(List<Blog> blogs) {
-        this.blogs = blogs;
+        this.blogs = blogs.stream().filter(Blog::isPublished).collect(Collectors.toList());
     }
 
     @Override

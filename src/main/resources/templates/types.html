@@ -29,8 +29,8 @@
 
       <div class="ui attached segment m-padded-tb-large">
         <div class="ui labeled button m-margin-tb-tiny" th:each="type : ${types}">
-          <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="ui basic  button" th:classappend="${type.id==activeTypeId} ? 'teal'" th:text="${type.name}">分类名</a>
-          <div class="ui basic  left pointing label" th:classappend="${type.id==activeTypeId} ? 'teal'" th:text="${#arrays.length(type.blogs)}">24</div>
+          <a th:href="@{/types/{id}(id=${type.id})}" class="ui basic  button" th:classappend="${type.id==activeTypeId} ? 'teal'" th:text="${type.name}">分类名</a>
+          <div class="ui basic  left pointing label" th:classappend="${type.id==activeTypeId} ? 'teal'" th:text="${#arrays.length(type.getBlogs())}">24</div>
         </div>
       </div>
 
@@ -43,7 +43,7 @@
               <div class="ui grid">
                 <div class="eleven wide column">
                   <div class="ui mini horizontal link list">
-                    <div class="item">
+                    <div class="item"  th:onclick="!${session.user}?'alert(\'需要登录后才能查看博主信息。\');window.location.href=\'/login\';return false;'">
                       <img th:src="@{${blog.user.avatar}==null?'/images/avatar.png':${blog.user.avatar}}" alt="" class="ui avatar image">
                       <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}" >Ming</a></div>
                     </div>

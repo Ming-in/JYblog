@@ -34,17 +34,13 @@ public class Blog {
      */
     private String firstPicture;
     /**
-     * 原创/转载
+     * 原创/转载/翻譯
      */
     private String flag;
     /**
      * 浏览人数
      */
     private Integer views;
-    //赞赏
-    private boolean appreciation;
-    //版权声明
-    private boolean shareStatement;
     /**
      * 可评论
      */
@@ -146,22 +142,6 @@ public class Blog {
 
     public void setViews(Integer views) {
         this.views = views;
-    }
-
-    public boolean isAppreciation() {
-        return appreciation;
-    }
-
-    public void setAppreciation(boolean appreciation) {
-        this.appreciation = appreciation;
-    }
-
-    public boolean isShareStatement() {
-        return shareStatement;
-    }
-
-    public void setShareStatement(boolean shareStatement) {
-        this.shareStatement = shareStatement;
     }
 
     public boolean isCommentabled() {
@@ -291,15 +271,12 @@ public class Blog {
                 ", firstPicture='" + firstPicture + '\'' +
                 ", flag='" + flag + '\'' +
                 ", views=" + views +
-                ", appreciation=" + appreciation +
-                ", shareStatement=" + shareStatement +
                 ", commentabled=" + commentabled +
                 ", published=" + published +
                 ", recommend=" + recommend +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", type=" + type +
-                ", tags=" + tags +
                 ", user=" + user +
                 ", comments=" + comments +
                 ", tagIds='" + tagIds + '\'' +

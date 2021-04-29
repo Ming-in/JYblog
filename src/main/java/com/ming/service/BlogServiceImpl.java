@@ -53,38 +53,35 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Page<Blog> listBlog(Pageable pageable, BlogQuery blog) {
-        return blogRepository.findAll(new Specification<Blog>() {
-            @Override
-            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
-                List<Predicate> predicates = new ArrayList<>();
-                if (!"".equals(blog.getTitle()) && blog.getTitle() != null) {
-                    predicates.add(cb.like(root.<String>get("title"), "%" + blog.getTitle() + "%"));
-                }
-                if (blog.getTypeId() != null) {
-                    predicates.add(cb.equal(root.<Type>get("type").get("id"), blog.getTypeId()));
-                }
-                if (blog.isRecommend()) {
-                    predicates.add(cb.equal(root.<Boolean>get("recommend"), blog.isRecommend()));
-                }
-                cq.where(predicates.toArray(new Predicate[predicates.size()]));
-                return null;
+        return blogRepository.findAll((root, cq, cb) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            if (!"".equals(blog.getTitle()) && blog.getTitle() != null) {
+                predicates.add(cb.like(root.get("title"), "%" + blog.getTitle() + "%"));
             }
+            if (blog.getTypeId() != null) {
+                predicates.add(cb.equal(root.<Type>get("type").get("id"), blog.getTypeId()));
+            }
+            if (blog.isRecommend()) {
+                predicates.add(cb.equal(root.<Boolean>get("recommend"), blog.isRecommend()));
+            }
+            predicates.add(cb.equal(root.get("published"),true));
+            cq.where(predicates.toArray(new Predicate[predicates.size()]));
+            return null;
         }, pageable);
     }
 
     @Override
     public Page<Blog> listBlog(Pageable pageable) {
-        return blogRepository.findAll(pageable);
+        return blogRepository.findAll((root, cq, cb) -> cb.equal(root.get("published"), true), pageable);
     }
 
     @Override
     public Page<Blog> listBlog(Long tagId, Pageable pageable) {
-        return blogRepository.findAll(new Specification<Blog>() {
-            @Override
-            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
-                Join join = root.join("tags");
-                return cb.equal(join.get("id"), tagId);
-            }
+        return blogRepository.findAll((root, cq, cb) -> {
+            Join join = root.join("tags");
+            Predicate p1 = cb.equal(join.get("id"), tagId);
+            Predicate p2 = cb.equal(root.get("published"),true);
+            return cb.and(p1,p2);
         }, pageable);
     }
 
