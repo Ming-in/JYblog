@@ -23,7 +23,7 @@
         <div class="item"  th:onclick="!${session.user}?'alert(\'需要登录后才能查看博主信息。\');window.location.href=\'/login\';return false;'">
           <img th:src="@{${blog.user.avatar}==null?'/images/avatar.png':${blog.user.avatar}}" alt=""
                class="ui avatar image">
-          <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">Ming</a></div>
+          <div class="content"><a th:href="@{/about/{id}(id=${blog.user.id})}" class="header" th:text="${blog.user.nickname}">Ming</a></div>
         </div>
         <div class="item">
           <i class="calendar icon"></i> <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-10-01</span>
@@ -78,11 +78,11 @@
                 <img th:src="@{${comment.avatar}==null?'/images/avatar.png':${comment.avatar}}">
               </a>
               <div class="content">
-                <a class="author">
+                <div class="author">
                   <span th:text="${comment.nickname}">Matt</span>
                   <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${comment.adminComment}">博主
                   </div>
-                </a>
+                </div>
                 <div class="metadata">
                   <span class="date"
                         th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}">2021-04-03 18:47</span>
@@ -102,13 +102,13 @@
                     <img th:src="@{${comment.avatar}==null?'/images/avatar':${comment.avatar.png}}">
                   </a>
                   <div class="content">
-                    <a class="author">
+                    <div class="author">
                       <span th:text="${reply.nickname}">昵称</span>
                       <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${reply.adminComment}">
                         博主
                       </div>
                       &nbsp;<span th:text="|@ ${reply.parentComment.nickname}|" class="m-teal">昵称</span>
-                    </a>
+                    </div>
                     <div class="metadata">
                       <span class="date"
                             th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm')}">2021-04-03 18:47</span>

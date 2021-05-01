@@ -2,8 +2,10 @@ package com.ming.service;
 
 import com.ming.NotFoundException;
 import com.ming.dao.BlogRepository;
+import com.ming.dao.UserRepository;
 import com.ming.po.Blog;
 import com.ming.po.Type;
+import com.ming.po.User;
 import com.ming.util.MarkdownUtils;
 import com.ming.util.MyBeanUtils;
 import com.ming.vo.BlogQuery;
@@ -29,6 +31,8 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     private BlogRepository blogRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public Blog getBlog(Long id) {
@@ -64,7 +68,7 @@ public class BlogServiceImpl implements BlogService {
             if (blog.isRecommend()) {
                 predicates.add(cb.equal(root.<Boolean>get("recommend"), blog.isRecommend()));
             }
-            predicates.add(cb.equal(root.get("published"),true));
+            predicates.add(cb.equal(root.get("published"), true));
             cq.where(predicates.toArray(new Predicate[predicates.size()]));
             return null;
         }, pageable);
@@ -76,12 +80,20 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public Page<Blog> userBlog(Long id, Pageable pageable) {
+        User user = userRepository.findOne(id);
+        return blogRepository.findAll((root, cq, cb) -> {
+            return cb.and(cb.equal(root.get("user"), user), cb.equal(root.get("published"), true));
+        }, pageable);
+    }
+
+    @Override
     public Page<Blog> listBlog(Long tagId, Pageable pageable) {
         return blogRepository.findAll((root, cq, cb) -> {
             Join join = root.join("tags");
             Predicate p1 = cb.equal(join.get("id"), tagId);
-            Predicate p2 = cb.equal(root.get("published"),true);
-            return cb.and(p1,p2);
+            Predicate p2 = cb.equal(root.get("published"), true);
+            return cb.and(p1, p2);
         }, pageable);
     }
 

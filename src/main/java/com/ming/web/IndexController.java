@@ -60,10 +60,4 @@ public class IndexController {
         return "_fragments :: newblogList";
     }
 
-
-
-    private void setTypeAndTag(Model model) {
-        model.addAttribute("types", typeService.listType());
-        model.addAttribute("tags", tagService.listTag());
-    }
 }

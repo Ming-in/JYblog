@@ -28,6 +28,8 @@ public interface BlogService {
 
     Map<String,List<Blog>> archiveBlog();
 
+    Page<Blog> userBlog(Long id,Pageable pageable);
+
     Long countBlog();
 
     Blog saveBlog(Blog blog);

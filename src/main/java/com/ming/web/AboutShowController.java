@@ -2,14 +2,19 @@ package com.ming.web;
 
 import com.ming.po.Blog;
 import com.ming.po.User;
+import com.ming.service.BlogService;
 import com.ming.service.UserService;
 import com.ming.util.FileUtils;
 import com.ming.util.MarkdownUtils;
 import com.ming.util.MimeTypeUtils;
 import com.ming.util.UploadUtils;
+import com.ming.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +35,8 @@ public class AboutShowController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private BlogService blogService;
 
     @GetMapping("/about/{id}")
     public String about(@PathVariable Long id, Model model) {
@@ -47,25 +54,39 @@ public class AboutShowController {
     public String avatarUpload(HttpServletRequest request,
                                Model model) {
         request.setAttribute("introduction",true);
-        model.addAttribute("blog", new Blog());
+        User user = (User) request.getSession().getAttribute("user");
+        Blog blog = new Blog();
+        blog.setContent(user.getIntroduction());
+        model.addAttribute("blog", blog);
         return "write-blog";
     }
 
     @PostMapping(value = "/introduction")
     public String avatarUpload(HttpSession session,Blog blog) {
         User user = (User) session.getAttribute("user");
-        System.out.println(blog.getContent());
-
+        user = userService.findById(user.getId());
+        user.setIntroduction(blog.getContent());
+        userService.save(user);
+        user.setPassword(null);
+        session.setAttribute("user",user);
         return "redirect:/about/"+user.getId();
     }
 
+    @GetMapping("/search/{id}")
+    public String search(@PageableDefault(size = 10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+                         @PathVariable Long id, Model model) {
+        System.out.println(id);
+        model.addAttribute("page", blogService.userBlog(id,pageable));
+        return "search";
+    }
+
     @PostMapping(value = "/file/avatar")
-    public String avatarUpload(@RequestPart(value = "avatar_file") MultipartFile avatar_file,
+    public String avatarUpload(@RequestPart(value = "avatarFile") MultipartFile avatarFile,
                                HttpSession session,
                                Model model) {
         User user = (User) session.getAttribute("user");
         //获取文件后缀
-        final String fileSuffix = FileUtils.getExtension(avatar_file);
+        final String fileSuffix = FileUtils.getExtension(avatarFile);
         String path = "";
         //判断是否为有效图片
         if (isAllowedExtension(fileSuffix, MimeTypeUtils.IMAGE_EXTENSION)) {
@@ -78,7 +99,7 @@ public class AboutShowController {
         //生成加密字符
         String str = UploadUtils.aesEncrypt(user.getUsername());
         path = path + str + File.separator;
-        String fileName = FileUtils.upload(avatar_file, path);
+        String fileName = FileUtils.upload(avatarFile, path);
         model.addAttribute("message", "头像上传成功");
         model.addAttribute("filename", fileName);
         return "about";

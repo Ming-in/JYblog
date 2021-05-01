@@ -64,7 +64,7 @@
             </a>
           </div>
           <div class="ui button attached segment" onclick="document.getElementById('query-blog').click()">
-            <a id="query-blog" class="m-black m-text-thin" href="" target="_blank">
+            <a id="query-blog" class="m-black m-text-thin" th:href="@{/search/{id}(id=${zone.id})}">
               <i class="file alternate outline icon"></i>
               他的博客
             </a>
