@@ -1,5 +1,6 @@
 package com.ming.web;
 
+import com.ming.po.Blog;
 import com.ming.po.User;
 import com.ming.service.UserService;
 import com.ming.util.FileUtils;
@@ -9,11 +10,13 @@ import com.ming.util.UploadUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 
@@ -40,6 +43,21 @@ public class AboutShowController {
         return "about";
     }
 
+    @GetMapping(value = "/introduction")
+    public String avatarUpload(HttpServletRequest request,
+                               Model model) {
+        request.setAttribute("introduction",true);
+        model.addAttribute("blog", new Blog());
+        return "write-blog";
+    }
+
+    @PostMapping(value = "/introduction")
+    public String avatarUpload(HttpSession session,Blog blog) {
+        User user = (User) session.getAttribute("user");
+        System.out.println(blog.getContent());
+
+        return "redirect:/about/"+user.getId();
+    }
 
     @PostMapping(value = "/file/avatar")
     public String avatarUpload(@RequestPart(value = "avatar_file") MultipartFile avatar_file,
@@ -66,19 +84,22 @@ public class AboutShowController {
         return "about";
     }
 
+    @ResponseBody
     @PostMapping(value = "/avatar")
-    public void avatarUpload(@RequestParam String file,
-                             HttpSession session,
-                             Model model) {
-        System.out.println(file);
+    public String avatarUpload(@RequestParam String file,
+                             HttpSession session) {
         User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "";
+        }
         user = userService.findById(user.getId());
         user.setAvatar(file);
         userService.save(user);
         user.setPassword(null);
         session.setAttribute("user", user);
-        model.addAttribute("message", "头像上传成功");
+//        model.addAttribute("message", "头像上传成功");
 //        model.addAttribute("filename", fileName);
+        return user.getId().toString();
     }
 
     /**

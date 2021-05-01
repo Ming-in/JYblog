@@ -44,7 +44,7 @@
           <div class="ui button  attached segment"
                th:if="${zone.id}==${session.user.id}"
                onclick="document.getElementById('write-introduction').click()">
-            <a id="write-introduction" class="m-black m-text-thin" href="">
+            <a id="write-introduction" class="m-black m-text-thin" th:href="@{/introduction}">
               <i class="edit outline icon"></i>
               修改个人介绍
             </a>
@@ -80,7 +80,8 @@
             <div class="four wide column">
               <br>
               <img class="ui small circular image centered" src=""
-                   style="margin:4em 0;border: solid 0.1em #ccc;"
+                   style="margin:4em 0;border: solid 0.1em #ccc;cursor: pointer"
+                   th:onclick="'window.open(\'/lib/upload/index.html\',\'_self\')'"
                    th:src="@{${zone.avatar}?${zone.avatar}:'/images/avatar.png'}" alt=""/>
             </div>
             <div class="ten wide column">
@@ -179,6 +180,7 @@
     });
 
     function showInfo() {
+        window.scrollTo(0,0);
         document.getElementsByName('username')[0].disabled = '';
         document.getElementsByName('nickname')[0].disabled = '';
         document.getElementsByName('email')[0].disabled = '';
@@ -188,6 +190,7 @@
     }
 
     function showPassword() {
+        window.scrollTo(0,0);
         document.getElementsByName('oldPwd')[0].disabled = false;
         document.getElementsByName('pwd')[0].disabled = false;
         document.getElementById('info').style = 'color:#aaa;display:none';

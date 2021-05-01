@@ -64,7 +64,7 @@
         <div id="carousel-example-generic" class="carousel slide center-block">
           <div class="carousel-inner">
             <div class="item" th:each="news,num : ${page.content}" th:classappend="${num.index}==0 ? 'active' : '' ">
-              <img class="center-block" th:src="@{${news.firstPicture}}" alt="" style="object-fit:cover;min-width: 100vw">
+              <img class="center-block" th:src="@{${news.firstPicture}}" alt="" style="object-fit:cover;width: 100vw">
               <div class="carousel-caption">
                 <h2 th:text="${news.title}"></h2>
                 <p th:text="${news.description}"></p>
