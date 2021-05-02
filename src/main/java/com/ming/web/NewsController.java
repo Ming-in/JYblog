@@ -1,5 +1,6 @@
 package com.ming.web;
 
+import com.ming.po.News;
 import com.ming.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -8,6 +9,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 邹明
@@ -19,9 +24,30 @@ public class NewsController {
 
     @GetMapping("/news")
     public String index(@PageableDefault(size = 10, sort = {"createTime"}, direction = Sort.Direction.DESC)
-                                    Pageable pageable, Model model) {
-        model.addAttribute("page", newsService.findAll(pageable));
+                                Pageable pageable, Model model) {
+        List<News> newsList = newsService.findAll(pageable).getContent();
+        List<News> page = new ArrayList<>();
+        List<News> pageTop = new ArrayList<>();
+        if (newsList.size()>=3){
+            for (int i = 0; i < 3; i++) {
+                pageTop.add(newsList.get(i));
+            }
+        }else {
+            pageTop.addAll(newsList);
+        }
+
+        for (int i = 3; i < newsList.size(); i++) {
+            page.add(newsList.get(i));
+        }
+        model.addAttribute("page", page);
+        model.addAttribute("pageTop", pageTop);
+        model.addAttribute("pages",newsService.findAll(pageable));
         return "news";
     }
 
+    @GetMapping("/news/{id}")
+    public String blog(@PathVariable Long id, Model model) {
+        model.addAttribute("blog", newsService.getAndConvert(id));
+        return "blog";
+    }
 }

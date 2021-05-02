@@ -20,16 +20,19 @@
   <div class="ui container">
     <div class="ui top attached segment">
       <div class="ui horizontal link list">
-        <div class="item"  th:onclick="!${session.user}?'alert(\'需要登录后才能查看博主信息。\');window.location.href=\'/login\';return false;'">
+        <div class="item" th:if="${blog.user}" th:onclick="!${session.user}?'alert(\'需要登录后才能查看博主信息。\');window.location.href=\'/login\';return false;'">
           <img th:src="@{${blog.user.avatar}==null?'/images/avatar.png':${blog.user.avatar}}" alt=""
                class="ui avatar image">
           <div class="content"><a th:href="@{/about/{id}(id=${blog.user.id})}" class="header" th:text="${blog.user.nickname}">Ming</a></div>
         </div>
-        <div class="item">
-          <i class="calendar icon"></i> <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-10-01</span>
+        <div class="item" th:if="${blog.updateTime}">
+          <i class="calendar icon" style="margin-top: -0.5em"></i> <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-10-01</span>
         </div>
-        <div class="item">
-          <i class="eye icon"></i> <span th:text="${blog.views}">666</span>
+        <div class="item" style="font-size: 15px;" th:unless="${blog.updateTime}">
+          <i class="calendar icon" style="margin-top: -0.5em"></i> <span th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}">2020-10-01</span>
+        </div>
+        <div class="item" style="font-size: 15px">
+          <i class="eye icon" style="margin-top: -0.5em"></i> <span th:text="${blog.views}">666</span>
         </div>
       </div>
     </div>

@@ -71,11 +71,11 @@
       <div class="ui padded vertical segment m-padded-tb-large" style="padding: 0 0 1em 0!important;">
         <div id="carousel-example-generic" class="carousel slide center-block">
           <div class="carousel-inner">
-            <div class="item" th:each="news,num : ${page.content}" th:classappend="${num.index}==0 ? 'active' : '' ">
+            <div class="item" th:each="news,num : ${pageTop}" th:classappend="${num.index}==0 ? 'active' : '' ">
               <img class="center-block" th:src="@{${news.firstPicture}}" alt="" style="object-fit:cover;width: 100vw">
               <div class="carousel-caption">
                 <h2 th:text="${news.title}"></h2>
-                <p th:text="${news.description}"></p>
+                <p th:text="${news.description}" style="font-size:15px;font-weight: 300 !important;letter-spacing: 1px !important;line-height: 1.8;"></p>
               </div>
             </div>
           </div>
@@ -87,8 +87,8 @@
           </a>
         </div>
       </div>
-
-      <div class="ui padded vertical segment m-padded-tb-large" th:each="news : ${page.content}"
+      <!--列表-->
+      <div class="ui padded vertical segment m-padded-tb-large" th:each="news : ${page}"
            style="margin-left: 1em!important;">
         <div class="ui middle aligned mobile reversed stackable grid">
           <div class="eleven wide column">
@@ -112,7 +112,7 @@
                 </div>
               </div>
               <div class="right aligned five wide column">
-                <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin" th:text="新闻">类型名</a>
+                <a href="#" class="ui teal basic label m-padded-tiny m-text-thin" th:text="新闻">类型名</a>
               </div>
             </div>
           </div>
@@ -128,13 +128,13 @@
     </div>
 
     <!--footer-->
-    <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
-      <div class="ui middle aligned two column grid">
+    <div class="ui bottom attached segment" th:if="${pages.totalPages}>1">
+      <div class="ui middle aligned two column grid" style="padding: 1em!important;">
         <div class="column">
-          <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
+          <a href="#" th:href="@{/news/(page=${pages.number}-1)}" th:unless="${pages.first}" class="ui mini teal basic button">上一页</a>
         </div>
         <div class="right aligned column">
-          <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
+          <a href="#" th:href="@{/news/(page=${pages.number}+1)}" th:unless="${pages.last}" class="ui mini teal basic button">下一页</a>
         </div>
       </div>
     </div>
