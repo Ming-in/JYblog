@@ -23,7 +23,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long>, JpaSpecificat
     Page<Blog> findByQuery(String query,Pageable pageable);
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Modifying
     @Query("update Blog b set b.views = b.views+1 where b.id = ?1")
     int updateViews(Long id);

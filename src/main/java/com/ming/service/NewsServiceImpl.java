@@ -37,7 +37,7 @@ public class NewsServiceImpl implements NewsService {
         Pageable pageable = new PageRequest(0, size, sort);
         return newsRepository.findTop(pageable);
     }
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Blog getAndConvert(Long id) {
         News news = newsRepository.findOne(id);

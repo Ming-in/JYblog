@@ -8,14 +8,11 @@ import com.ming.util.FileUtils;
 import com.ming.util.MarkdownUtils;
 import com.ming.util.MimeTypeUtils;
 import com.ming.util.UploadUtils;
-import com.ming.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -117,8 +114,6 @@ public class AboutShowController {
         userService.save(user);
         user.setPassword(null);
         session.setAttribute("user", user);
-//        model.addAttribute("message", "头像上传成功");
-//        model.addAttribute("filename", fileName);
         return user.getId().toString();
     }
 

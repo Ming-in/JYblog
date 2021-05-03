@@ -20,7 +20,7 @@ public interface NewsRepository extends JpaRepository<News, Long>, JpaSpecificat
     @Query("select n from News n")
     List<News> findTop(Pageable pageable);
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Modifying
     @Query("update News n set n.views = n.views+1 where n.id = ?1")
     int updateViews(Long id);

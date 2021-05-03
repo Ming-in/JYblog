@@ -1,7 +1,6 @@
 package com.ming.web.admin;
 
 import com.ming.po.Blog;
-import com.ming.po.Type;
 import com.ming.po.User;
 import com.ming.service.BlogService;
 import com.ming.service.TagService;

@@ -24,13 +24,13 @@ public class TagServiceImpl implements TagService {
     @Autowired
     private TagRepository tagRepository;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Tag saveTag(Tag tag) {
         return tagRepository.save(tag);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Tag getTag(Long id) {
         return tagRepository.findOne(id);
@@ -41,7 +41,7 @@ public class TagServiceImpl implements TagService {
         return tagRepository.findByName(name);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Page<Tag> listTag(Pageable pageable) {
         return tagRepository.findAll(pageable);
@@ -77,7 +77,7 @@ public class TagServiceImpl implements TagService {
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Tag updateTag(Long id, Tag tag) {
         Tag t = tagRepository.findOne(id);
@@ -90,7 +90,7 @@ public class TagServiceImpl implements TagService {
 
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void deleteTag(Long id) {
         tagRepository.delete(id);

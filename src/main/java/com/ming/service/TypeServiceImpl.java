@@ -23,13 +23,13 @@ public class TypeServiceImpl implements TypeService {
     @Autowired
     private TypeRepository typeRepository;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Type saveType(Type type) {
         return typeRepository.save(type);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Type getType(Long id) {
         return typeRepository.findOne(id);
@@ -40,7 +40,7 @@ public class TypeServiceImpl implements TypeService {
         return typeRepository.findByName(name);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Page<Type> listType(Pageable pageable) {
         return typeRepository.findAll(pageable);
@@ -60,7 +60,7 @@ public class TypeServiceImpl implements TypeService {
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Type updateType(Long id, Type type) {
         Type t = typeRepository.findOne(id);
@@ -73,7 +73,7 @@ public class TypeServiceImpl implements TypeService {
 
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void deleteType(Long id) {
         typeRepository.delete(id);

@@ -25,18 +25,19 @@ public class NewsController {
     @GetMapping("/news")
     public String index(@PageableDefault(size = 10, sort = {"createTime"}, direction = Sort.Direction.DESC)
                                 Pageable pageable, Model model) {
+        final byte size = 3;
         List<News> newsList = newsService.findAll(pageable).getContent();
         List<News> page = new ArrayList<>();
         List<News> pageTop = new ArrayList<>();
-        if (newsList.size()>=3){
-            for (int i = 0; i < 3; i++) {
+        if (newsList.size()>=size){
+            for (int i = 0; i < size; i++) {
                 pageTop.add(newsList.get(i));
             }
         }else {
             pageTop.addAll(newsList);
         }
 
-        for (int i = 3; i < newsList.size(); i++) {
+        for (int i = size; i < newsList.size(); i++) {
             page.add(newsList.get(i));
         }
         model.addAttribute("page", page);

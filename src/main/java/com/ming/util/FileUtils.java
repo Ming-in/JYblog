@@ -1042,7 +1042,8 @@ public class FileUtils {
             }
             String line;
             while ((line = reader.readLine()) != null) {
-                sb.append(line).append("\r\n");// windows系统换行为\r\n，Linux为\n
+                // windows系统换行为\r\n，Linux为\n
+                sb.append(line).append("\r\n");
             }
             // 要去除最后的换行符
             return sb.delete(sb.length() - 2, sb.length()).toString();

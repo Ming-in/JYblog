@@ -15,7 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,7 +38,7 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.findOne(id);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Blog getAndConvert(Long id) {
         Blog blog = blogRepository.findOne(id);
@@ -125,7 +124,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Blog saveBlog(Blog blog) {
         if (blog.getId() == null) {
@@ -138,7 +137,7 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.save(blog);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Blog updateBlog(Long id, Blog blog) {
         Blog b = blogRepository.findOne(id);
@@ -150,7 +149,7 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.save(b);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void deleteBlog(Long id) {
         blogRepository.delete(id);
