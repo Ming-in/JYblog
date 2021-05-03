@@ -1,10 +1,14 @@
 package com.ming.service;
 
 import com.ming.dao.UserRepository;
+import com.ming.po.Type;
 import com.ming.po.User;
 import com.ming.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -31,6 +35,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Page<User> listUser(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
@@ -44,5 +53,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         return userRepository.save(user);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void deleteUser(Long id) {
+        userRepository.delete(id);
     }
 }

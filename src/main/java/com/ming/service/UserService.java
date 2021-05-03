@@ -1,6 +1,8 @@
 package com.ming.service;
 
 import com.ming.po.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * @author 邹明
@@ -16,4 +18,8 @@ public interface UserService {
     User findById(Long id);
 
     User save(User user);
+
+    Page<User> listUser(Pageable pageable);
+
+    void deleteUser(Long id);
 }
