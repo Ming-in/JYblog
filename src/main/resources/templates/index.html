@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="../static/css/me.css">
 </head>
 <body>
-<!-- git remote set-url origin https://gitee.com/ming-ing/jy-blog -->
 <!--导航-->
 <nav th:replace="_fragments :: menu(1)"></nav>
 
@@ -79,7 +78,8 @@
           <div class="ui secondary segment ">
             <i class="bookmark icon"></i>最新推荐
           </div>
-          <div class="ui segment vertical fluid menu m-theme-shadow" th:each="blog : ${recommendBlogs}" style="padding:0;">
+          <div class="ui segment vertical fluid menu m-theme-shadow" th:each="blog : ${recommendBlogs}"
+               style="padding:0;">
             <a th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item">
               <span class="m-black m-text-thin" th:text="${blog.title}">博客标题</span>
             </a>
@@ -96,7 +96,7 @@
               <h3 class="ui teal header" style="color: #555!important;">博客列表</h3>
             </div>
             <div class="right aligned column">
-<!--              共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${page.totalElements}"> 0 </h2> 篇-->
+              <!--              共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${page.totalElements}"> 0 </h2> 篇-->
             </div>
           </div>
         </div>
@@ -107,10 +107,12 @@
           <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
             <div class="ui middle aligned mobile reversed stackable grid">
               <div class="eleven wide column" style="padding: 0 2em !important;">
-                <div onclick="document.getElementById('click-blog').click()" style="cursor:pointer">
-                  <h3 class="ui header"><a id="click-blog" href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank"
-                                           class="m-black"
-                                           th:text="${blog.title}">标题</a></h3>
+                <div th:onclick="'document.getElementById(\'click-blog'+${blog.id}+'\').click()'"
+                     style="cursor:pointer">
+                  <h3 class="ui header">
+                    <a th:id="'click-blog'+${blog.id}" href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank"
+                       class="m-black" th:text="${blog.title}">标题</a>
+                  </h3>
                   <p class="m-text" th:text="|${blog.description}...|">描述</p>
                 </div>
                 <div class="ui grid">

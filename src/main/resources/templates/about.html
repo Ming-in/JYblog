@@ -66,7 +66,7 @@
           <div class="ui button attached segment" onclick="document.getElementById('query-blog').click()">
             <a id="query-blog" class="m-black m-text-thin" th:href="@{/search/{id}(id=${zone.id})}">
               <i class="file alternate outline icon"></i>
-              他的博客
+              查看<span th:text="${zone.id}==${session.user.id}?'我':'他'">用户昵称</span>的博客
             </a>
           </div>
         </div>

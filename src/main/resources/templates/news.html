@@ -72,10 +72,11 @@
         <div id="carousel-example-generic" class="carousel slide center-block">
           <div class="carousel-inner">
             <div class="item" th:each="news,num : ${pageTop}" th:classappend="${num.index}==0 ? 'active' : '' ">
-              <img class="center-block" th:src="@{${news.firstPicture}}" alt="" style="object-fit:cover;width: 100vw">
+              <img  th:onclick="'window.location.href=\'/news/'+${news.id}+'\''" class="center-block" th:src="@{${news.firstPicture}}" alt="" style="object-fit:cover;width: 100vw;cursor: pointer">
               <div class="carousel-caption">
                 <h2 th:text="${news.title}"></h2>
-                <p th:text="${news.description}" style="font-size:15px;font-weight: 300 !important;letter-spacing: 1px !important;line-height: 1.8;"></p>
+                <p th:text="${news.description}"
+                   style="font-size:15px;font-weight: 300 !important;letter-spacing: 1px !important;line-height: 1.8;"></p>
               </div>
             </div>
           </div>
@@ -92,10 +93,12 @@
            style="margin-left: 1em!important;">
         <div class="ui middle aligned mobile reversed stackable grid">
           <div class="eleven wide column">
-            <div onclick="document.getElementById('click-blog').click()" style="cursor:pointer">
-              <h2 class="ui header"><a id="click-blog" href="#" th:href="@{/news/{id}(id=${news.id})}" class="m-black"
-                                       th:text="${news.title}"
-                                       style="color: #333 !important;text-decoration: none;">标题</a></h2>
+            <div th:onclick="'document.getElementById(\'click-blog'+${news.id}+'\').click()'" style="cursor:pointer">
+              <h2 class="ui header">
+                <a th:id="'click-blog'+${news.id}" href="#" th:href="@{/news/{id}(id=${news.id})}" class="m-black"
+                   th:text="${news.title}"
+                   style="color: #333 !important;text-decoration: none;">标题</a>
+              </h2>
               <p class="m-text" th:text="|${news.description}...|"
                  style="font-weight: 300 !important;letter-spacing: 1px !important;line-height: 1.8;">描述</p>
             </div>
@@ -131,10 +134,12 @@
     <div class="ui bottom attached segment" th:if="${pages.totalPages}>1">
       <div class="ui middle aligned two column grid" style="padding: 1em!important;">
         <div class="column">
-          <a href="#" th:href="@{/news/(page=${pages.number}-1)}" th:unless="${pages.first}" class="ui mini teal basic button">上一页</a>
+          <a href="#" th:href="@{/news/(page=${pages.number}-1)}" th:unless="${pages.first}"
+             class="ui mini teal basic button">上一页</a>
         </div>
         <div class="right aligned column">
-          <a href="#" th:href="@{/news/(page=${pages.number}+1)}" th:unless="${pages.last}" class="ui mini teal basic button">下一页</a>
+          <a href="#" th:href="@{/news/(page=${pages.number}+1)}" th:unless="${pages.last}"
+             class="ui mini teal basic button">下一页</a>
         </div>
       </div>
     </div>

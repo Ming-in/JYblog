@@ -33,8 +33,8 @@
         <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
           <div class="ui middle aligned mobile reversed stackable grid" >
             <div class="eleven wide column">
-              <div onclick="document.getElementById('click-blog').click()" style="cursor:pointer">
-                <h3 class="ui header"><a id="click-blog" href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank"
+              <div th:onclick="'document.getElementById(\'click-blog'+${blog.id}+'\').click()'" style="cursor:pointer">
+                <h3 class="ui header"><a th:id="'click-blog'+${blog.id}" href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank"
                                          class="m-black"
                                          th:text="${blog.title}">标题</a></h3>
                 <p class="m-text" th:text="|${blog.description}...|">描述</p>
