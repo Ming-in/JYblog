@@ -46,7 +46,7 @@
                onclick="document.getElementById('write-introduction').click()">
             <a id="write-introduction" class="m-black m-text-thin" th:href="@{/introduction}">
               <i class="edit outline icon"></i>
-              修改个人介绍
+              修改个人简介
             </a>
           </div>
           <div class="ui button attached segment" onclick="showPassword()"
@@ -81,7 +81,7 @@
               <br>
               <img class="ui small circular image centered" src=""
                    style="margin:4em 0;border: solid 0.1em #ccc;cursor: pointer"
-                   th:onclick="'window.open(\'/lib/upload/index.html\',\'_self\')'"
+                   th:onclick="${zone.id}==${session.user.id}?'window.open(\'/lib/upload/index.html\',\'_self\')':'return false'"
                    th:src="@{${zone.avatar}?${zone.avatar}:'/images/avatar.png'}" alt=""/>
             </div>
             <div class="ten wide column">

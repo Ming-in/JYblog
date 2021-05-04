@@ -44,13 +44,13 @@
       <div class="right m-item m-mobile-hide item">
         <div class="ui dropdown item" th:if="${session.user}">
           <a th:href="@{/about/{id}(id=${session.user.id})}" class="text"
-             style="font-size: 13px !important;line-height: 13px!important;">
+             style="font-size: 13px !important;line-height: 13px!important;text-decoration: none">
             <img class="ui avatar image" th:src="@{${session.user.avatar}?${session.user.avatar}:'/images/avatar.png'}">
             <span th:text="${session.user.nickname}">Ming</span>
           </a>
         </div>
         <a class="right m-item m-mobile-hide item" th:href="@{/login}" th:if="${session.user}==null"
-           style="font-size: 15px !important;"><i
+           style="font-size: 15px !important;text-decoration: none"><i
             class="desktop icon"></i>登录/注册</a>
       </div>
     </div>
@@ -92,7 +92,7 @@
            style="margin-left: 1em!important;">
         <div class="ui middle aligned mobile reversed stackable grid">
           <div class="eleven wide column">
-            <div onclick="document.getElementById('click-blog').click()">
+            <div onclick="document.getElementById('click-blog').click()" style="cursor:pointer">
               <h2 class="ui header"><a id="click-blog" href="#" th:href="@{/news/{id}(id=${news.id})}" class="m-black"
                                        th:text="${news.title}"
                                        style="color: #333 !important;text-decoration: none;">标题</a></h2>

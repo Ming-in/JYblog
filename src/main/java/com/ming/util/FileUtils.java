@@ -22,6 +22,7 @@ import java.util.UUID;
  *
  * @author 邹明
  */
+@SuppressWarnings("AliDeprecation")
 public class FileUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FileUtils.class);

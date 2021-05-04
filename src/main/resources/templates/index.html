@@ -16,7 +16,7 @@
 <div class="m-container m-padded-tb-big animated fadeIn" style="min-height:85vh">
 
   <!--消息提示-->
-  <div class="ui floating massive positive  message" th:if="${message}">
+  <div class="ui floating massive positive  message" th:if="${messages}">
     <i class="close icon"></i>
     <span th:text="${message}">消息</span>
   </div>
@@ -39,7 +39,7 @@
               </div>
             </div>
           </div>
-          <div class="ui teal segment m-them-shadow" style="padding: 0!important;">
+          <div class="ui teal segment" style="padding: 0!important;">
             <div class="ui fluid vertical menu">
               <a href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank" class="item"
                  th:each="type : ${types}">
@@ -79,8 +79,8 @@
           <div class="ui secondary segment ">
             <i class="bookmark icon"></i>最新推荐
           </div>
-          <div class="ui segment" th:each="blog : ${recommendBlogs}">
-            <a th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+          <div class="ui segment vertical fluid menu m-theme-shadow" th:each="blog : ${recommendBlogs}" style="padding:0;">
+            <a th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item">
               <span class="m-black m-text-thin" th:text="${blog.title}">博客标题</span>
             </a>
           </div>
@@ -96,7 +96,7 @@
               <h3 class="ui teal header" style="color: #555!important;">博客列表</h3>
             </div>
             <div class="right aligned column">
-              共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${page.totalElements}"> 0 </h2> 篇
+<!--              共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${page.totalElements}"> 0 </h2> 篇-->
             </div>
           </div>
         </div>
@@ -107,7 +107,7 @@
           <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
             <div class="ui middle aligned mobile reversed stackable grid">
               <div class="eleven wide column" style="padding: 0 2em !important;">
-                <div onclick="document.getElementById('click-blog').click()">
+                <div onclick="document.getElementById('click-blog').click()" style="cursor:pointer">
                   <h3 class="ui header"><a id="click-blog" href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank"
                                            class="m-black"
                                            th:text="${blog.title}">标题</a></h3>
