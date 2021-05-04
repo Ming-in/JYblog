@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/_fragments :: head(~{::title})">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>编辑用户</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css">
+  <link rel="stylesheet" href="../../static/css/me.css">
+</head>
+<body>
+
+<!--导航-->
+<nav th:replace="admin/_fragments :: menu(1)">导航条</nav>
+
+<div class="ui container segment raised very padded m-them-shadow" style="min-height: 85vh;width: 50vw">
+  <div class="ten wide centered column">
+    <form id="info" class="ui form" method="post" th:action="@{/admin/users/{id}(id=${user.id})}" style="color: #aaa;">
+      <br>
+      <div class="inline field required">
+        <label style="width:6em;">用户名：</label>
+        <input type="text" name="username" placeholder="请输入用户名"
+               style="width: 80%"
+               th:value="${user.username}">
+      </div>
+      <div class="inline field">
+        <label style="width:6em;">密码：</label>
+        <input type="password" name="pwd" placeholder="密码没有填写将默认为原密码"
+               style="width: 80%">
+      </div>
+      <div class="inline field required">
+        <label style="width:6em;">昵称：</label>
+        <input type="text" name="nickname" placeholder="请输入昵称"
+               style="width: 80%"
+               th:value="${user.nickname}">
+      </div>
+      <div class="inline field required">
+        <label style="width:6em;">Email：</label>
+        <input type="text" name="email" placeholder="请输入邮箱"
+               style="width: 80%"
+               th:value="${user.email}">
+      </div>
+      <div class="inline field required">
+        <label style="width:6em;">用户角色：</label>
+        <input type="text" placeholder="请输入角色"
+               name="type"
+               style="width: 80%"
+               th:value="${user.type}">
+      </div>
+      <div class="inline field">
+        <label style="width:6em;">创建日期：</label>
+        <input type="text" placeholder="创建日期"
+               style="width: 80%" disabled
+               th:value="${#dates.format(user.createTime,'yyyy-MM-dd')}">
+      </div>
+      <div class="ui error message"></div>
+      <div id="submit" class="ui buttons" style="margin-left:40%;">
+        <button class="ui primary button">保存</button>
+        <div class="or"></div>
+        <button class="ui button" onclick="window.history.go(-1);return false;">取消</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--底部footer-->
+<footer th:replace="admin/_fragments :: footer"></footer>
+
+<th:block th:replace="_fragments :: script"/>
+
+<script>
+
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+
+    $('.ui.form').form({
+        fields: {
+            username: {
+                identifier: 'username',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入用户名'
+                }]
+            },
+            email: {
+                identifier: 'email',
+                rules: [{
+                    type: 'email',
+                    prompt: '请输入邮箱'
+                }]
+            },
+            nickname: {
+                identifier: 'nickname',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入昵称'
+                }]
+            },
+            type: {
+                identifier: 'type',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入用户类型'
+                }]
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
