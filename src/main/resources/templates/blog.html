@@ -56,7 +56,7 @@
       </div>
       <!--标签-->
       <div class="m-padded-lr-responsive">
-        <div class="ui basic blue left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">标签</div>
+        <a th:href="@{/tags/{id}(id=${tag.id})}" target="_blank" class="ui basic blue left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">标签</a>
       </div>
 
     </div>
@@ -76,6 +76,7 @@
         <div th:fragment="commentList">
           <div class="ui threaded comments" style="max-width: 100%;">
             <h3 class="ui dividing header">评论</h3>
+            <!--评论-->
             <div class="comment" th:each="comment : ${comments}">
               <a class="avatar">
                 <img th:src="@{${comment.avatar}==null?'/images/avatar.png':${comment.avatar}}">
@@ -91,7 +92,7 @@
                         th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}">2021-04-03 18:47</span>
                 </div>
                 <div class="text" th:text="${comment.content}">
-                  评论
+                  评论内容
                 </div>
                 <div class="actions">
                   <a class="reply" data-commentid="1" data-commentnickname="Matt"
@@ -99,10 +100,11 @@
                      onclick="reply(this)">回复</a>
                 </div>
               </div>
+              <!--回复-->
               <div class="comments" th:if="${#arrays.length(comment.replyComments)}>0">
                 <div class="comment" th:each="reply : ${comment.replyComments}">
                   <a class="avatar">
-                    <img th:src="@{${comment.avatar}==null?'/images/avatar.png':${comment.avatar}}">
+                    <img th:src="@{${reply.avatar}==null?'/images/avatar.png':${reply.avatar}}">
                   </a>
                   <div class="content">
                     <div class="author">

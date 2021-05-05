@@ -110,12 +110,12 @@
                       th:text="${#dates.format(news.createTime,'yyyy-MM-dd')}">2020-10-01</span>
                   </div>
                   <div class="item">
-                    <i class="eye icon"></i> <span th:text="${news.views}">666</span>
+                    <i class="eye icon" style="margin-right: 1em"></i> <span th:text="${news.views}"> 666</span>
                   </div>
                 </div>
               </div>
               <div class="right aligned five wide column">
-                <a href="#" class="ui blue basic label m-padded-tiny m-text-thin" th:text="新闻">类型名</a>
+                <div class="ui blue basic label m-padded-tiny m-text-thin" th:text="新闻">类型名</div>
               </div>
             </div>
           </div>

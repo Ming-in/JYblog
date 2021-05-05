@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 .typo p {
+  text-indent: 2em;
   font-size: 16px;
   font-weight: 300;
   line-height: 1.8;
@@ -47,11 +48,12 @@
 /* 块/段落引用 */
 .typo blockquote {
   position: relative;
-  color: #999;
+  background: #eee;
   font-weight: 400;
-  border-left: 1px solid #1abc9c;
-  padding-left: 1em;
-  margin: 1em 3em 1em 2em;
+  border-left: 4px solid #03A9F4;
+  padding: 1em 3em 1em 1em!important;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 @media only screen and ( max-width: 640px ) {
@@ -116,7 +118,7 @@
 
 /* 让链接在 hover 状态下显示下划线 */
 .typo a {
-  color: #1abc9c;
+  color: #2185d0;
 }
 
 .typo a:hover {
@@ -124,12 +126,12 @@
 }
 
 .typo a {
-  border-bottom: 1px solid #1abc9c;
+  border-bottom: 1px solid #2185d0;
 }
 
 .typo a:hover {
-  border-bottom-color: #555;
-  color: #555;
+  border-bottom-color: #767676;
+  color: #767676;
   text-decoration: none;
 }
 

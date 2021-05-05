@@ -55,7 +55,7 @@
                   </div>
                 </div>
                 <div class="right aligned five wide column">
-                  <a href="#" target="_blank" class="ui blue basic label m-padded-tiny m-text-thin" th:text="${blog.type.name}">类型名</a>
+                  <a th:href="@{/types/{id}(id=${blog.type.id})}" target="_blank" class="ui blue basic label m-padded-tiny m-text-thin" th:text="${blog.type.name}">类型名</a>
                 </div>
               </div>
             </div>

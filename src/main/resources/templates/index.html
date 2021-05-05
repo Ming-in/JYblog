@@ -27,7 +27,7 @@
       <div class="five wide column" style="padding: 0 10px;">
 
         <!--分类-->
-        <div class="ui sticky segments m-them-shadow" style="position: sticky;top: 0;">
+        <div class="ui segments m-them-shadow" style="position: sticky;top: 0;">
           <div class="ui secondary segment">
             <div class="ui two column grid">
               <div class="column">
@@ -73,16 +73,17 @@
         -->
 
         <!--最新推荐-->
-        <div class="ui segments m-margin-top-large m-them-shadow"
+        <div class="ui segments m-them-shadow"
              style="position: sticky;top: 340px;z-index: 801!important;">
-          <div class="ui secondary segment ">
+          <div class="ui secondary segment">
             <i class="bookmark icon"></i>最新推荐
           </div>
-          <div class="ui segment vertical fluid menu m-theme-shadow" th:each="blog : ${recommendBlogs}"
-               style="padding:0;">
-            <a th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item">
-              <span class="m-black m-text-thin" th:text="${blog.title}">博客标题</span>
-            </a>
+          <div class="ui blue segment" style="padding: 0!important;">
+            <div class="ui vertical fluid menu">
+              <a th:href="@{/blog/{id}(id=${blog.id})}"  th:each="blog : ${recommendBlogs}" target="_blank" class="item">
+                <span th:text="${blog.title}">博客标题</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -121,7 +122,7 @@
                       <div class="item"
                            th:onclick="!${session.user}?'alert(\'需要登录后才能查看博主信息。\');window.location.href=\'/login\';return false;'">
                         <img th:src="@{${blog.user.avatar}==null?'/images/avatar.png':${blog.user.avatar}}" alt=""
-                             class="ui avatar image">
+                             class="ui avatar fluid image">
                         <div class="content">
                           <a th:href="@{/about/{id}(id=${blog.user.id})}" class="header"
                              th:text="${blog.user.nickname}" target="_blank">Ming</a>
@@ -137,7 +138,7 @@
                     </div>
                   </div>
                   <div class="right aligned five wide column">
-                    <a href="#" target="_blank" class="ui blue basic label m-padded-tiny m-text-thin"
+                    <a th:href="@{/types/{id}(id=${blog.type.id})}" target="_blank" class="ui blue basic label m-padded-tiny m-text-thin"
                        th:text="${blog.type.name}">类型</a>
                   </div>
                 </div>
