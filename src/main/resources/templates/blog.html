@@ -56,7 +56,7 @@
       </div>
       <!--标签-->
       <div class="m-padded-lr-responsive">
-        <div class="ui basic teal left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">标签</div>
+        <div class="ui basic blue left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">标签</div>
       </div>
 
     </div>
@@ -71,8 +71,8 @@
         </div>
         -->
     <div class="ui bottom attached segment" th:if="${blog.commentabled}">
-      <!--留言区域列表-->
-      <div id="comment-container" class="ui teal segment">
+      <!--评论区域列表-->
+      <div id="comment-container" class="ui grey segment">
         <div th:fragment="commentList">
           <div class="ui threaded comments" style="max-width: 100%;">
             <h3 class="ui dividing header">评论</h3>
@@ -83,7 +83,7 @@
               <div class="content">
                 <div class="author">
                   <span th:text="${comment.nickname}">Matt</span>
-                  <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${comment.adminComment}">博主
+                  <div class="ui mini basic blue left pointing label m-padded-mini" th:if="${comment.adminComment}">博主
                   </div>
                 </div>
                 <div class="metadata">
@@ -102,12 +102,12 @@
               <div class="comments" th:if="${#arrays.length(comment.replyComments)}>0">
                 <div class="comment" th:each="reply : ${comment.replyComments}">
                   <a class="avatar">
-                    <img th:src="@{${comment.avatar}==null?'/images/avatar':${comment.avatar.png}}">
+                    <img th:src="@{${comment.avatar}==null?'/images/avatar.png':${comment.avatar}}">
                   </a>
                   <div class="content">
                     <div class="author">
                       <span th:text="${reply.nickname}">昵称</span>
-                      <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${reply.adminComment}">
+                      <div class="ui mini basic blue left pointing label m-padded-mini" th:if="${reply.adminComment}">
                         博主
                       </div>
                       &nbsp;<span th:text="|@ ${reply.parentComment.nickname}|" class="m-teal">昵称</span>
@@ -153,7 +153,7 @@
             </div>
           </div>
           <div class="field  m-margin-bottom-small m-mobile-wide">
-            <button id="commentpost-btn" type="button" class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布
+            <button id="commentpost-btn" type="button" class="ui primary button m-mobile-wide"><i class="edit icon"></i>发布
             </button>
           </div>
         </div>

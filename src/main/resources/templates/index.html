@@ -38,12 +38,12 @@
               </div>
             </div>
           </div>
-          <div class="ui teal segment" style="padding: 0!important;">
+          <div class="ui blue segment" style="padding: 0!important;">
             <div class="ui fluid vertical menu">
               <a href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank" class="item"
                  th:each="type : ${types}">
                 <span th:text="${type.name}">类型</span>
-                <div class="ui teal basic left pointing label" th:text="${#arrays.length(type.blogs)}">13</div>
+                <div class="ui blue basic left pointing label" th:text="${#arrays.length(type.blogs)}">13</div>
               </a>
             </div>
           </div>
@@ -62,9 +62,9 @@
                       </div>
                     </div>
                   </div>
-                  <div class="ui teal segment">
+                  <div class="ui grey segment">
                     <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" target="_blank"
-                       class="ui teal basic left pointing label m-margin-tb-tiny" th:each="tag : ${tags}">
+                       class="ui blue basic left pointing label m-margin-tb-tiny" th:each="tag : ${tags}">
                       <span th:text="${tag.name}">标签</span>
                       <div class="detail" th:text="${#arrays.length(tag.blogs)}">23</div>
                     </a>
@@ -93,7 +93,7 @@
         <div class="ui top attached segment m-them-shadow">
           <div class="ui middle aligned two column grid">
             <div class="column">
-              <h3 class="ui teal header" style="color: #555!important;">博客列表</h3>
+              <h3 class="ui header" style="color: #555!important;">博客列表</h3>
             </div>
             <div class="right aligned column">
               <!--              共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${page.totalElements}"> 0 </h2> 篇-->
@@ -137,7 +137,7 @@
                     </div>
                   </div>
                   <div class="right aligned five wide column">
-                    <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin"
+                    <a href="#" target="_blank" class="ui blue basic label m-padded-tiny m-text-thin"
                        th:text="${blog.type.name}">类型</a>
                   </div>
                 </div>
@@ -158,11 +158,11 @@
           <div class="ui middle aligned two column grid">
             <div class="column">
               <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}"
-                 class="ui mini teal basic button">上一页</a>
+                 class="ui mini grey button">上一页</a>
             </div>
             <div class="right aligned column">
               <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}"
-                 class="ui mini teal basic button">下一页</a>
+                 class="ui mini grey button">下一页</a>
             </div>
           </div>
         </div>

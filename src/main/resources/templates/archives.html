@@ -19,7 +19,7 @@
     <div class="ui top attached padded segment">
       <div class="ui middle aligned two column grid">
         <div class="column">
-          <h3 class="ui teal header" style="color: #555!important;">归档</h3>
+          <h3 class="ui header" style="color: #555!important;">归档</h3>
         </div>
         <div class="right aligned column">
           共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${blogCount}"> 0 </h2> 篇博客
@@ -32,8 +32,8 @@
       <div class="ui fluid vertical menu">
         <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${item.value}">
           <span>
-            <i class="mini teal circle icon"></i><span th:text="${blog.title}">标题</span>
-            <div class="ui teal basic left pointing label m-padded-mini "
+            <i class="mini blue circle icon"></i><span th:text="${blog.title}">标题</span>
+            <div class="ui primary left pointing label m-padded-mini "
                  th:text="${#dates.format(blog.updateTime,'MMMdd')}">9月03</div>
           </span>
           <div class="ui orange basic left pointing label m-padded-mini " th:if="${blog.flag}" th:text="${blog.flag}">

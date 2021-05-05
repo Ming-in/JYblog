@@ -25,7 +25,7 @@
       <input user="hidden" name="id" th:value="*{id}">
       <div class=" field">
         <div class="ui left labeled input">
-          <label class="ui teal basic label">名称</label>
+          <label class="ui blue basic label">名称</label>
           <input user="text" name="name" placeholder="分类名称" th:value="*{username}" >
         </div>
       </div>
@@ -33,15 +33,15 @@
       <div class="ui error message"></div>
       <div class="ui right aligned container">
         <button user="button" class="ui button" onclick="window.history.go(-1)" >返回</button>
-        <button class="ui teal submit button">提交</button>
+        <button class="ui primary submit button">提交</button>
       </div>
     </form>
 -->
 
-    <table class="ui compact teal table">
+    <table class="ui compact grey table">
       <thead>
-      <tr>
-        <th></th>
+      <tr style="text-align: center">
+        <th>#</th>
         <th>用户ID</th>
         <th>用户名</th>
         <th>邮箱</th>
@@ -50,15 +50,15 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="user,iterStat : ${page.content}">
+      <tr th:each="user,iterStat : ${page.content}" style="text-align: center">
         <td th:text="${iterStat.count}">1</td>
         <td th:text="${user.id}">用户ID</td>
         <td th:text="${user.username}">用户名</td>
         <td th:text="${user.email}">邮箱</td>
         <td th:text="${user.createTime}">创建时间</td>
         <td>
-          <a href="#" th:href="@{/admin/users/{id}/input(id=${user.id})}" class="ui mini teal basic button">编辑</a>
-          <a href="#" th:href="@{/admin/users/{id}/delete(id=${user.id})}" class="ui mini red basic button">删除</a>
+          <a href="#" th:href="@{/admin/users/{id}/input(id=${user.id})}" class="ui tiny primary button">编辑</a>
+          <a href="#" th:href="@{/admin/users/{id}/delete(id=${user.id})}" class="ui tiny red basic button">删除</a>
         </td>
       </tr>
       </tbody>
@@ -69,7 +69,7 @@
             <a th:href="@{/admin/users(page=${page.number}-1)}" class="  item" th:unless="${page.first}">上一页</a>
             <a th:href="@{/admin/users(page=${page.number}+1)}" class=" item" th:unless="${page.last}">下一页</a>
           </div>
-          <a href="#" th:href="@{/login}" class="ui mini right floated teal basic button">新增</a>
+          <a href="#" th:href="@{/login}" class="ui mini right floated primary button">新增</a>
         </th>
       </tr>
       </tfoot>

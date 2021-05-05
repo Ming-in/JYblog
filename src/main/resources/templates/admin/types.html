@@ -15,7 +15,7 @@
   <div class="ui container">
     <div class="right menu">
       <a href="#" th:href="@{/admin/types/input}" class="item">新增</a>
-      <a href="#" th:href="@{/admin/types}" class="teal active item">列表</a>
+      <a href="#" th:href="@{/admin/types}" class="blue active item">列表</a>
     </div>
   </div>
 </div>
@@ -34,7 +34,7 @@
       <input type="hidden" name="id" th:value="*{id}">
       <div class=" field">
         <div class="ui left labeled input">
-          <label class="ui teal basic label">名称</label>
+          <label class="ui blue basic label">名称</label>
           <input type="text" name="name" placeholder="分类名称" th:value="*{name}" >
         </div>
       </div>
@@ -42,12 +42,12 @@
       <div class="ui error message"></div>
       <div class="ui right aligned container">
         <button type="button" class="ui button" onclick="window.history.go(-1)" >返回</button>
-        <button class="ui teal submit button">提交</button>
+        <button class="ui primary submit button">提交</button>
       </div>
     </form>
 -->
 
-    <table class="ui compact teal table">
+    <table class="ui compact grey table">
       <thead>
       <tr>
         <th></th>
@@ -60,7 +60,7 @@
         <td th:text="${iterStat.count}">1</td>
         <td th:text="${type.name}">分类名/td>
         <td>
-          <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini teal basic button">编辑</a>
+          <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini primary button">编辑</a>
           <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui mini red basic button">删除</a>
         </td>
       </tr>
@@ -72,7 +72,7 @@
             <a th:href="@{/admin/types(page=${page.number}-1)}" class="  item" th:unless="${page.first}">上一页</a>
             <a th:href="@{/admin/types(page=${page.number}+1)}" class=" item" th:unless="${page.last}">下一页</a>
           </div>
-          <a href="#" th:href="@{/admin/types/input}" class="ui mini right floated teal basic button">新增</a>
+          <a href="#" th:href="@{/admin/types/input}" class="ui mini right floated primary button">新增</a>
         </th>
       </tr>
       </tfoot>

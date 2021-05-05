@@ -14,7 +14,7 @@
      style="border: none;min-height: 67.3px!important;">
   <div class="ui container">
     <div class="ui inverted secondary menu m-theme-bg" style="width:100%">
-      <h2 class="ui teal header item" style="color: palegoldenrod!important;font-size: 24px">JY-Blog</h2>
+      <h2 class="ui header item" style="color: palegoldenrod!important;font-size: 24px">JY-Blog</h2>
       <a th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"
          style="font-size: 15px !important; margin-top: 12px!important;margin-bottom: 12px!important;"><i
           class="home icon"></i>首页</a>
@@ -66,7 +66,7 @@
 <!--中间内容-->
 <div class="m-container-small m-padded-tb-big" style="min-height:85vh;padding-top: 10px!important;">
   <div class="ui container">
-    <div class="ui top attached teal segment">
+    <div class="ui top attached grey segment">
       <!--轮播图-->
       <div class="ui padded vertical segment m-padded-tb-large" style="padding: 0 0 1em 0!important;">
         <div id="carousel-example-generic" class="carousel slide center-block">
@@ -115,7 +115,7 @@
                 </div>
               </div>
               <div class="right aligned five wide column">
-                <a href="#" class="ui teal basic label m-padded-tiny m-text-thin" th:text="新闻">类型名</a>
+                <a href="#" class="ui blue basic label m-padded-tiny m-text-thin" th:text="新闻">类型名</a>
               </div>
             </div>
           </div>
@@ -135,11 +135,11 @@
       <div class="ui middle aligned two column grid" style="padding: 1em!important;">
         <div class="column">
           <a href="#" th:href="@{/news/(page=${pages.number}-1)}" th:unless="${pages.first}"
-             class="ui mini teal basic button">上一页</a>
+             class="ui mini grey button">上一页</a>
         </div>
         <div class="right aligned column">
           <a href="#" th:href="@{/news/(page=${pages.number}+1)}" th:unless="${pages.last}"
-             class="ui mini teal basic button">下一页</a>
+             class="ui mini grey button">下一页</a>
         </div>
       </div>
     </div>

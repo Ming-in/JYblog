@@ -19,7 +19,7 @@
       <div class="ui top attached segment">
         <div class="ui middle aligned two column grid">
           <div class="column">
-            <h3 class="ui teal header" style="color: #555!important;">搜索结果</h3>
+            <h3 class="ui header">搜索结果</h3>
           </div>
           <div class="right aligned column">
             共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${page.totalElements}"> 0 </h2> 个
@@ -29,7 +29,7 @@
 
 
 
-      <div class="ui top attached teal segment">
+      <div class="ui top attached grey segment">
         <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
           <div class="ui middle aligned mobile reversed stackable grid" >
             <div class="eleven wide column">
@@ -55,7 +55,7 @@
                   </div>
                 </div>
                 <div class="right aligned five wide column">
-                  <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin" th:text="${blog.type.name}">类型名</a>
+                  <a href="#" target="_blank" class="ui blue basic label m-padded-tiny m-text-thin" th:text="${blog.type.name}">类型名</a>
                 </div>
               </div>
             </div>
@@ -74,10 +74,10 @@
       <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
         <div class="ui middle aligned two column grid">
           <div class="column">
-            <a href="#" th:href="@{/(page=${page.number}-1)}"  th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
+            <a href="#" th:href="@{/(page=${page.number}-1)}"  th:unless="${page.first}" class="ui mini grey button">上一页</a>
           </div>
           <div class="right aligned column">
-            <a href="#" th:href="@{/(page=${page.number}+1)}"  th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
+            <a href="#" th:href="@{/(page=${page.number}+1)}"  th:unless="${page.last}" class="ui mini grey button">下一页</a>
           </div>
         </div>
       </div>
