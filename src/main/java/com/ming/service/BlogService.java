@@ -16,19 +16,19 @@ public interface BlogService {
 
     Blog getAndConvert(Long id);
 
-    Page<Blog> listBlog(Pageable pageable,BlogQuery blog);
+    Page<Blog> listBlog(Pageable pageable,BlogQuery blog,Boolean filterPublished);
 
-    Page<Blog> listBlog(Pageable pageable);
+    Page<Blog> listBlog(Pageable pageable,Boolean filterPublished);
 
-    Page<Blog> listBlog(Long tagId,Pageable pageable);
+    Page<Blog> listBlog(Long tagId,Pageable pageable,Boolean filterPublished);
 
-    Page<Blog> listBlog(String query,Pageable pageable);
+    Page<Blog> listBlog(String query,Pageable pageable,Boolean filterPublished);
 
     List<Blog> listRecommendBlogTop(Integer size);
 
     Map<String,List<Blog>> archiveBlog();
 
-    Page<Blog> userBlog(Long id,Pageable pageable);
+    Page<Blog> userBlog(Long id,Pageable pageable, Boolean filterPublished);
 
     Long countBlog();
 

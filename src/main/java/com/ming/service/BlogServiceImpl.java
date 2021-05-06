@@ -55,7 +55,7 @@ public class BlogServiceImpl implements BlogService {
 
 
     @Override
-    public Page<Blog> listBlog(Pageable pageable, BlogQuery blog) {
+    public Page<Blog> listBlog(Pageable pageable, BlogQuery blog, Boolean filterPublished) {
         return blogRepository.findAll((root, cq, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
             if (!"".equals(blog.getTitle()) && blog.getTitle() != null) {
@@ -67,27 +67,34 @@ public class BlogServiceImpl implements BlogService {
             if (blog.isRecommend()) {
                 predicates.add(cb.equal(root.<Boolean>get("recommend"), blog.isRecommend()));
             }
-            predicates.add(cb.equal(root.get("published"), true));
+            if (filterPublished) {
+                predicates.add(cb.equal(root.get("published"), true));
+            }
             cq.where(predicates.toArray(new Predicate[predicates.size()]));
             return null;
         }, pageable);
     }
 
     @Override
-    public Page<Blog> listBlog(Pageable pageable) {
-        return blogRepository.findAll((root, cq, cb) -> cb.equal(root.get("published"), true), pageable);
+    public Page<Blog> listBlog(Pageable pageable, Boolean filterPublished) {
+        return blogRepository.findAll((root, cq, cb) ->
+                filterPublished ? cb.equal(root.get("published"), true) : null, pageable);
     }
 
     @Override
-    public Page<Blog> userBlog(Long id, Pageable pageable) {
+    public Page<Blog> userBlog(Long id, Pageable pageable, Boolean filterPublished) {
         User user = userRepository.findOne(id);
         return blogRepository.findAll((root, cq, cb) -> {
-            return cb.and(cb.equal(root.get("user"), user), cb.equal(root.get("published"), true));
+            if (filterPublished) {
+                return cb.and(cb.equal(root.get("user"), user), cb.equal(root.get("published"), true));
+            } else {
+                return cb.equal(root.get("user"), user);
+            }
         }, pageable);
     }
 
     @Override
-    public Page<Blog> listBlog(Long tagId, Pageable pageable) {
+    public Page<Blog> listBlog(Long tagId, Pageable pageable, Boolean filterPublished) {
         return blogRepository.findAll((root, cq, cb) -> {
             Join join = root.join("tags");
             Predicate p1 = cb.equal(join.get("id"), tagId);
@@ -97,7 +104,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Page<Blog> listBlog(String query, Pageable pageable) {
+    public Page<Blog> listBlog(String query, Pageable pageable, Boolean filterPublished) {
         return blogRepository.findByQuery(query, pageable);
     }
 
