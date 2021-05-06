@@ -40,7 +40,7 @@ public class AdminLoginController {
             if (user.getType() == 0){
                 user.setPassword(null);
                 session.setAttribute("user", user);
-                return "admin/index";
+                return "redirect:/admin/users";
             }else {
                 attributes.addFlashAttribute("message", "请使用管理员账户登录！");
                 return "redirect:/admin";
