@@ -5,16 +5,15 @@
   <meta charset="UTF-8">
   <title>上传头像</title>
 
-  <script src="head/jquery.min.js"></script>
+  <script th:src="@{/lib/upload/head/jquery.min.js}"></script>
 
   <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css">
-  <link href="head/cropper.min.css" rel="stylesheet">
-  <link href="head/sitelogo.css" rel="stylesheet">
+  <link th:src="@{/lib/upload/head/cropper.min.css}" rel="stylesheet">
+  <link th:src="@{/lib/upload/head/sitelogo.css}" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
-
-  <script src="head/bootstrap.min.js"></script>
-  <script src="head/cropper.js"></script>
-  <script src="head/sitelogo.js"></script>
+  <script th:src="@{/lib/upload/head/bootstrap.min.js}"></script>
+  <script th:src="@{/lib/upload/head/cropper.js}"></script>
+  <script th:src="@{/lib/upload/head/sitelogo.js}"></script>
 
   <style type="text/css">
     .avatar-btns button {
@@ -114,7 +113,7 @@
 </div>
 
 <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
-<script src="head/html2canvas.min.js" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/lib/upload/head/html2canvas.min.js}" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
     //做个下简易的验证  大小 格式
     $('#avatarInput').on('change', function (e) {

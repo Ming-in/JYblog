@@ -35,7 +35,7 @@
           </div>
           <div class="ui center aligned segment" onclick="document.getElementById('upload-avatar').click()"
                th:if="${zone.id}==${session.user.id}">
-            <a id="upload-avatar" class="m-black m-text-thin" th:href="@{/lib/upload/index.html}">
+            <a id="upload-avatar" class="m-black m-text-thin" th:href="@{/avatar}">
               <i class="user circle outline icon"></i>
               上传头像
             </a>
@@ -81,7 +81,7 @@
               <br>
               <img class="ui small circular image centered" src=""
                    style="margin:4em 0;border: solid 0.1em #ccc;cursor: pointer"
-                   th:onclick="${zone.id}==${session.user.id}?'window.open(\'/lib/upload/index.html\',\'_self\')':'return false'"
+                   th:onclick="${zone.id}==${session.user.id}?'document.getElementById(\'upload-avatar\').click()':'return false'"
                    th:src="@{${zone.avatar}?${zone.avatar}:'/images/avatar.png'}" alt=""/>
             </div>
             <div class="ten wide column">

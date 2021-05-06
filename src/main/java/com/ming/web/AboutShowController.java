@@ -101,8 +101,13 @@ public class AboutShowController {
         return "about";
     }
 
+    @GetMapping(value = "/avatar")
+    public String avatar(Model model){
+        return "uploadAvatar";
+    }
+
     @ResponseBody
-    @PostMapping(value = "/avatar")
+    @PostMapping(value = "/uploadavatar")
     public String avatarUpload(@RequestParam String file,
                              HttpSession session) {
         User user = (User) session.getAttribute("user");
