@@ -92,7 +92,7 @@
       <div class="ui padded vertical segment m-padded-tb-large" th:each="news : ${page}"
            style="margin-left: 1em!important;">
         <div class="ui middle aligned mobile reversed stackable grid">
-          <div class="eleven wide column">
+          <div class="eleven wide column" style="padding: 0 2em !important;">
             <div th:onclick="'document.getElementById(\'click-blog'+${news.id}+'\').click()'" style="cursor:pointer">
               <h2 class="ui header">
                 <a th:id="'click-blog'+${news.id}" href="#" th:href="@{/news/{id}(id=${news.id})}" class="m-black"
