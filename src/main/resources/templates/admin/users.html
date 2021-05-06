@@ -20,23 +20,24 @@
       <div class="header">提示：</div>
       <p th:text="${message}">操作成功！</p>
     </div>
-<!--
-    <form action="#" method="post"  th:object="${user}" th:action="*{id}==null ? @{/admin/users} : @{/admin/users/{id}(id=*{id})} "  class="ui form">
-      <input user="hidden" name="id" th:value="*{id}">
-      <div class=" field">
-        <div class="ui left labeled input">
-          <label class="ui blue basic label">名称</label>
-          <input user="text" name="name" placeholder="分类名称" th:value="*{username}" >
-        </div>
-      </div>
+    <div class="alert m-them-shadow"></div>
+    <!--
+        <form action="#" method="post"  th:object="${user}" th:action="*{id}==null ? @{/admin/users} : @{/admin/users/{id}(id=*{id})} "  class="ui form">
+          <input user="hidden" name="id" th:value="*{id}">
+          <div class=" field">
+            <div class="ui left labeled input">
+              <label class="ui blue basic label">名称</label>
+              <input user="text" name="name" placeholder="分类名称" th:value="*{username}" >
+            </div>
+          </div>
 
-      <div class="ui error message"></div>
-      <div class="ui right aligned container">
-        <button user="button" class="ui button" onclick="window.history.go(-1)" >返回</button>
-        <button class="ui primary submit button">提交</button>
-      </div>
-    </form>
--->
+          <div class="ui error message"></div>
+          <div class="ui right aligned container">
+            <button user="button" class="ui button" onclick="window.history.go(-1)" >返回</button>
+            <button class="ui primary submit button">提交</button>
+          </div>
+        </form>
+    -->
 
     <table class="ui compact grey table">
       <thead>
@@ -58,7 +59,12 @@
         <td th:text="${user.createTime}">创建时间</td>
         <td>
           <a href="#" th:href="@{/admin/users/{id}/input(id=${user.id})}" class="ui tiny primary button">编辑</a>
-          <a href="#" th:href="@{/admin/users/{id}/delete(id=${user.id})}" class="ui tiny red basic button">删除</a>
+          <!--<a href="#" th:href="@{/admin/users/{id}/delete(id=${user.id})}" class="ui tiny red basic button">删除</a>-->
+          <div class="ui toggle checkbox">
+            <input th:onclick="'isBan('+${user.id}+',this.value)'" th:checked="${user.type}==9" th:value="${user.type}" type="checkbox"
+                   name="type">
+            <label>封禁</label>
+          </div>
         </td>
       </tr>
       </tbody>
@@ -69,7 +75,7 @@
             <a th:href="@{/admin/users(page=${page.number}-1)}" class="  item" th:unless="${page.first}">上一页</a>
             <a th:href="@{/admin/users(page=${page.number}+1)}" class=" item" th:unless="${page.last}">下一页</a>
           </div>
-          <a href="#" th:href="@{/login}" class="ui mini right floated primary button">新增</a>
+          <a href="#" th:href="@{/admin/toadduser}" class="ui mini right floated primary button">新增</a>
         </th>
       </tr>
       </tfoot>
@@ -90,6 +96,25 @@
     $('.ui.dropdown').dropdown({
         on: 'hover'
     });
+
+    function isBan(userID,type) {
+        $.ajax({
+            url: "/admin/ban",
+            data: {id:userID,type:type},
+            type: "POST",
+            dataType: 'text',
+            success: function (re) {
+                if (re) {
+                    $('.alert').html(re).addClass('alert-success').show().delay(1500).fadeOut();
+                } else {
+                    $('.alert').html(re).addClass('alert-danger').show().delay(1500).fadeOut();
+                }
+            },
+            error:function (re) {
+                console.log(re);
+            }
+        });
+    }
 
     //消息提示关闭初始化
     $('.message .close')

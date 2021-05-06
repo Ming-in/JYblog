@@ -15,7 +15,8 @@
 
 <div class="ui container segment raised very padded m-them-shadow" style="min-height: 85vh;width: 50vw">
   <div class="ten wide centered column">
-    <form id="info" class="ui form" method="post" th:action="@{/admin/users/{id}(id=${user.id})}" style="color: #aaa;">
+    <form id="info" class="ui form" method="post"
+          th:action="@{${user.id} ? '/admin/users/'+${user.id} : '/admin/adduser'}" style="color: #aaa;">
       <br>
       <div class="inline field required">
         <label style="width:6em;">用户名：</label>
@@ -40,12 +41,24 @@
                style="width: 80%"
                th:value="${user.email}">
       </div>
-      <div class="inline field required">
+      <!--  <div class="inline field required">
+          <label style="width:6em;">用户角色：</label>
+          <input type="text" placeholder="请输入角色"
+                 name="type"
+                 style="width: 80%"
+                 th:value="${user.type}">
+        </div>-->
+      <div class="inline field required" th:if="${user.id}">
         <label style="width:6em;">用户角色：</label>
-        <input type="text" placeholder="请输入角色"
-               name="type"
-               style="width: 80%"
-               th:value="${user.type}">
+        <div class="ui selection dropdown" style="width: 80%">
+          <input type="hidden" name="type" th:value="${user.type}">
+          <i class="dropdown icon"></i>
+          <div class="default text">用户权限</div>
+          <div class="menu">
+            <div class="item" data-value="0">管理员</div>
+            <div class="item" data-value="1">普通用户</div>
+          </div>
+        </div>
       </div>
       <div class="inline field">
         <label style="width:6em;">创建日期：</label>
@@ -91,7 +104,7 @@
                 identifier: 'email',
                 rules: [{
                     type: 'email',
-                    prompt: '请输入邮箱'
+                    prompt: '请检查邮箱格式'
                 }]
             },
             nickname: {

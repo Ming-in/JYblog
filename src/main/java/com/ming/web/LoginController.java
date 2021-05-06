@@ -36,6 +36,11 @@ public class LoginController {
                         RedirectAttributes attributes) {
         User user = userService.checkUser(username, password);
         if (user != null) {
+            //被封禁用户
+            if (user.getType() == 9) {
+                attributes.addFlashAttribute("message", "用户已被封禁，禁止登录");
+                return "redirect:/login";
+            }
             user.setPassword(null);
             session.setAttribute("user", user);
             return "redirect:/";

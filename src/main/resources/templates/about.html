@@ -109,7 +109,7 @@
                   <label style="width:5em;">用户角色：</label>
                   <input type="text" placeholder="请输入角色"
                          style="width: 80%"
-                         th:value="${zone.type}==1?'普通用户':'管理员'" disabled>
+                         th:value="${zone.type}==0?'管理员':'普通用户'" disabled>
                 </div>
                 <div class="inline field">
                   <label style="width:5em;">创建日期：</label>

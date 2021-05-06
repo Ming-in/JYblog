@@ -72,7 +72,7 @@ public class AboutShowController {
     @GetMapping("/search/{id}")
     public String search(@PageableDefault(size = 10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          @PathVariable Long id, Model model) {
-        model.addAttribute("page", blogService.userBlog(id,pageable));
+        model.addAttribute("page", blogService.userBlog(id,pageable,true));
         return "search";
     }
 

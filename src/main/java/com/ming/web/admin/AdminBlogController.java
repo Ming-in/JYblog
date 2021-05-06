@@ -38,14 +38,14 @@ public class AdminBlogController {
     public String blogs(@PageableDefault(size = 10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                         BlogQuery blog, Model model) {
         model.addAttribute("types", typeService.listType());
-        model.addAttribute("page", blogService.listBlog(pageable, blog));
+        model.addAttribute("page", blogService.listBlog(pageable, blog,false));
         return "admin/blogs";
     }
 
     @PostMapping("/blogs/search")
     public String search(@PageableDefault(size = 10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          BlogQuery blog, Model model) {
-        model.addAttribute("page", blogService.listBlog(pageable, blog));
+        model.addAttribute("page", blogService.listBlog(pageable, blog,false));
         return "admin/blogs :: blogList";
     }
 
