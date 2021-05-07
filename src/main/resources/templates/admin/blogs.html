@@ -11,17 +11,16 @@
 
   <!--导航-->
   <nav th:replace="admin/_fragments :: menu(2)"></nav>
-  <div class="ui attached pointing menu">
-    <div class="ui container">
-      <div class="right menu">
-        <a href="#" th:href="@{/admin/blogs/input}" class=" item">发布</a>
-        <a href="#" th:href="@{/admin/blogs}" class="blue active item">列表</a>
-      </div>
-    </div>
-  </div>
 
   <!--中间内容-->
   <div  class="m-container-small m-padded-tb-big" style="min-height: 85vh">
+
+    <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+      <i class="close icon"></i>
+      <div class="header">提示：</div>
+      <p th:text="${message}">操作成功！</p>
+    </div>
+
     <div class="ui container">
       <div  class="ui secondary segment form">
         <input type="hidden" name="page" >
@@ -58,7 +57,7 @@
         <table th:fragment="blogList" class="ui compact grey table" style="text-align: center">
           <thead>
           <tr>
-            <th></th>
+            <th>#</th>
             <th>标题</th>
             <th>类型</th>
             <th>推荐</th>
@@ -83,7 +82,7 @@
           </tbody>
           <tfoot>
           <tr>
-            <th colspan="7">
+            <th colspan="7" style="text-align: left">
               <div class="ui mini pagination menu" th:if="${page.totalPages}>1" >
                 <a onclick="page(this)" th:attr="data-page=${page.number}-1" class="item" th:unless="${page.first}">上一页</a>
                 <a onclick="page(this)" th:attr="data-page=${page.number}+1" class="item" th:unless="${page.last}">下一页</a>
@@ -94,11 +93,6 @@
           </tfoot>
         </table>
 
-        <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
-          <i class="close icon"></i>
-          <div class="header">提示：</div>
-          <p th:text="${message}">操作成功！</p>
-        </div>
 
       </div>
 

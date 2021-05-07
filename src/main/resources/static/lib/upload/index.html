@@ -155,14 +155,14 @@
     });
     function imagesAjax(file) {
         $.ajax({
-            url: "/avatar",
+            url: "/uploadavatar",
             data: {file:file},
             type: "POST",
             // headers: { "Content-Type": "application/x-www-form-urlencoded" },
             dataType: 'json',
             success: function (re) {
                 if (re){
-                    // window.open('/about/'+re,'_self');
+                    window.open('/about/'+re,'_self');
                 }else {
                     window.open('/','_self');
                 }

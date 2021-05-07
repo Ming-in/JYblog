@@ -32,6 +32,7 @@ public class Blog {
     /**
      * 首页展示图
      */
+    @Column(length = 1023)
     private String firstPicture;
     /**
      * 原创/转载/翻譯

@@ -75,7 +75,10 @@ public class AdminBlogController {
 
     @PostMapping("/blogs")
     public String post(Blog blog, RedirectAttributes attributes, HttpSession session) {
-        blog.setUser((User) session.getAttribute("user"));
+
+        if (blog.getId()==null || blogService.getBlog(blog.getId()).getUser()==null){
+            blog.setUser((User) session.getAttribute("user"));
+        }
         blog.setType(typeService.getType(blog.getType().getId()));
         blog.setTags(tagService.listTag(blog.getTagIds()));
         if ("".equals(blog.getFlag()) || blog.getFlag() == null) {

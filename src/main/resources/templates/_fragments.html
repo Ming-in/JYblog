@@ -65,6 +65,7 @@
           </div>
           <i class="dropdown icon"></i>
           <div class="menu">
+            <a href="#" th:if="${session.user.type}==0" th:href="@{/admin/users}" class="item"><i class="street view icon"></i>后台管理</a>
             <a href="#" th:href="@{/about/{id}(id=${session.user.id})}" class="item"><i class="street view icon"></i>个人空间</a>
             <a href="#" th:href="@{/writeblog}" class="item"><i class="pen square icon"></i>写博客</a>
             <a href="#" th:href="@{/logout}" class="item"><i class="power off icon"></i>注销</a>

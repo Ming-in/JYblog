@@ -35,7 +35,8 @@
           </div>
           <div class="ui center aligned segment" onclick="document.getElementById('upload-avatar').click()"
                th:if="${zone.id}==${session.user.id}">
-            <a id="upload-avatar" class="m-black m-text-thin" th:href="@{/avatar}">
+            <!--<a id="upload-avatar" class="m-black m-text-thin" th:href="@{/avatar}">-->
+            <a id="upload-avatar" class="m-black m-text-thin" th:href="@{/lib/upload/index.html}">
               <i class="user circle outline icon"></i>
               上传头像
             </a>
