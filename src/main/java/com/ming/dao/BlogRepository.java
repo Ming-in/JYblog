@@ -1,6 +1,7 @@
 package com.ming.dao;
 
 import com.ming.po.Blog;
+import com.ming.po.Type;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,6 +23,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long>, JpaSpecificat
     @Query("select b from Blog b where b.title like ?1 or b.content like ?1")
     Page<Blog> findByQuery(String query,Pageable pageable);
 
+    List<Blog> findBlogsByType(Type type);
 
     @Transactional(rollbackFor = Exception.class)
     @Modifying

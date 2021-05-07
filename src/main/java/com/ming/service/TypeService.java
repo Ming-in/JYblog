@@ -26,4 +26,10 @@ public interface TypeService {
     Type updateType(Long id,Type type);
 
     void deleteType(Long id);
+
+    /**
+     * 删除分类及其下所有博客
+     * @param id
+     */
+    void deleteTypeAndBlogs(Long id);
 }

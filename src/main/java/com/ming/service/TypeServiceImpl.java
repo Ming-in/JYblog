@@ -1,7 +1,9 @@
 package com.ming.service;
 
 import com.ming.NotFoundException;
+import com.ming.dao.BlogRepository;
 import com.ming.dao.TypeRepository;
+import com.ming.po.Blog;
 import com.ming.po.Type;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author 邹明
@@ -22,6 +25,8 @@ public class TypeServiceImpl implements TypeService {
 
     @Autowired
     private TypeRepository typeRepository;
+    @Autowired
+    private BlogRepository blogRepository;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -76,6 +81,21 @@ public class TypeServiceImpl implements TypeService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void deleteType(Long id) {
+        Type type = typeRepository.findById(id);
+        List<Blog> listBlog = blogRepository.findBlogsByType(type);
+        listBlog.stream().map(blog -> {
+            blog.setType(typeRepository.findByName("默认"));
+            return blog;
+        }).forEach(blog -> blogRepository.save(blog));
+        typeRepository.delete(id);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void deleteTypeAndBlogs(Long id) {
+        Type type = typeRepository.findById(id);
+        List<Blog> listBlog = blogRepository.findBlogsByType(type);
+        blogRepository.delete(listBlog);
         typeRepository.delete(id);
     }
 }

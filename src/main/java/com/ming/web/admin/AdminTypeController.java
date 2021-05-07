@@ -28,7 +28,7 @@ public class AdminTypeController {
     private TypeService typeService;
 
     @GetMapping("/types")
-    public String types(@PageableDefault(size = 10,sort = {"id"},direction = Sort.Direction.DESC)
+    public String types(@PageableDefault(size = 10,sort = {"id"},direction = Sort.Direction.ASC)
                                     Pageable pageable, Model model) {
         model.addAttribute("page",typeService.listType(pageable));
         return "admin/types";
@@ -91,5 +91,11 @@ public class AdminTypeController {
         return "redirect:/admin/types";
     }
 
+    @GetMapping("/types/{id}/deleteall")
+    public String deleteAllBlog(@PathVariable Long id,RedirectAttributes attributes) {
+        typeService.deleteTypeAndBlogs(id);
+        attributes.addFlashAttribute("message", "删除成功");
+        return "redirect:/admin/types";
+    }
 
 }

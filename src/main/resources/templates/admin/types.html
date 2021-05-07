@@ -47,7 +47,7 @@
     </form>
 -->
 
-    <table class="ui compact grey table">
+    <table class="ui compact grey table"  style="text-align: center">
       <thead>
       <tr>
         <th></th>
@@ -60,8 +60,11 @@
         <td th:text="${iterStat.count}">1</td>
         <td th:text="${type.name}">分类名/td>
         <td>
-          <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini primary button">编辑</a>
-          <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui mini red basic button">删除</a>
+        <div th:unless="${type.name}=='默认'">
+          <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui tiny primary button">修改分类名</a>
+          <a href="#" onclick="if(!window.confirm('确定删除该分类吗?分类下的博客将移至默认分类。'))return false" th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui tiny red basic button">删除分类</a>
+          <a href="#" onclick="if(!window.confirm('确定删除该分类吗?警告：分类下的博客将全部删除。'))return false" th:href="@{/admin/types/{id}/deleteall(id=${type.id})}" class="ui tiny red basic button">删除分类及博客</a>
+        </div>
         </td>
       </tr>
       </tbody>
@@ -72,7 +75,7 @@
             <a th:href="@{/admin/types(page=${page.number}-1)}" class="  item" th:unless="${page.first}">上一页</a>
             <a th:href="@{/admin/types(page=${page.number}+1)}" class=" item" th:unless="${page.last}">下一页</a>
           </div>
-          <a href="#" th:href="@{/admin/types/input}" class="ui mini right floated primary button">新增</a>
+          <a href="#" th:href="@{/admin/types/input}" class="ui tiny right floated primary button">新增</a>
         </th>
       </tr>
       </tfoot>
