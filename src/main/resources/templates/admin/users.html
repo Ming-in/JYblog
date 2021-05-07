@@ -62,8 +62,8 @@
           <!--<a href="#" th:href="@{/admin/users/{id}/delete(id=${user.id})}" class="ui tiny red basic button">删除</a>-->
           <div class="ui toggle checkbox">
             <input th:onclick="'isBan('+${user.id}+',this.value)'" th:checked="${user.type}==9" th:value="${user.type}" type="checkbox"
-                   name="type">
-            <label>封禁</label>
+                   name="type" th:id="${user.id}">
+            <label th:for="${user.id}" style="cursor: pointer">封禁</label>
           </div>
         </td>
       </tr>
@@ -106,6 +106,7 @@
             success: function (re) {
                 if (re) {
                     $('.alert').html(re).addClass('alert-success').show().delay(1500).fadeOut();
+                    document.getElementById(userID).value = type==='9'?1:9;
                 } else {
                     $('.alert').html(re).addClass('alert-danger').show().delay(1500).fadeOut();
                 }
