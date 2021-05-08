@@ -8,4 +8,10 @@ spring:
     active: dev
 
 comment.avatar: /images/avatar.png
+# 启动之后要打开的地址
+open:
+  browser:
+    url: http://localhost:8080
+    openUrl: false
+
 
