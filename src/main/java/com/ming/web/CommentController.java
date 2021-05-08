@@ -26,7 +26,7 @@ public class CommentController {
     @Autowired
     private BlogService blogService;
 
-    @Value("${comment.avatar}")
+    @Value("${files.avatar}")
     private String avatar;
 
     @GetMapping("/comments/{blogId}")

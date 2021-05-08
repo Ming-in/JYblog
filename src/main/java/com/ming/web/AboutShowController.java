@@ -10,6 +10,7 @@ import com.ming.util.MimeTypeUtils;
 import com.ming.util.UploadUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -21,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 个人中心页面
@@ -34,6 +37,10 @@ public class AboutShowController {
     private UserService userService;
     @Autowired
     private BlogService blogService;
+    @Value("${files.blogImgs}")
+    private String blogImg;
+    @Value("${server.port}")
+    private String port;
 
     @GetMapping("/about/{id}")
     public String about(@PathVariable Long id, Model model) {
@@ -50,7 +57,7 @@ public class AboutShowController {
     @GetMapping(value = "/introduction")
     public String avatarUpload(HttpServletRequest request,
                                Model model) {
-        request.setAttribute("introduction",true);
+        request.setAttribute("introduction", true);
         User user = (User) request.getSession().getAttribute("user");
         Blog blog = new Blog();
         blog.setContent(user.getIntroduction());
@@ -59,57 +66,60 @@ public class AboutShowController {
     }
 
     @PostMapping(value = "/introduction")
-    public String avatarUpload(HttpSession session,Blog blog) {
+    public String avatarUpload(HttpSession session, Blog blog) {
         User user = (User) session.getAttribute("user");
         user = userService.findById(user.getId());
         user.setIntroduction(blog.getContent());
         userService.save(user);
         user.setPassword(null);
-        session.setAttribute("user",user);
-        return "redirect:/about/"+user.getId();
+        session.setAttribute("user", user);
+        return "redirect:/about/" + user.getId();
     }
 
     @GetMapping("/search/{id}")
     public String search(@PageableDefault(size = 10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          @PathVariable Long id, Model model) {
-        model.addAttribute("page", blogService.userBlog(id,pageable,true));
+        model.addAttribute("page", blogService.userBlog(id, pageable, true));
         return "search";
     }
 
-    @PostMapping(value = "/file/avatar")
-    public String avatarUpload(@RequestPart(value = "avatarFile") MultipartFile avatarFile,
-                               HttpSession session,
-                               Model model) {
+    @ResponseBody
+    @PostMapping(value = "/file/imgupload")
+    public Map<String, Object> imgUpload(@RequestParam(value = "editormd-image-file") MultipartFile file,
+                                         HttpSession session) {
+        Map<String, Object> map = new HashMap<>();
         User user = (User) session.getAttribute("user");
         //获取文件后缀
-        final String fileSuffix = FileUtils.getExtension(avatarFile);
+        final String fileSuffix = FileUtils.getExtension(file);
         String path = "";
         //判断是否为有效图片
         if (isAllowedExtension(fileSuffix, MimeTypeUtils.IMAGE_EXTENSION)) {
-            path = "/resources/static/images/avatar/";
+            path = blogImg;
         } else {
             //上传失败
-            model.addAttribute("message", "头像上传失败");
-            return "about";
+            map.put("message", "图片上传失败");
+            return map;
         }
         //生成加密字符
-        String str = UploadUtils.aesEncrypt(user.getUsername());
+//        String str = UploadUtils.aesEncrypt(user.getUsername());
+        String str = user.getUsername();
         path = path + str + File.separator;
-        String fileName = FileUtils.upload(avatarFile, path);
-        model.addAttribute("message", "头像上传成功");
-        model.addAttribute("filename", fileName);
-        return "about";
+        String fileName = FileUtils.upload(file, path);
+        String realPath = "http://localhost:"+port+"/blogImgs/"+str+File.separator+fileName;
+        map.put("success", 1);
+        map.put("url", realPath);
+        return map;
     }
 
     @GetMapping(value = "/avatar")
-    public String avatar(Model model){
+    public String avatar(Model model) {
         return "uploadAvatar";
     }
 
     @ResponseBody
     @PostMapping(value = "/uploadavatar")
     public String avatarUpload(@RequestParam String file,
-                             HttpSession session) {
+                               HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "";

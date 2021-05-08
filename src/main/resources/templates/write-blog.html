@@ -47,8 +47,8 @@
 
       <div class="required field" th:unless="${introduction}">
         <div class="ui left labeled input">
-          <label class="ui blue label">上传图片</label>
-          <input type="text" name="firstPicture" th:value="*{firstPicture}" placeholder="图片地址">
+          <label class="ui blue label">上传博客首图</label>
+          <input type="text" name="firstPicture" th:value="*{firstPicture}" placeholder="博客的首图地址">
         </div>
       </div>
 
@@ -128,10 +128,15 @@
     var contentEditor;
     $(function () {
         contentEditor = editormd("md-content", {
-            width: "100%",
-            height: 640,
-            syncScrolling: "single",
-            path: "/lib/editormd/lib/"
+          width: "100%",
+          height: 640,
+          syncScrolling: "single",
+          path: "/lib/editormd/lib/",
+          imageUpload: true,
+          tex : true, // 开启科学公式TeX语言支持，默认关闭
+          flowChart : true, // 开启流程图支持，默认关闭
+          imageFormats : [ "jpg", "jpeg", "gif", "png", "bmp", "webp" ],
+          imageUploadURL : "/file/imgupload"
         });
     });
 
