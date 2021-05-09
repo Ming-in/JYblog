@@ -4,10 +4,7 @@ import com.ming.po.Blog;
 import com.ming.po.User;
 import com.ming.service.BlogService;
 import com.ming.service.UserService;
-import com.ming.util.FileUtils;
 import com.ming.util.MarkdownUtils;
-import com.ming.util.MimeTypeUtils;
-import com.ming.util.UploadUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,13 +14,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 个人中心页面
@@ -37,10 +30,6 @@ public class AboutShowController {
     private UserService userService;
     @Autowired
     private BlogService blogService;
-    @Value("${files.blogImgs}")
-    private String blogImg;
-    @Value("${server.port}")
-    private String port;
 
     @GetMapping("/about/{id}")
     public String about(@PathVariable Long id, Model model) {
@@ -83,34 +72,6 @@ public class AboutShowController {
         return "search";
     }
 
-    @ResponseBody
-    @PostMapping(value = "/file/imgupload")
-    public Map<String, Object> imgUpload(@RequestParam(value = "editormd-image-file") MultipartFile file,
-                                         HttpSession session) {
-        Map<String, Object> map = new HashMap<>();
-        User user = (User) session.getAttribute("user");
-        //获取文件后缀
-        final String fileSuffix = FileUtils.getExtension(file);
-        String path = "";
-        //判断是否为有效图片
-        if (isAllowedExtension(fileSuffix, MimeTypeUtils.IMAGE_EXTENSION)) {
-            path = blogImg;
-        } else {
-            //上传失败
-            map.put("message", "图片上传失败");
-            return map;
-        }
-        //生成加密字符
-//        String str = UploadUtils.aesEncrypt(user.getUsername());
-        String str = user.getUsername();
-        path = path + str + File.separator;
-        String fileName = FileUtils.upload(file, path);
-        String realPath = "http://localhost:"+port+"/blogImgs/"+str+File.separator+fileName;
-        map.put("success", 1);
-        map.put("url", realPath);
-        return map;
-    }
-
     @GetMapping(value = "/avatar")
     public String avatar(Model model) {
         return "uploadAvatar";
@@ -131,21 +92,5 @@ public class AboutShowController {
         session.setAttribute("user", user);
         return user.getId().toString();
     }
-
-    /**
-     * 判断是否是允许的文件类型
-     *
-     * @param extension        文件后缀
-     * @param allowedExtension MIME类型
-     */
-    private static boolean isAllowedExtension(String extension, String[] allowedExtension) {
-        for (String str : allowedExtension) {
-            if (str.equalsIgnoreCase(extension)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
 }

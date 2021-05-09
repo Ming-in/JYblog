@@ -12,16 +12,6 @@
 
 <!--导航-->
 <nav th:replace="_fragments :: menu(5)"></nav>
-<!--
-  <div class="ui attached pointing menu">
-    <div class="ui container">
-      <div class="right menu">
-        <a href="#" th:href="@{/admin/blogs/input}" class="blue active item">发布</a>
-        <a href="#" th:href="@{/admin/blogs}" class="item">列表</a>
-      </div>
-    </div>
-  </div>
--->
 
 <!--中间内容-->
 <div class="m-container m-padded-tb-big" style="min-height: 85vh">
@@ -47,7 +37,9 @@
 
       <div class="required field" th:unless="${introduction}">
         <div class="ui left labeled input">
-          <label class="ui blue label">上传博客首图</label>
+          <label class="ui blue label" style="cursor: pointer">上传博客首图
+            <input type="file" hidden="hidden" onchange="uploadImg(event)">
+          </label>
           <input type="text" name="firstPicture" th:value="*{firstPicture}" placeholder="博客的首图地址">
         </div>
       </div>
@@ -159,6 +151,25 @@
         $('#blog-form').submit();
     });
 
+    function uploadImg(e){
+        let formData = new FormData();
+        formData.append("editormd-image-file",e.target.files[0]);
+        $.ajax({
+            url: '/file/imgupload',
+            data: formData,
+            type: "POST",
+            dataType: 'json',
+            contentType:false,
+            processData:false,
+            success: function (re) {
+                if (re){
+                    $("[name = 'firstPicture']").val(re.url);
+                }else {
+                  alert(re)
+                }
+            }
+        });
+    }
 
     $('.ui.form').form({
         fields: {

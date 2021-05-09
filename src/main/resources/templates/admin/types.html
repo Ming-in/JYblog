@@ -54,8 +54,8 @@
         <td>
         <div th:unless="${type.name}=='默认'">
           <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui tiny primary button">修改分类名</a>
-          <a href="#" onclick="if(!window.confirm('确定删除该分类吗?分类下的博客将移至默认分类。'))return false" th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui tiny red basic button">删除分类</a>
-          <a href="#" onclick="if(!window.confirm('确定删除该分类吗?警告：分类下的博客将全部删除。'))return false" th:href="@{/admin/types/{id}/deleteall(id=${type.id})}" class="ui tiny red basic button">删除分类及博客</a>
+          <a href="#" onclick="if(!window.confirm('\n确定删除该分类吗?\n\n分类下的博客将移至默认分类。'))return false" th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui tiny red basic button">删除分类</a>
+          <a href="#" onclick="if(!window.confirm('\n确定删除该分类吗?\n\n警告：分类下的博客将全部删除。'))return false" th:href="@{/admin/types/{id}/deleteall(id=${type.id})}" class="ui tiny red basic button">删除分类及博客</a>
         </div>
         </td>
       </tr>

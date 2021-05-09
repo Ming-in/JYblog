@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 
@@ -67,8 +68,13 @@ public class AdminUserController {
     }
 
     @PostMapping("/users/{id}")
-    public String editPost(@Valid User user, BindingResult result, @PathVariable Long id, RedirectAttributes attributes) {
+    public String editPost(@Valid User user,
+                           @PathVariable Long id,
+                           RedirectAttributes attributes,
+                           BindingResult result,
+                           HttpSession session) {
         User u1 = userService.findByUsername(user.getUsername());
+        //修改前的用户数据
         User user1 = userService.findById(id);
         if (u1 != null && !u1.getId().equals(user1.getId())) {
             result.rejectValue("username", "nameError", "用户名重复");
@@ -84,12 +90,12 @@ public class AdminUserController {
         if (!StringUtils.isEmpty(user.getPassword())) {
             user1.setPassword(MD5Utils.code(user.getPassword()));
         }
-        User u2 = userService.save(user1);
-        if (u2 == null) {
+        if (userService.save(user1) == null) {
             attributes.addFlashAttribute("message", "更新失败");
         } else {
             attributes.addFlashAttribute("message", "更新成功");
         }
+        session.setAttribute("user", userService.findById(((User)session.getAttribute("user")).getId()));
         return "redirect:/admin/users";
     }
 
