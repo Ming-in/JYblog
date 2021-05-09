@@ -42,7 +42,7 @@
             <div class="ui fluid vertical menu">
               <a href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank" class="item"
                  th:each="type : ${types}">
-                <span th:text="${type.name}">类型</span>
+                <span th:text="${type.name}">分类</span>
                 <div class="ui blue basic left pointing label" th:text="${#arrays.length(type.blogs)}">13</div>
               </a>
             </div>
@@ -139,7 +139,7 @@
                   </div>
                   <div class="right aligned five wide column">
                     <a th:href="@{/types/{id}(id=${blog.type.id})}" target="_blank" class="ui blue basic label m-padded-tiny m-text-thin"
-                       th:text="${blog.type.name}">类型</a>
+                       th:text="${blog.type.name}">分类</a>
                   </div>
                 </div>
               </div>

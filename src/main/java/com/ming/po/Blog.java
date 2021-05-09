@@ -1,5 +1,7 @@
 package com.ming.po;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,6 +11,7 @@ import java.util.List;
 /**
  * @author 邹明
  */
+@JsonIgnoreProperties(value={"type","tags","user"})
 @Entity
 @Table(name = "blog")
 public class Blog {
@@ -277,7 +280,7 @@ public class Blog {
                 ", recommend=" + recommend +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
-                ", type=" + type +
+                ", type=" + type.getName() +
                 ", user=" + user +
                 ", comments=" + comments +
                 ", tagIds='" + tagIds + '\'' +

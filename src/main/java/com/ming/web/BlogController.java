@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -48,7 +45,8 @@ public class BlogController {
 
     @PostMapping("/blogs")
     public String post(Blog blog, RedirectAttributes attributes, HttpSession session) {
-        blog.setUser((User) session.getAttribute("user"));
+        User user = (User) session.getAttribute("user");
+        blog.setUser(user);
         blog.setType(typeService.getType(blog.getType().getId()));
         blog.setTags(tagService.listTag(blog.getTagIds()));
         if ("".equals(blog.getFlag()) || blog.getFlag() == null) {
@@ -65,9 +63,37 @@ public class BlogController {
         } else {
             attributes.addFlashAttribute("message", "操作成功");
         }
-        return "redirect:/";
+        return "redirect:/about/"+user.getId();
     }
 
+    /**
+     * 用户编辑博客
+     * @param id 博客id
+     * @param model
+     * @return
+     */
+    @GetMapping("/blogs/{id}/input")
+    public String editInput(@PathVariable Long id, Model model) {
+        setTypeAndTag(model);
+        Blog blog = blogService.getBlog(id);
+        blog.init();
+        model.addAttribute("blog", blog);
+        return "write-blog";
+    }
+
+    /**
+     * 用户删除博客
+     * @param id 博客id
+     * @param attributes
+     * @return
+     */
+    @GetMapping("/blogs/{id}/delete")
+    public String delete(@PathVariable Long id,RedirectAttributes attributes,HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        blogService.deleteBlog(id);
+        attributes.addFlashAttribute("message", "删除成功");
+        return "redirect:/about/"+user.getId();
+    }
 
     @GetMapping("/writeblog")
     public String input(Model model) {

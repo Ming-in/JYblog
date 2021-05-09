@@ -81,6 +81,13 @@ public class BlogServiceImpl implements BlogService {
                 filterPublished ? cb.equal(root.get("published"), true) : null, pageable);
     }
 
+    /**
+     * 查询该用户下所有博客
+     * @param id    用户ID
+     * @param pageable  分页
+     * @param filterPublished   是否过滤草稿
+     * @return
+     */
     @Override
     public Page<Blog> userBlog(Long id, Pageable pageable, Boolean filterPublished) {
         User user = userRepository.findOne(id);

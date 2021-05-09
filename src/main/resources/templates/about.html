@@ -70,6 +70,12 @@
               编写博客
             </a>
           </div>
+          <div id="modify-blog" class="ui center aligned segment" th:if="${zone.id}==${session.user.id} and ${session.user.type} !=0">
+            <div class="m-black m-text-thin">
+              <i class="edit outline icon"></i>
+              编辑博客
+            </div>
+          </div>
         </div>
       </div>
 
@@ -80,12 +86,13 @@
           <div class="ui stackable grid centered">
             <div class="four wide column">
               <br>
-              <img class="ui small circular image centered" src=""
+              <img class="ui small circular image centered" id="avatar"
                    style="margin:4em 0;border: solid 0.1em #ccc;cursor: pointer"
                    th:onclick="${zone.id}==${session.user.id}?'document.getElementById(\'upload-avatar\').click()':'return false'"
                    th:src="@{${zone.avatar}?${zone.avatar}:'/images/avatar.png'}" alt=""/>
             </div>
             <div class="ten wide column">
+              <!--修改个人信息-->
               <form id="info" class="ui form" onsubmit="return false" style="color: #aaa;">
                 <br>
                 <div class="inline field">
@@ -124,6 +131,7 @@
                   <button class="ui button" onclick="cancle()">取消</button>
                 </div>
               </form>
+              <!--修改密码-->
               <form id="password" onsubmit="return false" class="ui form"
                     style="color: #aaa;display: none">
                 <br><br><br><br>
@@ -149,6 +157,46 @@
                 </div>
               </form>
             </div>
+            <!--修改博客-->
+            <table id="blogTable" th:fragment="blogTable" class="ui compact grey table"
+                   th:if="${page}" style="display: none;text-align: center;margin: 1em 5px;margin-top:-2em;padding: 0">
+              <thead>
+              <tr>
+                <th>标题</th>
+                <th>分类</th>
+                <th>状态</th>
+                <th>更新时间</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="blog,iterStat : ${page.content}">
+                <td th:text="${blog.title}"></td>
+                <td th:text="${blog.type.name}"></td>
+                <td th:text="${blog.published} ? '发布':'草稿'"></td>
+                <td th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2021</td>
+                <td>
+                  <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="ui tiny primary button">查看</a>
+                  <a href="#" th:href="@{/blogs/{id}/input(id=${blog.id})}" class="ui tiny primary button">编辑</a>
+                  <a href="#" th:href="@{/blogs/{id}/delete(id=${blog.id})}" class="ui tiny red basic button">删除</a>
+                </td>
+              </tr>
+              </tbody>
+              <tfoot th:if="${page.totalPages}>1">
+              <tr>
+                <th colspan="5">
+                  <div class="ui mini pagination menu floated left" >
+                    <a onclick="page(this)" th:attr="data-page=${page.number}-1" class="item"
+                       th:unless="${page.first}">上一页</a>
+                  </div>
+                  <div class="ui mini pagination menu floated right" >
+                    <a onclick="page(this)" th:attr="data-page=${page.number}+1" class="item"
+                       th:unless="${page.last}">下一页</a>
+                  </div>
+                </th>
+              </tr>
+              </tfoot>
+            </table>
           </div>
           <div class="ui divider"></div>
           <!--个人介绍博客-->
@@ -188,6 +236,8 @@
         document.getElementById('info').style = 'color:#aaa';
         document.getElementById('password').style = 'color:#aaa;display:none';
         document.getElementById('submit').style = 'margin-left:40%';
+        document.getElementById('blogTable').style.display='none';
+        document.getElementById('avatar').style.display='';
     }
 
     function showPassword() {
@@ -197,7 +247,17 @@
         document.getElementById('info').style = 'color:#aaa;display:none';
         document.getElementById('password').style = 'color:#aaa';
         document.getElementById('submit2').style = 'margin-left:40%';
+        document.getElementById('blogTable').style.display='none';
+        document.getElementById('avatar').style.display='';
     }
+
+    $('#modify-blog').click(() => {
+        window.scrollTo(0, 0);
+        document.getElementById('blogTable').style.display='';
+        document.getElementById('info').style = 'color:#aaa;display:none';
+        document.getElementById('password').style = 'color:#aaa;display:none';
+        document.getElementById('avatar').style.display='none';
+    });
 
     function cancle() {
         showInfo();
@@ -219,6 +279,10 @@
                 window.location.reload();
             }
         });
+    }
+    function page(page) {
+        let num = $(page).data("page")||0;
+        $("#blogTable").load("/about/userblog",{"page":num})
     }
 
     function ajaxInfo() {
