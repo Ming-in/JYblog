@@ -70,7 +70,7 @@
               编写博客
             </a>
           </div>
-          <div id="modify-blog" class="ui center aligned segment" th:if="${zone.id}==${session.user.id} and ${session.user.type} !=0">
+          <div id="modify-blog" class="ui center aligned segment" th:if="${zone.id}==${session.user.id}">
             <div class="m-black m-text-thin">
               <i class="edit outline icon"></i>
               编辑博客
@@ -178,20 +178,19 @@
                 <td>
                   <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="ui tiny primary button">查看</a>
                   <a href="#" th:href="@{/blogs/{id}/input(id=${blog.id})}" class="ui tiny primary button">编辑</a>
-                  <a href="#" th:href="@{/blogs/{id}/delete(id=${blog.id})}" class="ui tiny red basic button">删除</a>
+                  <a href="#" onclick="if(!window.confirm('\n确定删除该博客吗?\n\n该操作将无法撤回。'))return false"
+                     th:href="@{/blogs/{id}/delete(id=${blog.id})}" class="ui tiny red basic button">删除</a>
                 </td>
               </tr>
               </tbody>
               <tfoot th:if="${page.totalPages}>1">
               <tr>
                 <th colspan="5">
-                  <div class="ui mini pagination menu floated left" >
-                    <a onclick="page(this)" th:attr="data-page=${page.number}-1" class="item"
-                       th:unless="${page.first}">上一页</a>
+                  <div class="ui mini pagination menu floated left" th:unless="${page.first}">
+                    <a onclick="page(this)" th:attr="data-page=${page.number}-1" class="item">上一页</a>
                   </div>
                   <div class="ui mini pagination menu floated right" >
-                    <a onclick="page(this)" th:attr="data-page=${page.number}+1" class="item"
-                       th:unless="${page.last}">下一页</a>
+                    <a onclick="page(this)" th:attr="data-page=${page.number}+1" class="item" th:unless="${page.last}">下一页</a>
                   </div>
                 </th>
               </tr>
