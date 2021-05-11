@@ -3,16 +3,13 @@ package com.ming.web;
 import com.ming.po.User;
 import com.ming.service.UserService;
 import com.ming.util.MD5Utils;
-import org.hibernate.validator.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 /**
  * @author 邹明

@@ -75,14 +75,28 @@
         <div class=" field">
           <div class="ui left labeled action input">
             <label class="ui compact blue basic label">标签</label>
-            <select class="ui fluid dropdown" multiple="" name="tagIds" th:value="*{tagIds}">
-              <option th:each="tag : ${tags}" class="item" value="1" th:value="${tag.id}"
-                      onclick="document.getElementById('close').click()"
-                      th:text="${tag.name}">java
-              </option>
-            </select>
+            <div class="ui fluid selection multiple search  dropdown">
+              <input type="hidden" name="tagIds" th:value="*{tagIds}">
+              <i class="dropdown icon"></i>
+              <div class="default text">标签</div>
+              <div class="menu">
+                <div th:each="tag : ${tags}" class="item" data-value="1" th:data-value="${tag.id}"
+                     th:text="${tag.name}">java
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        <!--<div class=" field">-->
+          <!--<div class="ui left labeled action input">-->
+            <!--<label class="ui compact blue basic label">标签</label>-->
+            <!--<select class="ui fluid dropdown" multiple="" name="tagIds" th:value="*{tagIds}">-->
+              <!--<option th:each="tag : ${tags}" class="item" th:value="${tag.id}"-->
+                      <!--th:text="${tag.name}">java-->
+              <!--</option>-->
+            <!--</select>-->
+          <!--</div>-->
+        <!--</div>-->
       </div>
 
       <div class="inline fields" th:unless="${introduction}">
@@ -171,6 +185,10 @@
             processData: false,
             success: function (re) {
                 if (re) {
+                    if(re.error){
+                        alert(re.message);
+                        return
+                    }
                     $("[name = 'firstPicture']").val(re.url);
                 } else {
                     alert(re)

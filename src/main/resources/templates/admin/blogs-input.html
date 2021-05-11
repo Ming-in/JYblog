@@ -166,6 +166,10 @@
             processData: false,
             success: function (re) {
                 if (re) {
+                    if(re.error){
+                        alert(re.message);
+                        return
+                    }
                     $("[name = 'firstPicture']").val(re.url);
                 } else {
                     alert(re)

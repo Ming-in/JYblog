@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -116,7 +115,8 @@ public class BlogController {
             path = blogImg;
         } else {
             //上传失败
-            map.put("message", "图片上传失败");
+            map.put("error", "error");
+            map.put("message", "\n图片上传失败，不支持的图片格式。\n\n请上传bmp, gif, jpg, jpeg, png格式图片");
             return map;
         }
         //生成加密字符

@@ -1,6 +1,5 @@
 package com.ming.web;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ming.po.Blog;
 import com.ming.po.User;
 import com.ming.service.BlogService;
@@ -18,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 个人中心页面

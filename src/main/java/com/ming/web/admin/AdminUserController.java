@@ -1,6 +1,5 @@
 package com.ming.web.admin;
 
-import com.ming.po.Type;
 import com.ming.po.User;
 import com.ming.service.UserService;
 import com.ming.util.MD5Utils;
