@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="_fragments :: head(~{::title})">
+<head th:replace="admin/_fragments :: head(~{::title})">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>博客发布</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
-  <link rel="stylesheet" href="../static/lib/editormd/css/editormd.min.css">
-  <link rel="stylesheet" href="../static/css/me.css">
+  <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css">
+  <link rel="stylesheet" href="../../static/css/me.css">
 </head>
 <body>
 
 <!--导航-->
-<nav th:replace="_fragments :: menu(5)"></nav>
+<nav th:replace="admin/_fragments :: menu(2)"></nav>
 
 <!--中间内容-->
-<div class="m-container m-padded-tb-big" style="min-height: 85vh">
+<div class="m-container m-padded-tb-big">
   <div class="ui container">
-    <form id="blog-form" th:object="${blog}" th:action="${introduction}?@{/introduction}:@{/blogs}" method="post"
-          class="ui form">
+    <form id="blog-form" action="#" th:object="${blog}" th:action="@{/admin/blogs}" method="post" class="ui form">
       <input type="hidden" name="published" th:value="*{published}">
       <input type="hidden" name="id" th:value="*{id}">
-      <div class="required field" th:unless="${introduction}">
+      <div class="required field">
         <div class="ui left labeled input">
           <div class="ui selection compact brown basic dropdown label">
             <input type="hidden" value="原创" name="flag" th:value="*{flag}">
@@ -35,8 +34,7 @@
           <input type="text" name="title" placeholder="标题" th:value="*{title}">
         </div>
       </div>
-
-      <div class="required field" th:unless="${introduction}">
+      <div class="required field">
         <div class="ui left labeled input">
           <label class="ui blue label" style="cursor: pointer">上传博客首图
             <input type="file" hidden="hidden" onchange="uploadImg(event)">
@@ -44,19 +42,17 @@
           <input type="text" name="firstPicture" th:value="*{firstPicture}" placeholder="博客的首图地址">
         </div>
       </div>
-
       <div class="required field" th:unless="${introduction}">
         <textarea rows="3" name="description" th:text="*{description}" placeholder="博客描述,100字以内..."
                   maxlength="100"></textarea>
       </div>
-
       <div class="required field">
         <div id="md-content" style="z-index: 1 !important;">
           <textarea placeholder="博客内容" name="content" style="display: none" th:text="*{content}"></textarea>
         </div>
       </div>
 
-      <div class="two fields" th:unless="${introduction}">
+      <div class="two fields">
         <div class="required field">
           <div class="ui left labeled action input">
             <label class="ui compact blue basic label">分类</label>
@@ -87,20 +83,9 @@
             </div>
           </div>
         </div>
-        <!--<div class=" field">-->
-          <!--<div class="ui left labeled action input">-->
-            <!--<label class="ui compact blue basic label">标签</label>-->
-            <!--<select class="ui fluid dropdown" multiple="" name="tagIds" th:value="*{tagIds}">-->
-              <!--<option th:each="tag : ${tags}" class="item" th:value="${tag.id}"-->
-                      <!--th:text="${tag.name}">java-->
-              <!--</option>-->
-            <!--</select>-->
-          <!--</div>-->
-        <!--</div>-->
       </div>
-
-      <div class="inline fields" th:unless="${introduction}">
-        <div class="field" th:if="${session.user.type}==0">
+      <div class="inline fields">
+        <div class="field">
           <div class="ui checkbox">
             <input type="checkbox" id="recommend" name="recommend" checked th:checked="*{recommend}" class="hidden">
             <label for="recommend">推荐</label>
@@ -118,9 +103,8 @@
 
       <div class="ui right aligned container">
         <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
-        <button th:unless="${introduction}" type="button" id="save-btn" class="ui grey button">保存</button>
-        <button th:unless="${introduction}" type="button" id="publish-btn" class="ui primary button">发布</button>
-        <button th:if="${introduction}" type="button" id="publish-btn" class="ui primary button">保存个人简介</button>
+        <button type="button" id="save-btn" class="ui grey button">保存</button>
+        <button type="button" id="publish-btn" class="ui primary button">发布</button>
       </div>
 
     </form>
@@ -130,12 +114,9 @@
 <br>
 <br>
 <!--底部footer-->
-<footer th:replace="_fragments :: footer">
-</footer>
+<footer th:replace="admin/_fragments :: footer"></footer>
 
 <th:block th:replace="admin/_fragments :: script"/>
-
-
 <script>
 
     //初始化Markdown编辑器
@@ -147,13 +128,10 @@
             syncScrolling: "single",
             path: "/lib/editormd/lib/",
             imageUpload: true,
-            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "/file/imgupload",
             tex: true, // 开启科学公式TeX语言支持，默认关闭
             flowChart: true, // 开启流程图支持，默认关闭
-            sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭,
-            htmlDecode : "style,script,iframe|on*",
-            // saveHTMLToTextarea : true,    // 保存 HTML 到 Textarea
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL: "/file/imgupload"
         });
     });
 
