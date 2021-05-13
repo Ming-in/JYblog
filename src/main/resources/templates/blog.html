@@ -60,24 +60,14 @@
       </div>
 
     </div>
-    <!--
-        <div class="ui attached positive message" th:if="${blog}">
-          <h4 class="ui inverted header m-text-thin m-text-spaced ">最新博客:</h4>
-          &lt;!&ndash;博客信息&ndash;&gt;
-          <div class="ui middle aligned">
-            <div id="newblog-container">
-            </div>
-          </div>
-        </div>
-        -->
     <div class="ui bottom attached segment" th:if="${blog.commentabled}">
       <!--评论区域列表-->
       <div id="comment-container" class="ui grey segment">
         <div th:fragment="commentList">
-          <div class="ui threaded comments" style="max-width: 100%;">
-            <h3 class="ui dividing header">评论</h3>
+          <div class="ui comments" style="max-width: 100%;">
+            <h3 class="ui header">评论</h3>
             <!--评论-->
-            <div class="comment" th:each="comment : ${comments}">
+            <div class="comment" th:each="comment : ${comments}" style="border-top:1px solid #eee">
               <a class="avatar">
                 <img th:src="@{${comment.avatar}==null?'/images/avatar.png':${comment.avatar}}">
               </a>
