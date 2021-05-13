@@ -8,11 +8,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author 邹明
@@ -29,20 +31,21 @@ public class NewsController {
         List<News> newsList = newsService.findAll(pageable).getContent();
         List<News> page = new ArrayList<>();
         List<News> pageTop = new ArrayList<>();
-        if (newsList.size()>=size){
+        if (newsList.size() >= size) {
             for (int i = 0; i < size; i++) {
                 pageTop.add(newsList.get(i));
             }
-        }else {
+        } else {
             pageTop.addAll(newsList);
         }
 
         for (int i = size; i < newsList.size(); i++) {
             page.add(newsList.get(i));
         }
+        pageTop = pageTop.stream().filter(news -> news.getFirstPicture().contains("/")).collect(Collectors.toList());
         model.addAttribute("page", page);
         model.addAttribute("pageTop", pageTop);
-        model.addAttribute("pages",newsService.findAll(pageable));
+        model.addAttribute("pages", newsService.findAll(pageable));
         return "news";
     }
 
