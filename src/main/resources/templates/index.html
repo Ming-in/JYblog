@@ -48,30 +48,6 @@
             </div>
           </div>
         </div>
-
-        <!--
-                &lt;!&ndash;标签&ndash;&gt;
-                <div class="ui segments m-margin-top-large m-them-shadow" style="padding: 0!important;">
-                  <div class="ui secondary segment">
-                    <div class="ui two column grid">
-                      <div class="column">
-                        <i class="tags icon"></i>标签
-                      </div>
-                      <div class="right aligned column">
-                        <a href="#" th:href="@{tags/-1}" target="_blank">more <i class="angle double right icon"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="ui grey segment">
-                    <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" target="_blank"
-                       class="ui blue basic left pointing label m-margin-tb-tiny" th:each="tag : ${tags}">
-                      <span th:text="${tag.name}">标签</span>
-                      <div class="detail" th:text="${#arrays.length(tag.blogs)}">23</div>
-                    </a>
-                  </div>
-                </div>
-        -->
-
         <!--最新推荐-->
         <div class="ui segments m-them-shadow"
              style="position: sticky;top: 340px;z-index: 801!important;">
@@ -95,9 +71,6 @@
           <div class="ui middle aligned two column grid">
             <div class="column">
               <h3 class="ui header" style="color: #555!important;">博客列表</h3>
-            </div>
-            <div class="right aligned column">
-              <!--              共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${page.totalElements}"> 0 </h2> 篇-->
             </div>
           </div>
         </div>

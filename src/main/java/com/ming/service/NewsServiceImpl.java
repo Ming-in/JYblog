@@ -5,6 +5,7 @@ import com.ming.dao.NewsRepository;
 import com.ming.po.Blog;
 import com.ming.po.News;
 import com.ming.util.MarkdownUtils;
+import com.ming.util.MyBeanUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,12 +15,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 
 /**
- * @author Ming
- * 创建时间：2021/4/25 22:16
+ * @author 邹明
  */
 @Service
 public class NewsServiceImpl implements NewsService {
@@ -52,5 +53,35 @@ public class NewsServiceImpl implements NewsService {
         return b;
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public News saveNews(News news) {
+        if (news.getId() == null) {
+            news.setCreateTime(new Date());
+            news.setViews(0);
+        }
+        return newsRepository.save(news);
+    }
 
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public News updateNews(Long id, News news) {
+        News b = newsRepository.findOne(id);
+        if (b == null) {
+            throw new NotFoundException("该博客不存在");
+        }
+        BeanUtils.copyProperties(news, b, MyBeanUtils.getNullPropertyNames(news));
+        return newsRepository.save(b);
+    }
+
+    @Override
+    public News findById(Long id) {
+        return newsRepository.findById(id);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void deleteNews(Long id) {
+        newsRepository.delete(id);
+    }
 }

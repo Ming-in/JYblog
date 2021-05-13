@@ -82,7 +82,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     /**
-     * 查询该用户下所有博客
+     * 依据用户ID查询用户下所有博客
      * @param id    用户ID
      * @param pageable  分页
      * @param filterPublished   是否过滤草稿

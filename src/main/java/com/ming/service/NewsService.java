@@ -18,4 +18,12 @@ public interface NewsService {
     List<News> findTop(int size);
 
     Blog getAndConvert(Long id);
+
+    void deleteNews(Long id);
+
+    News updateNews(Long id, News news);
+
+    News saveNews(News news);
+
+    News findById(Long id);
 }

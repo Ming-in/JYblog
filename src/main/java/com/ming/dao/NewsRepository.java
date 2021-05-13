@@ -24,4 +24,6 @@ public interface NewsRepository extends JpaRepository<News, Long>, JpaSpecificat
     @Modifying
     @Query("update News n set n.views = n.views+1 where n.id = ?1")
     int updateViews(Long id);
+
+    News findById(Long id);
 }
