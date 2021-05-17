@@ -15,7 +15,7 @@
 -  Bootstrap
 
 #### 通用
-- java、js、css、html5、mysql
+- 原生语言：java、js、css、html5
 - 第三方库：jquery.js、prism.js、editormd.js、animate.css
 
 
