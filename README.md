@@ -16,7 +16,7 @@
 
 #### 通用
 - 原生语言：java、js、css、html5
-- 开源库：jquery.js、prism.js、editormd.js、animate.css、FileUtils.java
+- 开源库：[jquery.js](https://www.bootcdn.cn/jquery/)、[prism.js](https://www.bootcdn.cn/prism/)、[editormd.js](https://github.com/pandao/editor.md)、[animate.css](https://www.bootcdn.cn/animate.css/)、[FileUtils.java](https://github.com/coltoscosmin/FileUtils/blob/master/FileUtils.java)
 
 
 ### 安装教程
