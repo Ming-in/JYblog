@@ -333,5 +333,7 @@
 
 /* Responsive images */
 .typo img {
+  margin-left: 50%;
   max-width: 100%;
+  transform: translate(-50%,0%);
 }
