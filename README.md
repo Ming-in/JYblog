@@ -10,9 +10,9 @@
 -  MySql
 
 #### 前端
--  Thymeleaf
--  Semantic UI
--  Bootstrap
+-  [Thymeleaf](https://www.thymeleaf.org/)
+-  [Semantic UI](https://semantic-ui.com/introduction/getting-started.html)
+-  [Bootstrap](https://v3.bootcss.com/)
 
 #### 通用
 - 原生语言：java、js、css、html5
