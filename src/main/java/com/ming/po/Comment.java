@@ -16,12 +16,17 @@ public class Comment {
     @Id
     @GeneratedValue
     private Long id;
+
     private String nickname;
+
     private String email;
+
     private String content;
+
     @Basic(fetch = FetchType.LAZY)
     @Lob
     private String avatar;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
 

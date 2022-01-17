@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author 邹明
  */
-@JsonIgnoreProperties(value={"type","tags","user"})
+@JsonIgnoreProperties(value = {"type", "tags", "user"})
 @Entity
 @Table(name = "blog")
 public class Blog {
@@ -19,13 +19,10 @@ public class Blog {
     @Id
     @GeneratedValue
     private Long id;
-
-
     /**
      * 标题
      */
     private String title;
-
     /**
      * 内容
      */
