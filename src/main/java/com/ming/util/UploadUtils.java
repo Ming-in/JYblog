@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 
 /**
- * @author 邹明
+ * @author Ming
  */
 public class UploadUtils {
     /**

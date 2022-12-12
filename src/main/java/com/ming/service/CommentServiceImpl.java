@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author 邹明
+ * @author Ming
  */
 @Service
 public class CommentServiceImpl implements CommentService {

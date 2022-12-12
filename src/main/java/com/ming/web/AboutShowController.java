@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 /**
  * 个人中心页面
  *
- * @author 邹明
+ * @author Ming
  */
 @Controller
 public class AboutShowController {

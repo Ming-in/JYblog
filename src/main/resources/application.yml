@@ -5,21 +5,16 @@ spring:
     cache: false
     mode: HTML
   profiles:
-    active: dev
+    active: prod
   http:
     multipart:
       #限制设置单个文件上传大小为10M
       max-file-size: 10MB
       #限制设置单次请求的文件的总大小为100M
       max-request-size: 100MB
-#文件地址
-files:
-  blogImgs: E:/Environment/JY-blog/BlogImg/
-  avatar: /images/avatar.png
 # 启动之后要打开的地址
 open:
   browser:
     url: http://localhost:8080
     openUrl: false
-
 

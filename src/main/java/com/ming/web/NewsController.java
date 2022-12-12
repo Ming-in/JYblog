@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author 邹明
+ * @author Ming
  */
 @Controller
 public class NewsController {

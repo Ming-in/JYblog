@@ -1,7 +1,7 @@
 package com.ming.vo;
 
 /**
- * @author 邹明
+ * @author Ming
  */
 public class BlogQuery {
 

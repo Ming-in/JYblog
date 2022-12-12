@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 /**
- * @author 邹明
+ * @author Ming
  */
 @Controller
 @RequestMapping("/admin")

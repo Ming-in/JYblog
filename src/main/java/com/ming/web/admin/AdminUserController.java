@@ -19,7 +19,7 @@ import javax.validation.Valid;
 
 
 /**
- * @author 邹明
+ * @author Ming
  */
 
 @Controller

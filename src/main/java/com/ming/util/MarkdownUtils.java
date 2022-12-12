@@ -14,7 +14,7 @@ import org.commonmark.renderer.html.HtmlRenderer;
 
 import java.util.*;
 /**
- * @author 邹明
+ * @author Ming
  */
 public class MarkdownUtils {
 

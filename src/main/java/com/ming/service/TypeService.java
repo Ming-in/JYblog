@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
- * @author 邹明
+ * @author Ming
  */
 public interface TypeService {
 

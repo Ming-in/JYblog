@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author 邹明
+ * @author Ming
  */
 @Controller
 public class BlogController {

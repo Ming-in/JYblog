@@ -9,7 +9,7 @@ import java.util.List;
 
 
 /**
- * @author 邹明
+ * @author Ming
  */
 @JsonIgnoreProperties(value = {"type", "tags", "user"})
 @Entity

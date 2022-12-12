@@ -20,7 +20,7 @@ import java.util.List;
 
 
 /**
- * @author 邹明
+ * @author Ming
  */
 @Service
 public class NewsServiceImpl implements NewsService {

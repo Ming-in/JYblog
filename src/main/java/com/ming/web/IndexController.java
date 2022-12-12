@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * @author 邹明
+ * @author Ming
  */
 @Controller
 public class IndexController {

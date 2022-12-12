@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 /**
- * @author 邹明
+ * @author Ming
  */
 @Controller
 public class TypeShowController {

@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * @author 邹明
+ * @author Ming
  */
 public interface UserService {
 

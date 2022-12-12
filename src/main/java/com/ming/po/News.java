@@ -7,7 +7,7 @@ import java.util.List;
 
 
 /**
- * @author 邹明
+ * @author Ming
  */
 @Entity
 @Table(name = "news")

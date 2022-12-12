@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 /**
  * 归档页面
  *
- * @author 邹明
+ * @author Ming
  */
 @Controller
 public class ArchiveShowController {

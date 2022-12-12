@@ -8,7 +8,7 @@ import java.util.List;
 
 
 /**
- * @author 邹明
+ * @author Ming
  */
 public interface TagService {
 

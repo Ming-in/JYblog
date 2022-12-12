@@ -3,7 +3,7 @@ package com.ming;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
- * @author 邹明
+ * @author Ming
  */
 @SpringBootApplication
 public class BlogApplication {

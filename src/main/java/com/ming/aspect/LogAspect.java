@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 /**
- * @author 邹明
+ * @author Ming
  */
 @Aspect
 @Component

@@ -17,6 +17,10 @@ logging:
     root: info
     com.lrm: debug
 #  file: log/jyblog-dev.log
+#文件地址
+files:
+  blogImgs: E:/Environment/JY-blog/BlogImg/
+  avatar: /images/avatar.png
 
 
 

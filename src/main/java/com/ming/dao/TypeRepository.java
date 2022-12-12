@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 /**
- * @author 邹明
+ * @author Ming
  */
 public interface TypeRepository extends JpaRepository<Type,Long> {
 

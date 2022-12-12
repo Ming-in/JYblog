@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * @author 邹明
+ * @author Ming
  */
 @SuppressWarnings("AlibabaClassNamingShouldBeCamel")
 public class MD5Utils {

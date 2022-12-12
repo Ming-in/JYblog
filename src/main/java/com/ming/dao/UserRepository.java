@@ -3,7 +3,7 @@ package com.ming.dao;
 import com.ming.po.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 /**
- * @author 邹明
+ * @author Ming
  */
 public interface UserRepository extends JpaRepository<User,Long> {
 

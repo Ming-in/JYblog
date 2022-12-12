@@ -22,7 +22,7 @@ import javax.persistence.criteria.*;
 import java.util.*;
 
 /**
- * @author 邹明
+ * @author Ming
  */
 @Service
 public class BlogServiceImpl implements BlogService {

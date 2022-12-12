@@ -20,7 +20,7 @@ import java.util.UUID;
 /**
  * 文件相关工具类
  *
- * @author 邹明
+ * @author Ming
  */
 @SuppressWarnings("AliDeprecation")
 public class FileUtils {

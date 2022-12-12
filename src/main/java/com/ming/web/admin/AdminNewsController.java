@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author 邹明
+ * @author Ming
  */
 @Controller
 @RequestMapping("/admin")

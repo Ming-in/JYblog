@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 /**
- * @author 邹明
+ * @author Ming
  */
 @Service
 public class UserServiceImpl implements UserService {
